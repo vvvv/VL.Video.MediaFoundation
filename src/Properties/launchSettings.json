@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "VL.CoreLib.Windows.Extensions": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\vvvv\\vvvv_gamma_2020.1.0\\vvvv.exe",
+      "commandLineArgs": "--package-repositories $(PackageRepositories) -o \"$(MSBuildThisFileDirectory)..\\help\\Overview\\Explanation VideoIn.vl\""
+    }
+  }
+}
