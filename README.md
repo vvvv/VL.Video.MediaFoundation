@@ -1,6 +1,4 @@
 # VL.MediaFoundation
-Microsoft Media Foundation for VL
-
 As of now only the video capture capabilities are made available through the VideoIn nodes.
 
 ## Installation
