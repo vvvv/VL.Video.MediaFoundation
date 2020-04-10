@@ -1,5 +1,7 @@
 # VL.MediaFoundation
-As of now only the video capture capabilities are made available through the VideoIn nodes.
+- Use `VideoIn` and `VideoIn (Reactive)` for video capture
+- Use `VideoPlayer`and `VideoPlayer (Reactive)` for video playback from file or the web
+
 
 ## Installation
 ### vvvv gamma
