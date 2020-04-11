@@ -500,4 +500,6 @@
     </Node>
   </Patch>
   <PlatformDependency Id="BGEGu4c1wcsPKai7Ct7s2I" Location="./src/bin/net472/VL.MediaFoundation.dll" />
+  <NugetDependency Id="CIaIqv37RcIOugCory9kns" Location="SharpDX.MediaFoundation" Version="4.2.0" />
+  <NugetDependency Id="U5feeIjoSz2MGN4Xo82u2R" Location="SharpDX.Direct3D11" Version="4.2.0" />
 </Document>

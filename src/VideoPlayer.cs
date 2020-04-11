@@ -1,7 +1,6 @@
 ﻿using SharpDX.Direct3D;
 using SharpDX.Direct3D11;
 using SharpDX.MediaFoundation;
-using SharpDX.WIC;
 using System;
 using System.Diagnostics;
 using System.Reactive.Linq;
@@ -185,6 +184,13 @@ namespace VL.MediaFoundation
 
                 if (engine.OnVideoStreamTick(out var presentationTimeTicks))
                 {
+                    // Not sure why but sometimes we get a negative number here and the pipeline seems stuck as long as we don't hit play again
+                    if (presentationTimeTicks < 0)
+                    {
+                        await engine.PlayAsync(token);
+                        continue;
+                    }
+
                     var currentTime = CurrentTime = (float)TimeSpan.FromTicks(presentationTimeTicks).TotalSeconds;
 
                     if (Loop || presentationTimeTicks < 0)
