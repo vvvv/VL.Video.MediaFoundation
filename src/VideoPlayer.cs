@@ -145,12 +145,12 @@ namespace VL.MediaFoundation
             {
                 Width = width,
                 Height = height,
-                MipLevels = 0,
+                MipLevels = 1,
                 ArraySize = 1,
                 Format = SharpDX.DXGI.Format.B8G8R8A8_UNorm,
                 SampleDescription = new SharpDX.DXGI.SampleDescription(1, 0),
                 Usage = ResourceUsage.Default,
-                BindFlags = BindFlags.RenderTarget,
+                BindFlags = BindFlags.RenderTarget | BindFlags.ShaderResource,
                 CpuAccessFlags = CpuAccessFlags.None,
                 OptionFlags = ResourceOptionFlags.None
             };
