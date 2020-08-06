@@ -4,7 +4,7 @@ using System;
 using System.Buffers;
 using System.Runtime.InteropServices;
 using VL.Lib.Basics.Imaging;
-using ColorBGRA = Xenko.Core.Mathematics.ColorBGRA;
+using ColorBGRA = Stride.Core.Mathematics.ColorBGRA;
 
 namespace VL.MediaFoundation
 {

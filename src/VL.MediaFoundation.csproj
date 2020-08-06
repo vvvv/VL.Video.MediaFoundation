@@ -7,9 +7,8 @@
     <OutputPath>bin\</OutputPath>
 
     <Year>$([System.DateTime]::Now.ToString('yyyy'))</Year>
-    <OutputPath>bin\</OutputPath>
-    <VersionPrefix>0.0.4</VersionPrefix>
-    <!--<VersionSuffix>preview</VersionSuffix>-->
+    <VersionPrefix>0.0.5</VersionPrefix>
+    <VersionSuffix>stride</VersionSuffix>
 
     <!-- Passed to vvvv.exe when starting from within VS -->
     <PackageRepositories>$(MSBuildThisFileDirectory)..\..\</PackageRepositories>
@@ -28,7 +27,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="VL.Core" Version="2020.1.0">
+    <PackageReference Include="VL.Core" Version="2020.2.0-0217-g78b13ed816">
       <!-- Already shipped with vvvv itself -->
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
