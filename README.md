@@ -8,7 +8,7 @@
 - Install [vvvv gamma](https://vvvv.org/downloads) (minimum required version is 2020.1)
 - Inside from the patch editor open the nuget command line and type `nuget install VL.MediaFoundation`
 
-### vvvv gamma preview)
+### vvvv gamma preview
 - Install [vvvv gamma preview](https://teamcity.vvvv.org/) (minimum required version is 2020.2)
 - Inside from the patch editor open the nuget command line and type `nuget install VL.MediaFoundation -pre`
 
