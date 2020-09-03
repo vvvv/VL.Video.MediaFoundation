@@ -11,7 +11,7 @@
     <VersionSuffix>stride</VersionSuffix>
 
     <!-- Passed to vvvv.exe when starting from within VS -->
-    <PackageRepositories>$(MSBuildThisFileDirectory)..\..\</PackageRepositories>
+    <PackageRepositories>$(MSBuildThisFileDirectory)..\..</PackageRepositories>
 
     <!-- Package properties -->
     <Authors>vvvv group</Authors>
@@ -27,11 +27,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="VL.Core" Version="2020.2.0-0217-g78b13ed816">
+    <PackageReference Include="VL.Stride.Runtime" Version="0.7.327-g4acbba7b8b">
       <!-- Already shipped with vvvv itself -->
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="SharpDX.Direct3D11" Version="4.2.0" />
     <PackageReference Include="SharpDX.MediaFoundation" Version="4.2.0" />
   </ItemGroup>
 

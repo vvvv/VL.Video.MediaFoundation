@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Document xmlns:p="property" Id="HCLhARd4Sv0PCVs8Igi22t" LanguageVersion="2020.2.0.217" Version="0.128">
-  <NugetDependency Id="Gj2X4Tql09gOq0jy9yu36j" Location="VL.CoreLib" Version="2020.2.0-0217-g78b13ed816" />
+<Document xmlns:p="property" Id="HCLhARd4Sv0PCVs8Igi22t" LanguageVersion="2020.2.0.262" Version="0.128">
+  <NugetDependency Id="Gj2X4Tql09gOq0jy9yu36j" Location="VL.CoreLib" Version="2020.2.0-0262-g2752f56465" />
   <Patch Id="PNn7TZV6ad3P1MdWzEMnc6">
     <Canvas Id="AVxdp3P1HUsQFBWkhFkFnV" DefaultCategory="Main" BordersChecked="false" CanvasType="FullCategory" />
     <!--
@@ -18,7 +18,7 @@
           <Node Bounds="225,296,371,19" Id="DgVQXzT7aZTNVDVCaQjTze">
             <p:NodeReference LastCategoryFullName="MediaFoundation" LastSymbolSource="VL.MediaFoundation.vl">
               <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
-              <Choice Kind="ProcessAppFlag" Name="VideoPlayer (Reactive Texture)" />
+              <Choice Kind="ProcessAppFlag" Name="VideoPlayer (Reactive)" />
             </p:NodeReference>
             <p:HelpFocus p:Assembly="VL.Lang" p:Type="VL.Model.HelpPriority">High</p:HelpFocus>
             <Pin Id="KuaxdePJRN3OCel7oVoF0u" Name="Url" Kind="InputPin" />
@@ -116,6 +116,7 @@
                 <Choice Kind="TypeFlag" Name="Boolean" />
               </p:TypeAnnotation>
             </Pin>
+            <Pin Id="Ih7y6OFcvaOLmDTJfcJUZk" Name="Alpha Blend" Kind="InputPin" />
             <Pin Id="Li3kELaV2DWP1fV0phtDbE" Name="Layer" Kind="OutputPin" />
           </Node>
           <Node Bounds="200,684,145,19" Id="PWCMdifKTvBLmyt3k9wuRs">
@@ -128,13 +129,14 @@
                 <Choice Kind="TypeFlag" Name="Rectangle" />
               </p:TypeAnnotation>
             </Pin>
+            <Pin Id="A7hi9wjIi37PfA45tets0M" Name="Back Buffer Format" Kind="InputPin" />
+            <Pin Id="BkSaFYtgtShOkoHCnnrhZe" Name="Depth Buffer Format" Kind="InputPin" />
             <Pin Id="I9xG0c9RY6SOgZE2uN1Z9O" Name="Input" Kind="InputPin" />
             <Pin Id="NDOZZfjVimeOJGbc6m4YX8" Name="Title" Kind="InputPin" />
             <Pin Id="G374mj86pfTMOpZwb9gSVs" Name="Enable Keyboard Shortcuts" Kind="InputPin" />
             <Pin Id="FfF2IWyoma8LmIfw4XFdnf" Name="Render View" Kind="InputPin" />
             <Pin Id="CUyvLW4Tw2RO0aZOwCPF01" Name="Enabled" Kind="InputPin" />
-            <Pin Id="A7hi9wjIi37PfA45tets0M" Name="Back Buffer Format" Kind="InputPin" />
-            <Pin Id="BkSaFYtgtShOkoHCnnrhZe" Name="Depth Buffer Format" Kind="InputPin" />
+            <Pin Id="Ks8BxCd70lQNc1swmzG9gM" Name="Present Interval" Kind="InputPin" />
             <Pin Id="KiYS2sGP0fHOaPs4W2ztxV" Name="Output" Kind="OutputPin" />
             <Pin Id="K93O6302ebUMmMaPorAWmW" Name="Input Source" Kind="OutputPin" />
             <Pin Id="PbaZAI6CVciNdLwiSukXAJ" Name="Back Buffer" Kind="OutputPin" />
@@ -149,9 +151,8 @@
               </CategoryReference>
             </p:NodeReference>
             <Pin Id="FCxwQoU125KPVAjIQgCCCU" Name="Input" Kind="InputPin" />
-            <Pin Id="NXfFBVA4fJ4Ou0pmYEr5xN" Name="Clear Color" Kind="InputPin" />
-            <Pin Id="BcXfA5GuOTmNuWhXit0Wv5" Name="Clear" Kind="InputPin" />
-            <Pin Id="O5NnIerbb68OtodCIVpINT" Name="Clear Depth" Kind="InputPin" />
+            <Pin Id="RJvonBMZ6wlLGZBAVz33nh" Name="Color" Kind="InputPin" />
+            <Pin Id="ID6UtXOKLuEOFd5N8wljIg" Name="Enabled" Kind="InputPin" />
             <Pin Id="G4jFVX29DYUPHFBWHV0cqq" Name="Output" Kind="StateOutputPin" />
           </Node>
         </Canvas>
@@ -176,7 +177,8 @@
       </Patch>
     </Node>
   </Patch>
-  <NugetDependency Id="NDNpQsV2PrIQW6rfNRHtNx" Location="VL.MediaFoundation" Version="0.0.0.0" />
-  <NugetDependency Id="T5qmJh7oUizMwENYD97jbP" Location="VL.Stride.Windows" Version="0.7.247-g67c2ebb8da" />
-  <NugetDependency Id="J1DogPkYXV5MsqQSVEfk3l" Location="VL.Stride" Version="0.7.247-g67c2ebb8da" />
+  <NugetDependency Id="NDNpQsV2PrIQW6rfNRHtNx" Location="VL.MediaFoundation" Version="0.0.5-stride" />
+  <NugetDependency Id="T5qmJh7oUizMwENYD97jbP" Location="VL.Stride.Windows" Version="0.7.322-g6875704a00" />
+  <NugetDependency Id="J1DogPkYXV5MsqQSVEfk3l" Location="VL.Stride" Version="0.7.322-g6875704a00" />
+  <DocumentDependency Id="KBJzA4543lkOIdEOtiv40L" Location="../../VL.MediaFoundation.vl" />
 </Document>
