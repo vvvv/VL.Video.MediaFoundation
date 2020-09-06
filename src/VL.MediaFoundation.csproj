@@ -7,11 +7,11 @@
     <OutputPath>bin\</OutputPath>
 
     <Year>$([System.DateTime]::Now.ToString('yyyy'))</Year>
-    <VersionPrefix>0.0.5</VersionPrefix>
+    <VersionPrefix>0.0.6</VersionPrefix>
     <VersionSuffix>stride</VersionSuffix>
 
     <!-- Passed to vvvv.exe when starting from within VS -->
-    <PackageRepositories>$(MSBuildThisFileDirectory)..\..\</PackageRepositories>
+    <PackageRepositories>$(MSBuildThisFileDirectory)..\..</PackageRepositories>
 
     <!-- Package properties -->
     <Authors>vvvv group</Authors>
@@ -21,17 +21,16 @@
     <PackageProjectUrl>http://vvvv.org</PackageProjectUrl>
     <RepositoryUrl>https://github.com/vvvv/VL.MediaFoundation</RepositoryUrl>
     <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
-    <PackageReleaseNotes>Popular nodes: VideoIn</PackageReleaseNotes>
+    <PackageReleaseNotes>Popular nodes: VideoIn VideoPlayer</PackageReleaseNotes>
     <PackageTags>VL;video;camera;vvvv</PackageTags>
     <PackageOutputPath>..\bin\</PackageOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="VL.Core" Version="2020.2.0-0217-g78b13ed816">
+    <PackageReference Include="VL.Stride.Runtime" Version="0.7.327-g4acbba7b8b">
       <!-- Already shipped with vvvv itself -->
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="SharpDX.Direct3D11" Version="4.2.0" />
     <PackageReference Include="SharpDX.MediaFoundation" Version="4.2.0" />
   </ItemGroup>
 

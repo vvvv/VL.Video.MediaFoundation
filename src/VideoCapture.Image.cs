@@ -8,7 +8,7 @@ using ColorBGRA = Stride.Core.Mathematics.ColorBGRA;
 
 namespace VL.MediaFoundation
 {
-    partial class VideoCaptureDevice
+    partial class VideoCapture
     {
         // For 2020.2
         /*

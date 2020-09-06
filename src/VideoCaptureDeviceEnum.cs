@@ -18,8 +18,7 @@ namespace VL.MediaFoundation
             var result = new Dictionary<string, object>(devices.Length);
 
             // Add a default entry which makes it up to the system to select a device
-            if (devices.Length > 0)
-                result.Add("Default", default(string));
+            result.Add("Default", default(string));
 
             foreach (var device in devices)
             {
