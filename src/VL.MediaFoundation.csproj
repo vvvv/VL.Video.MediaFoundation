@@ -7,7 +7,7 @@
     <OutputPath>bin\</OutputPath>
 
     <Year>$([System.DateTime]::Now.ToString('yyyy'))</Year>
-    <VersionPrefix>0.0.6</VersionPrefix>
+    <VersionPrefix>0.0.7</VersionPrefix>
     <VersionSuffix>stride</VersionSuffix>
 
     <!-- Passed to vvvv.exe when starting from within VS -->
@@ -27,7 +27,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="VL.Stride.Runtime" Version="0.7.327-g4acbba7b8b">
+    <PackageReference Include="VL.Stride.Runtime" Version="0.8.10-g8460fd4e14">
       <!-- Already shipped with vvvv itself -->
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
