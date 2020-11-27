@@ -91,6 +91,7 @@ namespace VL.MediaFoundation
                 {
                     url = value;
                     engine.Source = value;
+                    invalidated = true;
                 }
             }
         }
