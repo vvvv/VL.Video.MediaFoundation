@@ -2,8 +2,8 @@
   "profiles": {
     "VL.MediaFoundation": {
       "commandName": "Executable",
-      "executablePath": "C:\\Program Files\\vvvv\\vvvv_gamma_2020.2.0-0271-gcebfb7f3e2\\vvvv.exe",
-      "commandLineArgs": "--package-repositories $(PackageRepositories) -o \"$(MSBuildThisFileDirectory)..\\help\\HowTo Capture video input from a camera.vl\""
+      "executablePath": "C:\\Program Files\\vvvv\\vvvv_gamma_2020.3.0-0095-ge3a2e6b737\\vvvv.exe",
+      "commandLineArgs": "--package-repositories \"$(PackageRepositories)\" -o \"$(MSBuildThisFileDirectory)..\\help\\HowTo Play a video file.vl\""
     }
   }
 }

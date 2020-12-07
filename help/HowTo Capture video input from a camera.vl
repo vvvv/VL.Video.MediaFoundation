@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Document xmlns:p="property" Id="HCLhARd4Sv0PCVs8Igi22t" LanguageVersion="2020.2.0.271" Version="0.128">
-  <NugetDependency Id="Gj2X4Tql09gOq0jy9yu36j" Location="VL.CoreLib" Version="2020.2.0-0271-gcebfb7f3e2" />
+<Document xmlns:p="property" Id="HCLhARd4Sv0PCVs8Igi22t" LanguageVersion="2020.3.0.95" Version="0.128">
+  <NugetDependency Id="Gj2X4Tql09gOq0jy9yu36j" Location="VL.CoreLib" Version="2020.3.0-0095-ge3a2e6b737" />
   <Patch Id="PNn7TZV6ad3P1MdWzEMnc6">
     <Canvas Id="AVxdp3P1HUsQFBWkhFkFnV" DefaultCategory="Main" BordersChecked="false" CanvasType="FullCategory" />
     <!--
@@ -45,10 +45,12 @@
             <Pin Id="PuHHNGpfKfFMq4gwyvXwGU" Name="Transformation" Kind="InputPin" />
             <Pin Id="DAUv6u1TeYBPPznT48mMlJ" Name="Texture" Kind="InputPin" />
             <Pin Id="JnMSO1sIuI5MNqsZjdxAn8" Name="Color" Kind="InputPin" />
-            <Pin Id="JInMvY2KQuWNGYU9gX9cIX" Name="Screen Space" Kind="InputPin" />
             <Pin Id="UuyLcXH6B56MGWTGiZLGvr" Name="Keep Aspect" Kind="InputPin" />
-            <Pin Id="CzQizsbjM66NqbxzNt24q1" Name="Alpha Blend" Kind="InputPin" />
-            <Pin Id="K9K3IWNsC57PnFTGoSXWfq" Name="Layer" Kind="OutputPin" />
+            <Pin Id="BBkFmQNoWijP8nGB3XmsWY" Name="Blend State" Kind="InputPin" />
+            <Pin Id="H65kyc8G8XzQG8UBqnfbWR" Name="Rasterizer State" Kind="InputPin" />
+            <Pin Id="NtNU0j6RjhMPtnwdZcJYDI" Name="Depth Stencil State" Kind="InputPin" />
+            <Pin Id="VrfD8HKk52uPdrlb3UQArf" Name="Local Offset" Kind="InputPin" />
+            <Pin Id="CJpOIuep1TFLD8XgwIiSKN" Name="Output" Kind="OutputPin" />
           </Node>
           <Node Bounds="185,488,125,19" Id="FxyyDFKqCcKNOA8EjXI6Lo">
             <p:NodeReference LastCategoryFullName="Stride.Windowing" LastSymbolSource="VL.Stride.vl">
@@ -61,12 +63,16 @@
               </p:TypeAnnotation>
             </Pin>
             <Pin Id="JfIhIBGqkRwOn2oe1lO9HZ" Name="Input" Kind="InputPin" />
-            <Pin Id="MsSkG8Al7a4OaKNQlGriUQ" Name="Title" Kind="InputPin" />
-            <Pin Id="QDDnE5bGpLfPZJpk7MT4mn" Name="Enable Keyboard Shortcuts" Kind="InputPin" />
             <Pin Id="DLuuyCkOcDJOjn3VrH8kNS" Name="Render View" Kind="InputPin" />
+            <Pin Id="MsSkG8Al7a4OaKNQlGriUQ" Name="Title" Kind="InputPin" />
+            <Pin Id="OqiJEu6Za2zLbkLOf0epnB" Name="Clear Color" Kind="InputPin" />
+            <Pin Id="LV8yGSRKPhGM3IM89CP3dO" Name="Clear" Kind="InputPin" />
+            <Pin Id="Sla1w3MPRAdLgvY2OtJxSo" Name="Edit Mode" Kind="InputPin" />
+            <Pin Id="QDDnE5bGpLfPZJpk7MT4mn" Name="Enable Keyboard Shortcuts" Kind="InputPin" />
             <Pin Id="LfwXWi8rsagOjHsLsHQwLR" Name="Enabled" Kind="InputPin" />
             <Pin Id="OPcFxV3BPnZLxrH7PWq5Gg" Name="Present Interval" Kind="InputPin" />
             <Pin Id="S8C1b4pMOfaPQA0YWUQHXt" Name="Output" Kind="OutputPin" />
+            <Pin Id="UodDHMC8iHONmETqEVsSuL" Name="Client Bounds" Kind="OutputPin" />
             <Pin Id="TNu4QJUH87nNFd9npwBTmx" Name="Input Source" Kind="OutputPin" />
             <Pin Id="STxoOXppfYWLiVEbc12HRs" Name="Back Buffer" Kind="OutputPin" />
             <Pin Id="UBmkoLCVcbxNmhIySrZGWn" Name="Depth Buffer" Kind="OutputPin" />
@@ -85,19 +91,6 @@
               <p:stringtype p:Assembly="VL.Core" p:Type="VL.Core.StringType">Comment</p:stringtype>
             </p:ValueBoxSettings>
           </Pad>
-          <Node Bounds="205,441,81,19" Id="A3JGQJDOSFlQE3tcE3OLQJ">
-            <p:NodeReference LastCategoryFullName="Stride.Rendering" LastSymbolSource="VL.Stride.Rendering.vl">
-              <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
-              <Choice Kind="ProcessAppFlag" Name="ClearRenderer" />
-              <CategoryReference Kind="Category" Name="Rendering" NeedsToBeDirectParent="true">
-                <p:OuterCategoryReference Kind="Category" Name="Stride" NeedsToBeDirectParent="true" />
-              </CategoryReference>
-            </p:NodeReference>
-            <Pin Id="NHhjD6EEdTbOAhliqk0Jol" Name="Input" Kind="InputPin" />
-            <Pin Id="LLW7lfBcAydLzjEDOYYNxT" Name="Color" Kind="InputPin" />
-            <Pin Id="RJQM1u4Xnu8MjfL24SMq8E" Name="Enabled" Kind="InputPin" />
-            <Pin Id="FK6Lf8lEtjjOpI1FDyNh4c" Name="Output" Kind="OutputPin" />
-          </Node>
         </Canvas>
         <Patch Id="B1fNIgBbe2HOHjop6HGRX9" Name="Create" />
         <Patch Id="DcBxkBhtSUcQTPzfjLNNbp" Name="Update" />
@@ -109,12 +102,10 @@
         <Link Id="NIkMv7oHIzrLWMaUTzcwxF" Ids="Bl7GSpwubtBOHveArfpi8B,PvoiiKOTaBYMwgnFu0xwGl" />
         <Link Id="JyTkiztDKZyMZzVepX3UID" Ids="GyQ5E2mtsovNnYZ3PbJXTs,DAUv6u1TeYBPPznT48mMlJ" />
         <Link Id="NRhytQQ8Oj6PDIlrkRBqb9" Ids="Btikg1YAv8lOMIe9Ko8V0Y,LYl9SkPm7t4N5YdiCLkWG3" />
-        <Link Id="SNcsB5c27RLPrcPF8Co3GV" Ids="K9K3IWNsC57PnFTGoSXWfq,NHhjD6EEdTbOAhliqk0Jol" />
-        <Link Id="PPYqbJnEMt9Lbq0Y4gfaZc" Ids="FK6Lf8lEtjjOpI1FDyNh4c,JfIhIBGqkRwOn2oe1lO9HZ" />
+        <Link Id="JjvWZNHLHF2N5bAFXmqlQh" Ids="CJpOIuep1TFLD8XgwIiSKN,JfIhIBGqkRwOn2oe1lO9HZ" />
       </Patch>
     </Node>
   </Patch>
   <NugetDependency Id="NDNpQsV2PrIQW6rfNRHtNx" Location="VL.MediaFoundation" Version="0.0.0.0" />
-  <DocumentDependency Id="VhMrRSASNIxQABLPAN0I5Q" Location="../VL.MediaFoundation.vl" />
-  <NugetDependency Id="Nzz53D5gz6EN8zTPf6catI" Location="VL.Stride" Version="0.7.333-g8dd648346a" />
+  <NugetDependency Id="Nzz53D5gz6EN8zTPf6catI" Location="VL.Stride" Version="0.8.66-g000f07005f" />
 </Document>
