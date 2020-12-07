@@ -230,7 +230,6 @@ namespace VL.MediaFoundation
         {
             if (ReadyState <= ReadyState.HaveNothing)
             {
-                currentVideoFrame?.Dispose();
                 currentVideoFrame = null;
                 return;
             }
