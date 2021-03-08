@@ -196,7 +196,7 @@ namespace VL.MediaFoundation
 
         // This method is not really needed but makes it simpler to work with inside VL
         public Texture Update(
-            string url = "http://www.peach.themazzone.com/durian/movies/sintel-1024-surround.mp4",
+            string url,
             bool play = false,
             float rate = 1f,
             float seekTime = 0f,
@@ -205,8 +205,7 @@ namespace VL.MediaFoundation
             float loopEndTime = -1f,
             bool loop = false,
             float volume = 1f,
-            int textureWidth = 0,
-            int textureHeight = 0,
+            Int2 textureSize = default,
             RectangleF? sourceBounds = default,
             Color4? borderColor = default)
         {
@@ -219,7 +218,7 @@ namespace VL.MediaFoundation
             LoopEndTime = loopEndTime;
             Loop = loop;
             Volume = volume;
-            TextureSize = new Size2(textureWidth, textureHeight);
+            TextureSize = new Size2(textureSize.X, textureSize.Y);
             SourceBounds = sourceBounds;
             BorderColor = borderColor;
             Update();

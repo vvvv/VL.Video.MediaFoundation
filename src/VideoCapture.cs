@@ -2,6 +2,7 @@
 using SharpDX.Direct3D11;
 using SharpDX.MediaFoundation;
 using Stride.Core;
+using Stride.Core.Mathematics;
 using Stride.Engine;
 using Stride.Graphics;
 using Stride.Rendering;
@@ -31,6 +32,7 @@ namespace VL.MediaFoundation
         private string deviceSymbolicLink;
         private bool enabled = true;
         private int discardedFrames;
+        private float actualFps;
 
         public VideoCapture(NodeContext nodeContext)
         {
@@ -86,8 +88,9 @@ namespace VL.MediaFoundation
         Texture currentVideoFrame;
 
         public int DiscardedFrames => discardedFrames;
+        public float ActualFPS => actualFps;
 
-        public Texture Update(int waitTimeInMilliseconds)
+        public Texture Update(Int2 size, float fps, int waitTimeInMilliseconds)
         {
             if (enabled)
             {
@@ -135,6 +138,7 @@ namespace VL.MediaFoundation
                     // Ensure DXVA is enabled
                     sourceReaderAttributes.Set(SourceReaderAttributeKeys.DisableDxva, 0);
                     // Needed in order to read data as Argb32
+                    //sourceReaderAttributes.Set(SourceReaderAttributeKeys.EnableVideoProcessing, 1);
                     sourceReaderAttributes.Set(SourceReaderAttributeKeys.EnableAdvancedVideoProcessing, true);
 
                     // Hardware acceleration
@@ -158,7 +162,10 @@ namespace VL.MediaFoundation
                     using var mt = new MediaType();
                     mt.Set(MediaTypeAttributeKeys.MajorType, MediaTypeGuids.Video);
                     mt.Set(MediaTypeAttributeKeys.Subtype, VideoFormatGuids.Argb32);
+                    mt.Set(MediaTypeAttributeKeys.FrameRate, VideoCaptureHelpers.MakeFrameRate(fps));
+                    mt.Set(MediaTypeAttributeKeys.FrameSize, VideoCaptureHelpers.MakeSize(size.X, size.Y));
                     reader.SetCurrentMediaType(SourceReaderIndex.FirstVideoStream, mt);
+                    actualFps = VideoCaptureHelpers.ParseFrameRate(reader.GetCurrentMediaType(SourceReaderIndex.FirstVideoStream).Get(MediaTypeAttributeKeys.FrameRate));
 
                     // Reset the discared frame count
                     discardedFrames = 0;

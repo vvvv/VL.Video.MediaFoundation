@@ -21,9 +21,12 @@
     <PackageProjectUrl>http://vvvv.org</PackageProjectUrl>
     <RepositoryUrl>https://github.com/vvvv/VL.MediaFoundation</RepositoryUrl>
     <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
-    <PackageReleaseNotes>Popular nodes: VideoIn VideoPlayer</PackageReleaseNotes>
-    <PackageTags>VL;video;camera;vvvv</PackageTags>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageTags>VL, videoin, videoplayer, camera</PackageTags>
     <PackageOutputPath>..\bin\</PackageOutputPath>
+    <PackageId>VL.MediaFoundation.Stride</PackageId>
+    <Version>0.0.1-alpha</Version>
+    <PackageIcon>nugeticon.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -38,6 +41,13 @@
     <Content Include="..\**\*.vl">
       <PackagePath>.\%(RecursiveDir)%(Filename)%(Extension)</PackagePath>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="deployment/nugeticon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
