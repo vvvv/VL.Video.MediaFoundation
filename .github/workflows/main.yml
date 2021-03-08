@@ -26,5 +26,5 @@ jobs:
       with:
         csproj: src\VL.MediaFoundation.csproj
         icon-src: https://raw.githubusercontent.com/vvvv/PublicContent/master/nugeticon.png
-        icon-dst: ./deployment/nugeticon.png
+        icon-dst: ./nugeticon.png
         nuget-key: ${{ secrets.NUGET_KEY }}
