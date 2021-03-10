@@ -3,7 +3,7 @@
   <NugetDependency Id="OddDUH5t00UQDOaM5VIUbR" Location="VL.CoreLib" Version="2021.3.1" />
   <Patch Id="RGTfRCPLQo7PrXo7dPC5Ad">
     <Canvas Id="USHGZ5YZJZ5NCZiBRK95Vs" DefaultCategory="Stride.Textures.Source" CanvasType="FullCategory">
-      <Canvas Id="E85TIfV85NyN7HiBWXsv1t" Name="Advanced" Position="638,213">
+      <Canvas Id="E85TIfV85NyN7HiBWXsv1t" Name="Advanced" Position="497,234">
         <!--
 
     ************************ VideoCaptureDeviceEnumEntry ************************
@@ -57,7 +57,7 @@
     ************************ VideoIn (MediaFoundation) ************************
 
 -->
-      <Node Name="VideoIn (MediaFoundation)" Bounds="401,214" Id="EXFOac2lMH0NOo34w6lLvB">
+      <Node Name="VideoIn (MediaFoundation)" Bounds="260,235" Id="EXFOac2lMH0NOo34w6lLvB">
         <p:NodeReference LastCategoryFullName="Primitive" LastSymbolSource="builtin">
           <Choice Kind="ContainerDefinition" Name="Process" />
         </p:NodeReference>
@@ -142,7 +142,7 @@
             <ControlPoint Id="BZp0lLcHn61NTTM1guLC1a" Bounds="724,722" />
             <ControlPoint Id="MaiowPehk0pME6NEJCkH67" Bounds="440,515" />
             <ControlPoint Id="SXp7QLAH9iwMTbsD8kMRvm" Bounds="345,515" />
-            <Node Bounds="432,246,141,188" Id="JPQvcAWPoFKNfFFa1YuquI">
+            <Node Bounds="799,251,141,188" Id="JPQvcAWPoFKNfFFa1YuquI">
               <p:NodeReference LastCategoryFullName="Primitive" LastSymbolSource="VL.CoreLib.dll">
                 <Choice Kind="StatefulRegion" Name="Region (Stateful)" Fixed="true" />
                 <Choice Kind="ProcessStatefulRegion" Name="Cache" />
@@ -151,12 +151,12 @@
               <Pin Id="DbDx5Z9J1ujOHNUzildHDR" Name="Force" Kind="InputPin" />
               <Pin Id="CRSkYPhDeHHN3cTwBj26JY" Name="Dispose Cached Outputs" Kind="InputPin" />
               <Pin Id="G7zmcrbp8aGQISC2r1GDDf" Name="Has Changed" Kind="OutputPin" />
-              <ControlPoint Id="JVwHVH8AvD3PXI3U31CEoO" Bounds="452,253" Alignment="Top" />
-              <ControlPoint Id="RXK0oHPMf6XQFuWa75pJMQ" Bounds="447,428" Alignment="Bottom" />
+              <ControlPoint Id="JVwHVH8AvD3PXI3U31CEoO" Bounds="819,257" Alignment="Top" />
+              <ControlPoint Id="RXK0oHPMf6XQFuWa75pJMQ" Bounds="814,433" Alignment="Bottom" />
               <Patch Id="T0VHpU8sa2qPIpCUmJnLcT" ManuallySortedPins="true">
                 <Patch Id="TN1TJmqwa0oNaLfHsV0ncK" Name="Create" ManuallySortedPins="true" />
                 <Patch Id="NBCOiIafQ9VNy9s18ymGSj" Name="Then" ManuallySortedPins="true" />
-                <Node Bounds="446,395,115,19" Id="QLoqyW3HNAUP9K4yaEXjZc">
+                <Node Bounds="813,400,115,19" Id="QLoqyW3HNAUP9K4yaEXjZc">
                   <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCaptureHelpers" LastSymbolSource="VL.MediaFoundation.dll">
                     <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                     <CategoryReference Kind="AssemblyCategory" Name="VideoCaptureHelpers" />
@@ -165,7 +165,7 @@
                   <Pin Id="AYcl93dge2FQQa2Ac4MjKy" Name="Device Index" Kind="InputPin" />
                   <Pin Id="TMkskRakZ73M47H12tAsE5" Name="Result" Kind="OutputPin" />
                 </Node>
-                <Node Bounds="445,276,67,26" Id="GWo4KpKTjiQMqucNTsM6sg">
+                <Node Bounds="812,281,67,26" Id="GWo4KpKTjiQMqucNTsM6sg">
                   <p:NodeReference LastCategoryFullName="Primitive.DynamicEnum" LastSymbolSource="CoreLibBasics.vl">
                     <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                     <CategoryReference Kind="ImmutableInterfaceType" Name="DynamicEnum" />
@@ -174,7 +174,7 @@
                   <Pin Id="G2Eie4J1PXZMnuW7EaqhTi" Name="Input" Kind="StateInputPin" />
                   <Pin Id="GbrqxCU6oqHMJ16LOMCJiY" Name="Result" Kind="OutputPin" />
                 </Node>
-                <Node Bounds="445,315,51,26" Id="UPxnowI14Q1MFCio0SjC5B">
+                <Node Bounds="812,320,51,26" Id="UPxnowI14Q1MFCio0SjC5B">
                   <p:NodeReference LastCategoryFullName="Primitive.Integer32" LastSymbolSource="CoreLibBasics.vl">
                     <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                     <Choice Kind="OperationCallFlag" Name="Dec" />
@@ -183,7 +183,7 @@
                   <Pin Id="RuLlFA78KW2MaaOTjDBOS9" Name="Input" Kind="StateInputPin" />
                   <Pin Id="RugVMYoPTnCOhPT3XuJkrn" Name="Output" Kind="StateOutputPin" />
                 </Node>
-                <Node Bounds="444,358,25,19" Id="GhVbvTd9r9GNGoLvSo1EYw">
+                <Node Bounds="811,363,25,19" Id="GhVbvTd9r9GNGoLvSo1EYw">
                   <p:NodeReference LastCategoryFullName="Math" LastSymbolSource="CoreLibBasics.vl">
                     <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                     <Choice Kind="OperationCallFlag" Name="Max" />
@@ -194,7 +194,7 @@
                 </Node>
               </Patch>
             </Node>
-            <ControlPoint Id="VSKYDHouqboNlxqJo6G00c" Bounds="447,450" />
+            <ControlPoint Id="VSKYDHouqboNlxqJo6G00c" Bounds="814,455" />
           </Canvas>
           <ProcessDefinition Id="HkyhR5csDd5PuBFBOWKyGc">
             <Fragment Id="SkWQCGwxN1KQI0zG5UPiWW" Patch="QvCu62Lhf7WPMOxTMQ3o7W" Enabled="true" />
@@ -264,7 +264,7 @@
     ************************ VideoPlayer (Url MediaFoundation) ************************
 
 -->
-      <Node Name="VideoPlayer (Url MediaFoundation)" Bounds="408,280" Id="STFu4QdmkZDLjuilki3t4F">
+      <Node Name="VideoPlayer (Url MediaFoundation)" Bounds="260,301" Id="STFu4QdmkZDLjuilki3t4F">
         <p:NodeReference LastCategoryFullName="Primitive" LastSymbolSource="builtin">
           <Choice Kind="ContainerDefinition" Name="Process" />
         </p:NodeReference>
@@ -450,7 +450,7 @@
     ************************ VideoPlayer (MediaFoundation) ************************
 
 -->
-      <Node Name="VideoPlayer (MediaFoundation)" Bounds="414,342" Id="Bktz625OKwbLY1eZgNFaA7">
+      <Node Name="VideoPlayer (MediaFoundation)" Bounds="260,363" Id="Bktz625OKwbLY1eZgNFaA7">
         <p:NodeReference LastCategoryFullName="Primitive" LastSymbolSource="builtin">
           <Choice Kind="ContainerDefinition" Name="Process" />
         </p:NodeReference>
@@ -490,7 +490,7 @@
               <Pin Id="JC8ScPmR3e0LKzCzYxTf9F" Name="Result" Kind="OutputPin" />
             </Node>
             <ControlPoint Id="LEfpZ0fjNc2Oka2AwQF7nT" Bounds="369,300" />
-            <Pad Id="EBELsA9cBsmQRq0ztMbFEN" Comment="Network State" Bounds="503,436,71,15" ShowValueBox="true" isIOBox="true" />
+            <Pad Id="EBELsA9cBsmQRq0ztMbFEN" Comment="Network State" Bounds="551,436,71,15" ShowValueBox="true" isIOBox="true" />
             <ControlPoint Id="FkVY5XB9A8zQOBPIAZ8nZs" Bounds="579,299" />
             <ControlPoint Id="NzMUmPjHJz3L5FRqRuHAKT" Bounds="592,322" />
             <ControlPoint Id="JsSNSwbFLbHPikiuZ5QY4r" Bounds="600,350" />
@@ -516,9 +516,6 @@
                 <Choice Kind="TypeFlag" Name="Path" />
               </p:TypeAnnotation>
             </Pin>
-            <Pin Id="NGTvTA2CdmMOxTNgGw7zcC" Name="Texture Size" Kind="InputPin" Bounds="579,299" Visibility="Optional" />
-            <Pin Id="Kd7iCbZ9AzrOpPa3yE3kxM" Name="Source Bounds" Kind="InputPin" Bounds="592,322" Visibility="Optional" />
-            <Pin Id="SAbMGDJYM6YLop6GcIp87K" Name="Border Color" Kind="InputPin" Bounds="600,350" Visibility="Optional" />
             <Pin Id="BMILtWnOWcuNpAC71qcWZn" Name="Play" Kind="InputPin" />
             <Pin Id="ObCS3nxErPxMnmusMskmwk" Name="Rate" Kind="InputPin" />
             <Pin Id="HDPsxEMU1OrM04zkxNISH0" Name="Seek Time" Kind="InputPin" />
@@ -527,6 +524,9 @@
             <Pin Id="Fk7ce1YdiyqNMYmyHEjyJ2" Name="Loop End Time" Kind="InputPin" />
             <Pin Id="HjPrFD03SRBLm2hk2Tk4v8" Name="Loop" Kind="InputPin" />
             <Pin Id="JcDE01t5E0xLtgYhP6W9ky" Name="Volume" Kind="InputPin" />
+            <Pin Id="NGTvTA2CdmMOxTNgGw7zcC" Name="Texture Size" Kind="InputPin" Bounds="579,299" Visibility="Optional" />
+            <Pin Id="Kd7iCbZ9AzrOpPa3yE3kxM" Name="Source Bounds" Kind="InputPin" Bounds="592,322" Visibility="Optional" />
+            <Pin Id="SAbMGDJYM6YLop6GcIp87K" Name="Border Color" Kind="InputPin" Bounds="600,350" Visibility="Optional" />
             <Pin Id="Do2YEVl7JunOvLFAPohN9T" Name="Output" Kind="OutputPin" />
             <Pin Id="LaGEvwbN2WWNYwAhFwD9xJ" Name="Playing" Kind="OutputPin" />
             <Pin Id="VjRjLLGJp8dMMkqpNrsY22" Name="Current Time" Kind="OutputPin" />
