@@ -22,7 +22,7 @@ jobs:
       uses: nuget/setup-nuget@v1
       
     - name: Publish VL Nuget
-      uses: vvvv/PublishVLNuget@1.0.29
+      uses: vvvv/PublishVLNuget@1.0.40
       with:
         csproj: src\VL.MediaFoundation.csproj
         icon-src: https://raw.githubusercontent.com/vvvv/PublicContent/master/nugeticon.png
