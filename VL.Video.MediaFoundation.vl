@@ -32,7 +32,7 @@
                 <p:HideCategory p:Type="Boolean">false</p:HideCategory>
                 <Patch Id="DBnCic9VNMGO9pwftQqeNZ">
                   <Node Bounds="347,234,10,10" AutoConnect="true" Id="CP1FtoZxBvSQcdKMirAbNg">
-                    <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCaptureDeviceEnumEntry" LastSymbolSource="VL.MediaFoundation.dll">
+                    <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCaptureDeviceEnumEntry" LastSymbolSource="VL.Video.MediaFoundation.dll">
                       <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                       <Choice Kind="OperationNode" Name="CreateDefault" />
                       <CategoryReference Kind="AssemblyCategory" Name="VideoCaptureDeviceEnumEntry" NeedsToBeDirectParent="true" />
@@ -65,7 +65,7 @@
           <Canvas Id="KuF4UnnhmRHMxY2aAbALPG" CanvasType="Group">
             <ControlPoint Id="LmdthDEoqynLx8RI2AObf5" Bounds="334,186" />
             <Node Bounds="253,559,88,26" Id="GhaF29HsQKpMuculfSdNKD">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture" LastSymbolSource="VL.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="Update" />
                 <CategoryReference Kind="AssemblyCategory" Name="VideoCapture" NeedsToBeDirectParent="true" />
@@ -80,7 +80,7 @@
             <ControlPoint Id="ElZYrJzmCr4PwUBDpXEk71" Bounds="339,739" />
             <ControlPoint Id="TBaOl2BsNDiL8nI928kIQt" Bounds="542,738" />
             <Node Bounds="256,244,65,26" Id="ETHcLdPj5OOPzxcrGs6QOy">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture" LastSymbolSource="VL.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <CategoryReference Kind="AssemblyCategory" Name="VideoCapture" />
                 <Choice Kind="OperationCallFlag" Name="Create" />
@@ -91,7 +91,7 @@
             <Pad Id="VFo8LZAXsCsMEt5JcqMUaT" SlotId="G3hIl29CQXxONjiqhs1hxM" Bounds="258,309" />
             <ControlPoint Id="OW0nx31q8SjPRNDI7KfspO" Bounds="536,515" />
             <Node Bounds="256,426,65,26" Id="HcCBcJ1yV9JPQI6A36vtcM">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture" LastSymbolSource="VL.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <CategoryReference Kind="AssemblyCategory" Name="VideoCapture" />
                 <Choice Kind="OperationCallFlag" Name="SetDevice" />
@@ -101,7 +101,7 @@
               <Pin Id="RzeUIeaBv0eQJLGgB71xkl" Name="Output" Kind="StateOutputPin" />
             </Node>
             <Node Bounds="254,500" Id="LD5WWHN3rcUOdillUA97sz">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture" LastSymbolSource="VL.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <CategoryReference Kind="AssemblyCategory" Name="VideoCapture" />
                 <Choice Kind="OperationCallFlag" Name="SetEnabled" />
@@ -112,7 +112,7 @@
             </Node>
             <ControlPoint Id="NU8MrkFiSCDNldxaCQQLBw" Bounds="699,474" />
             <Node Bounds="451,659" Id="Vz9SabWLD6DNsKgNKAbhiF">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture" LastSymbolSource="VL.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <CategoryReference Kind="AssemblyCategory" Name="VideoCapture" />
                 <Choice Kind="OperationCallFlag" Name="DiscardedFrames" />
@@ -122,7 +122,7 @@
               <Pin Id="CPftVcjYWZ3NanNq5YOLT9" Name="Discarded Frames" Kind="OutputPin" />
             </Node>
             <Node Bounds="180,384" Id="JcSWRqrwp7jNW4BMjf1iYE">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture" LastSymbolSource="VL.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <CategoryReference Kind="AssemblyCategory" Name="VideoCapture" />
                 <Choice Kind="OperationCallFlag" Name="Dispose" />
@@ -131,7 +131,7 @@
               <Pin Id="CTI21Qbxsh5PiUrRZzMV6M" Name="Output" Kind="StateOutputPin" />
             </Node>
             <Node Bounds="663,659" Id="KlSYn05ro6dQN0q43gV1if">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture" LastSymbolSource="VL.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="ActualFPS" />
               </p:NodeReference>
@@ -157,7 +157,7 @@
                 <Patch Id="TN1TJmqwa0oNaLfHsV0ncK" Name="Create" ManuallySortedPins="true" />
                 <Patch Id="NBCOiIafQ9VNy9s18ymGSj" Name="Then" ManuallySortedPins="true" />
                 <Node Bounds="813,400,115,19" Id="QLoqyW3HNAUP9K4yaEXjZc">
-                  <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCaptureHelpers" LastSymbolSource="VL.MediaFoundation.dll">
+                  <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCaptureHelpers" LastSymbolSource="VL.Video.MediaFoundation.dll">
                     <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                     <CategoryReference Kind="AssemblyCategory" Name="VideoCaptureHelpers" />
                     <Choice Kind="OperationCallFlag" Name="GetSupportedFormats" />
@@ -271,7 +271,7 @@
         <Patch Id="BXvJDyNSqBcLb0gyXgF9NZ">
           <Canvas Id="Gg2QS1Wg1l9M7dAk9RKsg2" CanvasType="Group">
             <Node Bounds="224,198,58,26" Id="DV39z8q4XZ2OsCCEnQDUDp">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="OperationNode" Name="Create" />
                 <FullNameCategoryReference ID="VL.MediaFoundation.VideoPlayer" />
               </p:NodeReference>
@@ -281,7 +281,7 @@
             <ControlPoint Id="D228dko9n3JPxEbcJ0ZKyG" Bounds="226,141" />
             <Pad Id="MQXFQyXUcHPN11S8cbfzvP" SlotId="DpoWupsOjxuQSxVY930XwZ" Bounds="225,279" />
             <Node Bounds="221,366,245,26" AutoConnect="true" Id="Du0vCopVusHOTVzSp23qxZ">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <CategoryReference Kind="AssemblyCategory" Name="VideoPlayer" />
                 <Choice Kind="OperationCallFlag" Name="Update" />
@@ -303,7 +303,7 @@
               <Pin Id="G7bOmtiXeSoNusuLWrdzZD" Name="Result" Kind="OutputPin" />
             </Node>
             <Node Bounds="482,537,73,26" Id="UWolVM769ySNb2pREGzuXa">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <CategoryReference Kind="AssemblyCategory" Name="VideoPlayer" />
                 <Choice Kind="OperationCallFlag" Name="CurrentTime" />
@@ -313,7 +313,7 @@
               <Pin Id="QgIAjrYLE8mPgruIkfPeOH" Name="Current Time" Kind="OutputPin" />
             </Node>
             <Node Bounds="643,536,58,26" Id="GctlfEJbJjxPM1NKSLPR6x">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <CategoryReference Kind="AssemblyCategory" Name="VideoPlayer" />
                 <Choice Kind="OperationCallFlag" Name="Duration" />
@@ -326,7 +326,7 @@
             <ControlPoint Id="SWks5GMxvDcPBFS2k8rDlY" Bounds="551,593" />
             <ControlPoint Id="IpSjoZTAy9nNzoiHIy37L2" Bounds="700,592" />
             <Node Bounds="381,542,58,26" Id="BFOIB13ixSsLfNbj0TUNdD">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <CategoryReference Kind="AssemblyCategory" Name="VideoPlayer" />
                 <Choice Kind="OperationCallFlag" Name="Playing" />
@@ -337,7 +337,7 @@
             </Node>
             <ControlPoint Id="IfC6CFYOcDoLRnsIXarUPk" Bounds="434,602" />
             <Node Bounds="799,542,66,26" Id="DJblD7vRaXBLuy7xouCHK8">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <CategoryReference Kind="AssemblyCategory" Name="VideoPlayer" />
                 <Choice Kind="OperationCallFlag" Name="ReadyState" />
@@ -348,7 +348,7 @@
             </Node>
             <ControlPoint Id="B9DkwX7rnVbMRbNXsyeBvN" Bounds="862,606" />
             <Node Bounds="979,541,77,26" Id="FGRgl3c3F05MGqch7C6yts">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <CategoryReference Kind="AssemblyCategory" Name="VideoPlayer" />
                 <Choice Kind="OperationCallFlag" Name="NetworkState" />
@@ -359,7 +359,7 @@
             </Node>
             <ControlPoint Id="VB8qW1h3z23NlIZGtCI093" Bounds="1052,603" />
             <Node Bounds="106,364,58,26" Id="C4f4PKVSYfkNTtxJIGxnAt">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="Dispose" />
                 <CategoryReference Kind="AssemblyCategory" Name="VideoPlayer" NeedsToBeDirectParent="true" />
@@ -368,7 +368,7 @@
               <Pin Id="NaHZCCcn0AtMu4OC7pfr3t" Name="Output" Kind="StateOutputPin" />
             </Node>
             <Node Bounds="1214,536,62,26" Id="IRTFfF9oIcuNKqjCYu7qg7">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <CategoryReference Kind="AssemblyCategory" Name="VideoPlayer" />
                 <Choice Kind="OperationCallFlag" Name="ErrorCode" />
@@ -558,8 +558,7 @@
       </Patch>
     </Node>
   </Patch>
-  <PlatformDependency Id="BGEGu4c1wcsPKai7Ct7s2I" Location="./src/bin/net472/VL.MediaFoundation.dll" />
   <NugetDependency Id="CIaIqv37RcIOugCory9kns" Location="SharpDX.MediaFoundation" Version="4.2.0" />
-  <NugetDependency Id="U5feeIjoSz2MGN4Xo82u2R" Location="SharpDX.Direct3D11" Version="4.2.0" />
   <NugetDependency Id="LozAUHC3yMPOTrviaKMV0q" Location="VL.Stride.Windows" Version="0.9.90-g7445968757" />
+  <PlatformDependency Id="QoeqsqOSs36P831LYwJ2F5" Location="./src/bin/Debug/net472/VL.Video.MediaFoundation.dll" />
 </Document>
