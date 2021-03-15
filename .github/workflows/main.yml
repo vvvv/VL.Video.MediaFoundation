@@ -24,7 +24,7 @@ jobs:
     - name: Publish VL Nuget
       uses: vvvv/PublishVLNuget@1.0.40
       with:
-        csproj: src\VL.MediaFoundation.csproj
+        csproj: src\VL.Video.MediaFoundation.csproj
         icon-src: https://raw.githubusercontent.com/vvvv/PublicContent/master/nugeticon.png
         icon-dst: ./nugeticon.png
         nuget-key: ${{ secrets.NUGET_KEY }}
