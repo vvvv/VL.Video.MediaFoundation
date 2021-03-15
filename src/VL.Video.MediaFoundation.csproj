@@ -24,7 +24,7 @@
     <PackageReleaseNotes></PackageReleaseNotes>
     <PackageTags>VL, videoin, videoplayer, camera</PackageTags>
     <PackageOutputPath>..\bin\</PackageOutputPath>
-    <PackageId>VL.MediaFoundation.Stride</PackageId>
+    <PackageId>VL.Video.MediaFoundation</PackageId>
     <Version>0.0.2-alpha</Version>
     <PackageIcon>nugeticon.png</PackageIcon>
   </PropertyGroup>

@@ -1,22 +1,14 @@
-# VL.MediaFoundation
-- Use `VideoIn` and `VideoIn (Reactive)` for video capture
-- Use `VideoPlayer`and `VideoPlayer (Reactive)` for video playback from file or the web
+# VL.Video.MediaFoundation
+Set of nodes for video capture and playback using the [Windows MediaFoundation SDK](https://docs.microsoft.com/en-us/windows/win32/medfound/microsoft-media-foundation-sdk)
 
-## Installation
-### vvvv gamma
-- Install [vvvv gamma](https://visualprogramming.net/) (minimum required version is 2020.2)
-- Inside from the patch editor open the nuget command line and type `nuget install VL.MediaFoundation`
+Try it with vvvv, the visual live-programming environment for .NET  
+Download: http://visualprogramming.net
 
-### vvvv gamma preview
-- Install [vvvv gamma preview](https://visualprogramming.net/) (minimum required version is 2020.3)
-- Inside from the patch editor open the nuget command line and type `nuget install VL.MediaFoundation -pre`
+## Using the library
+In order to use this library with VL you have to install the nuget that is available via nuget.org. For information on how to use nugets with VL, see [Managing Nugets](https://thegraybook.vvvv.org/reference/libraries/dependencies.html#manage-nugets) in the VL documentation. As described there you go to the commandline and then type:
 
-### vvvv beta
-- Not available
+    nuget install VL.Video.MediaFoundation -pre
 
-The last working version for 2020.1 is 0.0.4 (`nuget isntall VL.MediaFoundation -version 0.0.4`)
+Once the VL.Video.MediaFoundation nuget is installed and referenced in your VL document you'll see the category "MediaFoundation" under "Video" in the nodebrowser. 
 
-## Building
-Note that this is only for developers, to use the nuget you only need the installation steps above.
-- Install [Visual Studio 2019](https://www.visualstudio.com/downloads)
-- Open `src/VL.MediaFoundation.sln` and build
+Demos are available via the Help Browser!

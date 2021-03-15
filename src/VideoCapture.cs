@@ -138,7 +138,6 @@ namespace VL.MediaFoundation
                     // Ensure DXVA is enabled
                     sourceReaderAttributes.Set(SourceReaderAttributeKeys.DisableDxva, 0);
                     // Needed in order to read data as Argb32
-                    //sourceReaderAttributes.Set(SourceReaderAttributeKeys.EnableVideoProcessing, 1);
                     sourceReaderAttributes.Set(SourceReaderAttributeKeys.EnableAdvancedVideoProcessing, true);
 
                     // Hardware acceleration
@@ -151,22 +150,24 @@ namespace VL.MediaFoundation
                         // Reset device
                         using var manager = new DXGIDeviceManager();
                         manager.ResetDevice(d3dDevice);
-
                         sourceReaderAttributes.Set(SourceReaderAttributeKeys.D3DManager, manager);
                     }
 
                     // Create the source reader
                     using var reader = new SourceReader(mediaSource, sourceReaderAttributes);
 
+
                     // Set output format to BGRA
                     using var mt = new MediaType();
                     mt.Set(MediaTypeAttributeKeys.MajorType, MediaTypeGuids.Video);
                     mt.Set(MediaTypeAttributeKeys.Subtype, VideoFormatGuids.Argb32);
-                    mt.Set(MediaTypeAttributeKeys.FrameRate, VideoCaptureHelpers.MakeFrameRate(fps));
                     mt.Set(MediaTypeAttributeKeys.FrameSize, VideoCaptureHelpers.MakeSize(size.X, size.Y));
+                    mt.Set(MediaTypeAttributeKeys.FrameRate, VideoCaptureHelpers.MakeFrameRate(fps));
+                    mt.Set(MediaTypeAttributeKeys.InterlaceMode, (int)VideoInterlaceMode.Progressive);
+                    mt.Set(MediaTypeAttributeKeys.PixelAspectRatio, VideoCaptureHelpers.MakeSize(1, 1));
                     reader.SetCurrentMediaType(SourceReaderIndex.FirstVideoStream, mt);
                     actualFps = VideoCaptureHelpers.ParseFrameRate(reader.GetCurrentMediaType(SourceReaderIndex.FirstVideoStream).Get(MediaTypeAttributeKeys.FrameRate));
-
+                    
                     // Reset the discared frame count
                     discardedFrames = 0;
 
