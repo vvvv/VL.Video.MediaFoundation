@@ -17,15 +17,15 @@
     <Authors>vvvv group</Authors>
     <Owners>$(Authors)</Owners>
     <Copyright>Copyright © $(Year) by $(Authors). All rights reserved.</Copyright>
-    <Description>Microsoft Media Foundation for VL</Description>
+    <Description>Video player and capture nodes based on the Windows MediaFoundation API</Description>
     <PackageProjectUrl>http://vvvv.org</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/vvvv/VL.MediaFoundation</RepositoryUrl>
+    <RepositoryUrl>https://github.com/vvvv/VL.Video.MediaFoundation</RepositoryUrl>
     <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
     <PackageReleaseNotes></PackageReleaseNotes>
-    <PackageTags>VL, videoin, videoplayer, camera</PackageTags>
+    <PackageTags>VL, videoin, videoplayer, camera, capture, movie, stream</PackageTags>
     <PackageOutputPath>..\bin\</PackageOutputPath>
     <PackageId>VL.Video.MediaFoundation</PackageId>
-    <Version>0.0.3-alpha</Version>
+    <Version>0.0.4-alpha</Version>
     <PackageIcon>nugeticon.png</PackageIcon>
   </PropertyGroup>
 
