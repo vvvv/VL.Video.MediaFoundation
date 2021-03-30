@@ -230,6 +230,8 @@ namespace VL.MediaFoundation
             if (ReadyState <= ReadyState.HaveNothing)
             {
                 currentVideoFrame = null;
+                renderTarget?.Dispose();
+                invalidated = true;
                 return;
             }
 
