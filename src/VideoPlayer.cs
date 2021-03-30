@@ -231,6 +231,7 @@ namespace VL.MediaFoundation
             {
                 currentVideoFrame = null;
                 renderTarget?.Dispose();
+                renderTarget = null;
                 invalidated = true;
                 return;
             }
