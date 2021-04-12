@@ -30,7 +30,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="VL.Stride.Runtime" Version="0.8.146-gd37a2c4664">
+    <PackageReference Include="VL.Stride.Runtime" Version="0.9.96-gbe66fd6c22">
       <!-- Already shipped with vvvv itself -->
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
