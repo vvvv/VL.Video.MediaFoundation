@@ -1,29 +1,35 @@
 ﻿using SharpDX.MediaFoundation;
 using SharpDX.Multimedia;
+using Stride.Core.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Disposables;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using VL.Core;
 
 namespace VL.MediaFoundation
 {
-    public class VideoCaptureHelpers
+    public static class VideoCaptureHelpers
     {
         public class Format
         {
-            public int w, h;
+            public Int2 size;
             public float fr;
             public string format;
             public float aspect;
+            public MediaType mediaType;
         }
 
         public static string GetSupportedFormats(int deviceIndex)
         {
             return String.Join(Environment.NewLine, EnumerateSupportedFormats(deviceIndex)
                 .OrderByDescending(x => x.format)
-                .ThenByDescending(x => x.w)
-                .ThenByDescending(x => x.h)
+                .ThenByDescending(x => x.size.X)
+                .ThenByDescending(x => x.size.Y)
                 .ThenByDescending(x => x.fr)
-                .Select(x => $"{x.format} {x.w}x{x.h} - {x.aspect:F2} @ {x.fr:F2}")
+                .Select(x => $"{x.format} {x.size.X}x{x.size.Y} - {x.aspect:F2} @ {x.fr:F2}")
                 .Distinct()
                 .ToArray());
         }
@@ -41,16 +47,18 @@ namespace VL.MediaFoundation
             {
                 var mediaType = handler.GetMediaTypeByIndex(i);
                 if (mediaType.MajorType == MediaTypeGuids.Video)
-                {
-                    var frameRate = ParseFrameRate(mediaType.Get(MediaTypeAttributeKeys.FrameRate));
-                    ParseSize(mediaType.Get(MediaTypeAttributeKeys.FrameSize), out int width, out int height);
-                    ParseSize(mediaType.Get(MediaTypeAttributeKeys.PixelAspectRatio), out int nominator, out int denominator);
-
-                    var format = GetVideoFormat(mediaType);
-
-                    yield return new Format() { w = width, h = height, fr = frameRate, format = format, aspect = nominator / denominator };
-                }
+                    yield return ToFormat(mediaType);
             }
+        }
+
+        static Format ToFormat(MediaType mediaType)
+        {
+            var frameRate = ParseFrameRate(mediaType.Get(MediaTypeAttributeKeys.FrameRate));
+            ParseSize(mediaType.Get(MediaTypeAttributeKeys.FrameSize), out int width, out int height);
+            ParseSize(mediaType.Get(MediaTypeAttributeKeys.PixelAspectRatio), out int nominator, out int denominator);
+
+            var format = mediaType.ToVideoFormatString();
+            return new Format() { size = new Int2(width, height), fr = frameRate, format = format, aspect = nominator / denominator, mediaType = mediaType };
         }
 
         public static Activate[] EnumerateVideoDevices()
@@ -59,7 +67,6 @@ namespace VL.MediaFoundation
             attributes.Set(CaptureDeviceAttributeKeys.SourceType, CaptureDeviceAttributeKeys.SourceTypeVideoCapture.Guid);
             return MediaFactory.EnumDeviceSources(attributes);
         }
-
 
         public static void ParseSize(long value, out int width, out int height)
         {
@@ -86,13 +93,77 @@ namespace VL.MediaFoundation
             return denominator + ((long)(numerator) << 32);
         }
 
-        private static string GetVideoFormat(MediaType mediaType)
+        private static string ToVideoFormatString(this MediaType mediaType)
         {
             // https://docs.microsoft.com/en-us/windows/desktop/medfound/video-subtype-guids
             var subTypeId = mediaType.Get(MediaTypeAttributeKeys.Subtype);
             var fourccEncoded = BitConverter.ToInt32(subTypeId.ToByteArray(), 0);
             var fourcc = new FourCC(fourccEncoded);
             return fourcc.ToString();
+        }
+
+        // See https://docs.microsoft.com/en-us/windows/win32/medfound/how-to-set-the-video-capture-format
+        internal static IEnumerable<Format> EnumerateCaptureFormats(this MediaSource mediaSource)
+        {
+            mediaSource.CreatePresentationDescriptor(out var pd);
+            using (pd)
+            {
+                using var sd = pd.GetStreamDescriptorByIndex(0, out _);
+                using var handler = sd.MediaTypeHandler;
+                for (int i = 0; i < handler.MediaTypeCount; i++)
+                {
+                    var mediaType = handler.GetMediaTypeByIndex(i);
+                    if (mediaType.MajorType == MediaTypeGuids.Video)
+                        yield return ToFormat(mediaType);
+                }
+            }
+        }
+
+        // See https://docs.microsoft.com/en-us/windows/win32/medfound/how-to-set-the-video-capture-format
+        internal static void SetCaptureFormat(this MediaSource mediaSource, MediaType mediaType)
+        {
+            mediaSource.CreatePresentationDescriptor(out var pd);
+            using (pd)
+            {
+                using var sd = pd.GetStreamDescriptorByIndex(0, out var _);
+                using var handler = sd.MediaTypeHandler;
+                handler.CurrentMediaType = mediaType;
+            }
+        }
+
+        internal static IDisposable SetCameraValue(this MediaSource mediaSource, CameraControlPropertyName propertyName, IObservable<float?> observableValue)
+        {
+            var flags = CameraControlFlags.None;
+
+            // Fetch defaults
+            int min = default, max = default, step = default, @default = default;
+            {
+                var cameraControl = Marshal.GetObjectForIUnknown(mediaSource.NativePointer) as IAMCameraControl;
+                if (cameraControl != null)
+                {
+                    cameraControl.GetRange(propertyName, out min, out max, out step, out @default, out flags);
+
+                    Marshal.ReleaseComObject(cameraControl);
+                }
+            }
+
+            if (flags == CameraControlFlags.None)
+                return Disposable.Empty;
+
+            return observableValue.Subscribe(value =>
+            {
+                // Need to fetch the interface again because of thread affinity
+                var cameraControl = Marshal.GetObjectForIUnknown(mediaSource.NativePointer) as IAMCameraControl;
+                if (cameraControl != null)
+                {
+                    if (value is null)
+                        cameraControl.Set(propertyName, @default, CameraControlFlags.Auto);
+                    else
+                        cameraControl.Set(propertyName, (int)VLMath.Map(value.Value, 0f, 1f, min, max, MapMode.Clamp), CameraControlFlags.Manual);
+
+                    Marshal.ReleaseComObject(cameraControl);
+                }
+            });
         }
     }
 }

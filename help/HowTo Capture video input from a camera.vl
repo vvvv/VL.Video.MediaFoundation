@@ -32,7 +32,7 @@
             <Pin Id="LMCcxMV1K0cNJprDHVNTcq" Name="Actual FPS" Kind="OutputPin" />
             <Pin Id="HDPSnhzjq9kPN0HO3W7bwk" Name="Supported Formats" Kind="OutputPin" />
           </Node>
-          <Pad Id="D4RKbFkppS3M9fno4Eq1Z1" Comment="Device" Bounds="228,156,116,15" ShowValueBox="true" isIOBox="true" Value="HD Pro Webcam C920">
+          <Pad Id="D4RKbFkppS3M9fno4Eq1Z1" Comment="Device" Bounds="228,156,116,15" ShowValueBox="true" isIOBox="true" Value="Default">
             <p:TypeAnnotation LastCategoryFullName="Video.MediaFoundation" LastSymbolSource="VL.Video.MediaFoundation.vl">
               <Choice Kind="TypeFlag" Name="VideoCaptureDeviceEnumEntry" />
             </p:TypeAnnotation>
@@ -91,6 +91,8 @@
             </p:TypeAnnotation>
           </Pad>
           <Pad Id="M1WtzXSzigTNUfiTKfjNYM" Comment="Supported Formats" Bounds="511,360,199,219" ShowValueBox="true" isIOBox="true" />
+          <Pad Id="MCTPOHWT6nJNaHnnkdOVYV" Comment="Discarded Frames" Bounds="252,355,35,15" ShowValueBox="true" isIOBox="true" />
+          <Pad Id="Mg7PiDveu9wPOvpU0bo6FR" Comment="Actual FPS" Bounds="399,419,35,15" ShowValueBox="true" isIOBox="true" />
         </Canvas>
         <Patch Id="B1fNIgBbe2HOHjop6HGRX9" Name="Create" />
         <Patch Id="DcBxkBhtSUcQTPzfjLNNbp" Name="Update" />
@@ -105,9 +107,11 @@
         <Link Id="EcBKbWVT3wPM619o0HcYNx" Ids="VwGZdRG0QTNOwKmaB68Aep,AW8x6Hfh3q8QYBmXMU9vSO" />
         <Link Id="MwJ32piwVF2LMMV5LSligu" Ids="HDPSnhzjq9kPN0HO3W7bwk,M1WtzXSzigTNUfiTKfjNYM" />
         <Link Id="JfC6afuEfF8L3Z67SjGoXc" Ids="EdarWB0EcPyOYFCfE0USOr,VooL3PK0VGaPcBTg1Ualup" />
+        <Link Id="Tt5mfYPNSHCPr2RrTcHbTk" Ids="DUyZVj3mSJwOiJL7LxshiJ,MCTPOHWT6nJNaHnnkdOVYV" />
+        <Link Id="UBNqN8w0DhbOlnxfzM65hQ" Ids="LMCcxMV1K0cNJprDHVNTcq,Mg7PiDveu9wPOvpU0bo6FR" />
       </Patch>
     </Node>
   </Patch>
   <NugetDependency Id="Nzz53D5gz6EN8zTPf6catI" Location="VL.Stride" Version="0.9.90-g7445968757" />
-  <NugetDependency Id="N7rlNx0nqcqOgtDvy65HRL" Location="VL.Video.MediaFoundation" Version="0.0.0.0" />
+  <NugetDependency Id="N7rlNx0nqcqOgtDvy65HRL" Location="VL.Video.MediaFoundation" Version="0.0.5-alpha" />
 </Document>

@@ -7,10 +7,11 @@ using Stride.Engine;
 using Stride.Graphics;
 using Stride.Rendering;
 using System;
+using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Disposables;
-using System.Threading;
+using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using VL.Core;
 using VL.Lib.Basics.Resources;
@@ -25,11 +26,11 @@ namespace VL.MediaFoundation
 
         private readonly SerialDisposable deviceSubscription = new SerialDisposable();
         private readonly IResourceHandle<RenderDrawContext> renderDrawContextHandle;
-        private readonly RingBuffer<Texture> ringBuffer = new RingBuffer<Texture>(2);
-        private readonly object ringBufferLock = new object();
-        private readonly ManualResetEventSlim videoFrameArrived = new ManualResetEventSlim();
         private readonly ColorSpaceConverter colorSpaceConverter;
+        private BlockingCollection<Texture> videoFrames;
         private string deviceSymbolicLink;
+        private Int2 preferredSize;
+        private float preferredFps;
         private bool enabled = true;
         private int discardedFrames;
         private float actualFps;
@@ -59,6 +60,40 @@ namespace VL.MediaFoundation
                 }
             }
         }
+
+        public Int2 PreferredSize
+        {
+            set
+            {
+                if (value != preferredSize)
+                {
+                    preferredSize = value;
+                    deviceSubscription.Disposable = null;
+                }
+            }
+        }
+
+        public float PreferredFps
+        {
+            set
+            {
+                if (value != preferredFps)
+                {
+                    preferredFps = value;
+                    deviceSubscription.Disposable = null;
+                }
+            }
+        }
+
+        public float? Exposure
+        {
+            set
+            {
+                if (value != exposure.Value)
+                    exposure.OnNext(value);
+            }
+        }
+        readonly BehaviorSubject<float?> exposure = new BehaviorSubject<float?>(default);
 
         public bool Enabled
         {
@@ -90,7 +125,7 @@ namespace VL.MediaFoundation
         public int DiscardedFrames => discardedFrames;
         public float ActualFPS => actualFps;
 
-        public Texture Update(Int2 size, float fps, int waitTimeInMilliseconds)
+        public Texture Update(int waitTimeInMilliseconds)
         {
             if (enabled)
             {
@@ -125,7 +160,8 @@ namespace VL.MediaFoundation
 
             IDisposable StartNewCapture()
             {
-                var cancellationTokenSource = new CancellationTokenSource();
+                var videoFrames = new BlockingCollection<Texture>(boundedCapacity: 1);
+
                 var pollTask = Task.Run(() =>
                 {
                     // Create the media source based on the selected symbolic link
@@ -135,6 +171,8 @@ namespace VL.MediaFoundation
 
                     // Setup source reader arguments
                     using var sourceReaderAttributes = new MediaAttributes();
+                    // Enable low latency - we don't want frames to get buffered
+                    sourceReaderAttributes.Set(SinkWriterAttributeKeys.LowLatency, true);
                     // Ensure DXVA is enabled
                     sourceReaderAttributes.Set(SourceReaderAttributeKeys.DisableDxva, 0);
                     // Needed in order to read data as Argb32
@@ -153,25 +191,32 @@ namespace VL.MediaFoundation
                         sourceReaderAttributes.Set(SourceReaderAttributeKeys.D3DManager, manager);
                     }
 
+                    // Connect camera controls
+                    using var exposureSubscription = mediaSource.SetCameraValue(CameraControlPropertyName.Exposure, exposure);
+
+                    // Find best capture format for device
+                    var bestCaptureFormat = mediaSource.EnumerateCaptureFormats()
+                        .FirstOrDefault(f => f.size == preferredSize && f.fr == preferredFps);
+                    if (bestCaptureFormat != null)
+                        mediaSource.SetCaptureFormat(bestCaptureFormat.mediaType);
+
                     // Create the source reader
                     using var reader = new SourceReader(mediaSource, sourceReaderAttributes);
-
 
                     // Set output format to BGRA
                     using var mt = new MediaType();
                     mt.Set(MediaTypeAttributeKeys.MajorType, MediaTypeGuids.Video);
                     mt.Set(MediaTypeAttributeKeys.Subtype, VideoFormatGuids.Argb32);
-                    mt.Set(MediaTypeAttributeKeys.FrameSize, VideoCaptureHelpers.MakeSize(size.X, size.Y));
-                    mt.Set(MediaTypeAttributeKeys.FrameRate, VideoCaptureHelpers.MakeFrameRate(fps));
-                    mt.Set(MediaTypeAttributeKeys.InterlaceMode, (int)VideoInterlaceMode.Progressive);
-                    mt.Set(MediaTypeAttributeKeys.PixelAspectRatio, VideoCaptureHelpers.MakeSize(1, 1));
                     reader.SetCurrentMediaType(SourceReaderIndex.FirstVideoStream, mt);
-                    actualFps = VideoCaptureHelpers.ParseFrameRate(reader.GetCurrentMediaType(SourceReaderIndex.FirstVideoStream).Get(MediaTypeAttributeKeys.FrameRate));
+
+                    // Read the actual FPS
+                    using var currentMediaType = reader.GetCurrentMediaType(SourceReaderIndex.FirstVideoStream);
+                    actualFps = VideoCaptureHelpers.ParseFrameRate(currentMediaType.Get(MediaTypeAttributeKeys.FrameRate));
                     
                     // Reset the discared frame count
                     discardedFrames = 0;
 
-                    while (!cancellationTokenSource.Token.IsCancellationRequested)
+                    while (!videoFrames.IsAddingCompleted)
                     {
                         var sample = reader.ReadSample(SourceReaderIndex.FirstVideoStream, SourceReaderControlFlags.None, out var streamIndex, out var streamFlags, out var timestamp);
                         if (sample is null)
@@ -196,21 +241,14 @@ namespace VL.MediaFoundation
                             dxgiBuffer.DisposeBy(texture);
                             sample.DisposeBy(texture);
 
-                            lock (ringBufferLock)
+                            try
                             {
-                                // In case the buffer is full the element at the front will be popped.
-                                if (ringBuffer.IsFull)
-                                {
-                                    Interlocked.Increment(ref discardedFrames);
-                                    ringBuffer.Front().Dispose();
-                                }
-
-                                // Place the texture in the buffer
-                                ringBuffer.PushBack(texture);
+                                videoFrames.Add(texture);
                             }
-
-                            // Signal render thread that a new frame is available
-                            videoFrameArrived.Set();
+                            catch (InvalidOperationException)
+                            {
+                                texture.Dispose();
+                            }
                         }
                         else
                         {
@@ -218,14 +256,20 @@ namespace VL.MediaFoundation
                             sample.Dispose();
                         }
                     }
-                }, cancellationTokenSource.Token);
+                });
+
+                // Make the queue available
+                this.videoFrames = videoFrames;
 
                 return Disposable.Create(() =>
                 {
-                    cancellationTokenSource.Cancel();
+                    videoFrames.CompleteAdding();
                     try
                     {
                         pollTask.Wait();
+
+                        foreach (var f in videoFrames)
+                            f.Dispose();
                     }
                     catch (Exception e)
                     {
@@ -234,10 +278,10 @@ namespace VL.MediaFoundation
                     }
                     finally
                     {
-                        cancellationTokenSource.Dispose();
-                        cancellationTokenSource = default;
                         pollTask.Dispose();
                         pollTask = default;
+                        videoFrames.Dispose();
+                        videoFrames = default;
                     }
                 });
             }
@@ -246,35 +290,11 @@ namespace VL.MediaFoundation
         void FetchCurrentVideoFrame(int waitTimeInMilliseconds)
         {
             // Fetch the texture
-            lock (ringBufferLock)
+            if (videoFrames != null && videoFrames.TryTake(out var texture, waitTimeInMilliseconds))
             {
-                if (!ringBuffer.IsEmpty)
-                {
-                    // Set the texture as current output
-                    var texture = ringBuffer.Front();
-                    ringBuffer.PopFront();
-                    CurrentVideoFrame = ToDeviceColorSpace(texture);
-                    return;
-                }
-            }
-
-            // The buffer was empty, wait for the next video frame to arrive
-            if (waitTimeInMilliseconds > 0 && videoFrameArrived.Wait(waitTimeInMilliseconds))
-            {
-                // Reset the wait handle
-                videoFrameArrived.Reset();
-
-                lock (ringBufferLock)
-                {
-                    if (!ringBuffer.IsEmpty)
-                    {
-                        // Set the texture as current output
-                        var texture = ringBuffer.Front();
-                        ringBuffer.PopFront();
-                        CurrentVideoFrame = ToDeviceColorSpace(texture);
-                        return;
-                    }
-                }
+                // Set the texture as current output
+                CurrentVideoFrame = ToDeviceColorSpace(texture);
+                return;
             }
         }
 
@@ -303,10 +323,7 @@ namespace VL.MediaFoundation
         public void Dispose()
         {
             deviceSubscription.Dispose();
-            foreach (var t in ringBuffer)
-                t?.Dispose();
             currentVideoFrame?.Dispose();
-            videoFrameArrived.Dispose();
             colorSpaceConverter.Dispose();
             renderDrawContextHandle.Dispose();
         }
