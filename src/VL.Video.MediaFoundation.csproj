@@ -7,7 +7,7 @@
     <OutputPath></OutputPath>
 
     <Year>$([System.DateTime]::Now.ToString('yyyy'))</Year>
-    <VersionPrefix>0.0.6</VersionPrefix>
+    <VersionPrefix>0.0.7</VersionPrefix>
     <VersionSuffix>alpha</VersionSuffix>
 
     <!-- Passed to vvvv.exe when starting from within VS -->

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Disposables;
+using System.Reactive.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using VL.Core;
@@ -131,7 +132,29 @@ namespace VL.MediaFoundation
             }
         }
 
-        internal static IDisposable SetCameraValue(this MediaSource mediaSource, CameraControlPropertyName propertyName, IObservable<float?> observableValue)
+        internal static IDisposable Subscribe(this MediaSource mediaSource, IObservable<CameraControls> cameraControls)
+        {
+            return cameraControls.Subscribe(p => mediaSource.Subscribe(p.Name, p.Subject));
+        }
+
+        internal static IDisposable Subscribe(this MediaSource mediaSource, IObservable<VideoControls> videoControls)
+        {
+            return videoControls.Subscribe(p => mediaSource.Subscribe(p.Name, p.Subject));
+        }
+
+        static IDisposable Subscribe<T>(this IObservable<IControls<T>> videoControls, Func<Property<T>, IDisposable> subscribeToProperty)
+        {
+            var subscriptions = new SerialDisposable();
+            return new CompositeDisposable(
+                subscriptions,
+                videoControls.Subscribe(c =>
+                {
+                    subscriptions.Disposable = new CompositeDisposable(
+                        c.GetProperties().Select(subscribeToProperty));
+                }));
+        }
+
+        static IDisposable Subscribe(this MediaSource mediaSource, CameraControlPropertyName propertyName, IObservable<float?> observableValue)
         {
             var flags = CameraControlFlags.None;
 
@@ -162,6 +185,41 @@ namespace VL.MediaFoundation
                         cameraControl.Set(propertyName, (int)VLMath.Map(value.Value, 0f, 1f, min, max, MapMode.Clamp), CameraControlFlags.Manual);
 
                     Marshal.ReleaseComObject(cameraControl);
+                }
+            });
+        }
+
+        static IDisposable Subscribe(this MediaSource mediaSource, VideoProcAmpProperty propertyName, IObservable<float?> observableValue)
+        {
+            var flags = VideoProcAmpFlags.None;
+
+            // Fetch defaults
+            int min = default, max = default, step = default, @default = default;
+            {
+                var videoControl = Marshal.GetObjectForIUnknown(mediaSource.NativePointer) as IAMVideoProcAmp;
+                if (videoControl != null)
+                {
+                    videoControl.GetRange(propertyName, out min, out max, out step, out @default, out flags);
+
+                    Marshal.ReleaseComObject(videoControl);
+                }
+            }
+
+            if (flags == VideoProcAmpFlags.None)
+                return Disposable.Empty;
+
+            return observableValue.Subscribe(value =>
+            {
+                // Need to fetch the interface again because of thread affinity
+                var videoControl = Marshal.GetObjectForIUnknown(mediaSource.NativePointer) as IAMVideoProcAmp;
+                if (videoControl != null)
+                {
+                    if (value is null)
+                        videoControl.Set(propertyName, @default, VideoProcAmpFlags.Auto);
+                    else
+                        videoControl.Set(propertyName, (int)VLMath.Map(value.Value, 0f, 1f, min, max, MapMode.Clamp), VideoProcAmpFlags.Manual);
+
+                    Marshal.ReleaseComObject(videoControl);
                 }
             });
         }

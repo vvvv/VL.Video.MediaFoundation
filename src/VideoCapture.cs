@@ -85,15 +85,27 @@ namespace VL.MediaFoundation
             }
         }
 
-        public float? Exposure
+        public CameraControls CameraControls
         {
             set
             {
-                if (value != exposure.Value)
-                    exposure.OnNext(value);
+                var v = value ?? CameraControls.Default;
+                if (v != cameraControls.Value)
+                    cameraControls.OnNext(v);
             }
         }
-        readonly BehaviorSubject<float?> exposure = new BehaviorSubject<float?>(default);
+        readonly BehaviorSubject<CameraControls> cameraControls = new BehaviorSubject<CameraControls>(CameraControls.Default);
+
+        public VideoControls VideoControls
+        {
+            set
+            {
+                var v = value ?? VideoControls.Default;
+                if (v != videoControls.Value)
+                    videoControls.OnNext(v);
+            }
+        }
+        readonly BehaviorSubject<VideoControls> videoControls = new BehaviorSubject<VideoControls>(VideoControls.Default);
 
         public bool Enabled
         {
@@ -191,8 +203,10 @@ namespace VL.MediaFoundation
                         sourceReaderAttributes.Set(SourceReaderAttributeKeys.D3DManager, manager);
                     }
 
-                    // Connect camera controls
-                    using var exposureSubscription = mediaSource.SetCameraValue(CameraControlPropertyName.Exposure, exposure);
+                    // Connect camera and video controls
+                    using var controlSubscription = new CompositeDisposable(
+                        mediaSource.Subscribe(cameraControls), 
+                        mediaSource.Subscribe(videoControls));
 
                     // Find best capture format for device
                     var bestCaptureFormat = mediaSource.EnumerateCaptureFormats()

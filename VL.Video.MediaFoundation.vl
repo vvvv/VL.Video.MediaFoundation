@@ -87,7 +87,7 @@
               <Pin Id="QMkQeOi2jOsOTF0g33uLZy" Name="Output" Kind="StateOutputPin" />
             </Node>
             <Pad Id="VFo8LZAXsCsMEt5JcqMUaT" SlotId="G3hIl29CQXxONjiqhs1hxM" Bounds="258,309" />
-            <ControlPoint Id="OW0nx31q8SjPRNDI7KfspO" Bounds="536,515" />
+            <ControlPoint Id="OW0nx31q8SjPRNDI7KfspO" Bounds="576,552" />
             <Node Bounds="256,426,65,26" Id="HcCBcJ1yV9JPQI6A36vtcM">
               <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
@@ -213,17 +213,27 @@
               <Pin Id="KZGUG5vs4CANKQZylnc5uD" Name="Value" Kind="InputPin" />
               <Pin Id="HSps1VzfQqCOuNTmyoGO4r" Name="Output" Kind="StateOutputPin" />
             </Node>
-            <Node Bounds="256,723" Id="SVEwE6qwclJN0SjoFTNJ6G">
+            <Node Bounds="255,703,103,26" Id="SVEwE6qwclJN0SjoFTNJ6G">
               <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <CategoryReference Kind="AssemblyCategory" Name="VideoCapture" />
-                <Choice Kind="OperationCallFlag" Name="SetExposure" />
+                <Choice Kind="OperationCallFlag" Name="SetCameraControls" />
               </p:NodeReference>
               <Pin Id="RXjBq6LtNx0QFQWOV3GMSP" Name="Input" Kind="StateInputPin" />
               <Pin Id="AE1yfct1ZOXLXnoKbWpjJU" Name="Value" Kind="InputPin" />
               <Pin Id="Rx3lgqY3Kt5NJDTN58Cq20" Name="Output" Kind="StateOutputPin" />
             </Node>
-            <ControlPoint Id="Pquau81zLzILmHG5bkgfza" Bounds="486,647" />
+            <ControlPoint Id="Pquau81zLzILmHG5bkgfza" Bounds="467,642" />
+            <Node Bounds="255,763,94,26" Id="MvSLvpg7oeiP2rCkZVIFvt">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture" LastSymbolSource="VL.Video.MediaFoundation.dll">
+                <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+                <Choice Kind="OperationCallFlag" Name="SetVideoControls" />
+              </p:NodeReference>
+              <Pin Id="TyXBTwQyQ3CLRHs6xh3SnB" Name="Input" Kind="StateInputPin" />
+              <Pin Id="TNF6gxsnaWkNKx2ukKwyQG" Name="Value" Kind="InputPin" />
+              <Pin Id="A8SPsD6PcnfPa6AmxSAISr" Name="Output" Kind="StateOutputPin" />
+            </Node>
+            <ControlPoint Id="VjUkbenH6yPPQzUTqaXFGR" Bounds="499,670" />
           </Canvas>
           <ProcessDefinition Id="HkyhR5csDd5PuBFBOWKyGc">
             <Fragment Id="SkWQCGwxN1KQI0zG5UPiWW" Patch="QvCu62Lhf7WPMOxTMQ3o7W" Enabled="true" />
@@ -255,7 +265,8 @@
               </p:TypeAnnotation>
             </Pin>
             <Pin Id="OPxOWUGNcYSLxWuKdUMWaz" Name="Supported Formats" Kind="OutputPin" Bounds="701,332" />
-            <Pin Id="QGpJs3sIJ5xOfYCxtuqKG5" Name="Exposure" Kind="InputPin" Bounds="400,665" Visibility="Optional" />
+            <Pin Id="QGpJs3sIJ5xOfYCxtuqKG5" Name="Camera Controls" Kind="InputPin" Bounds="400,665" Visibility="Optional" />
+            <Pin Id="S5AJWY441sPOIAIROUO7cd" Name="Video Controls" Kind="InputPin" Bounds="562,728" Visibility="Optional" />
           </Patch>
           <Link Id="UVshVWosbTmMKdFcPrb1K3" Ids="TBaOl2BsNDiL8nI928kIQt,D3Yb9sIJCwhNJZZj2klDb5" IsHidden="true" />
           <Slot Id="G3hIl29CQXxONjiqhs1hxM" Name="VideoCapture" />
@@ -289,9 +300,12 @@
           <Link Id="ALu37L4PGujPJBravpBpvI" Ids="SXp7QLAH9iwMTbsD8kMRvm,IKqIGHt8OzkPjzoQiqzgfW" />
           <Link Id="PP28e2iMVB2LB6do7kokp5" Ids="HSps1VzfQqCOuNTmyoGO4r,RXjBq6LtNx0QFQWOV3GMSP" />
           <Link Id="NMGOrLm7NlxP4c4piARTxp" Ids="MaiowPehk0pME6NEJCkH67,KZGUG5vs4CANKQZylnc5uD" />
-          <Link Id="M83XV2VAWTKMghwhIzoD3P" Ids="Rx3lgqY3Kt5NJDTN58Cq20,RdttWXMszc5MUR8dyj3dwv" />
+          <Link Id="M83XV2VAWTKMghwhIzoD3P" Ids="Rx3lgqY3Kt5NJDTN58Cq20,TyXBTwQyQ3CLRHs6xh3SnB" />
           <Link Id="DUjCTtnXNJLLI1EjgcPX0M" Ids="Pquau81zLzILmHG5bkgfza,AE1yfct1ZOXLXnoKbWpjJU" />
           <Link Id="SY7KSLFygQJMGvBCqWp2UK" Ids="QGpJs3sIJ5xOfYCxtuqKG5,Pquau81zLzILmHG5bkgfza" IsHidden="true" />
+          <Link Id="GQmRZkPPllKQLfywf03F6h" Ids="A8SPsD6PcnfPa6AmxSAISr,RdttWXMszc5MUR8dyj3dwv" />
+          <Link Id="PAt2pGDa0v3OMxPdJvwxes" Ids="VjUkbenH6yPPQzUTqaXFGR,TNF6gxsnaWkNKx2ukKwyQG" />
+          <Link Id="EX621g5cSEXOHcGijA6EVr" Ids="S5AJWY441sPOIAIROUO7cd,VjUkbenH6yPPQzUTqaXFGR" IsHidden="true" />
         </Patch>
       </Node>
       <!--
@@ -596,4 +610,5 @@
   <NugetDependency Id="CIaIqv37RcIOugCory9kns" Location="SharpDX.MediaFoundation" Version="4.2.0" />
   <NugetDependency Id="LozAUHC3yMPOTrviaKMV0q" Location="VL.Stride.Windows" Version="0.9.90-g7445968757" />
   <PlatformDependency Id="QoeqsqOSs36P831LYwJ2F5" Location="./src/bin/Debug/net472/VL.Video.MediaFoundation.dll" />
+  <NodeFactoryDependency Id="IMKEckb6PLINiWhI9EoUMQ" Location="VL.Video.MediaFoundation.ControlNodes" IsForward="true" />
 </Document>

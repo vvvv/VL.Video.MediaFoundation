@@ -60,7 +60,8 @@ namespace VL.MediaFoundation
         /// <param name="pSteppingDelta">The step size for the property.</param>
         /// <param name="pDefault">The default value of the property. </param>
         /// <param name="pCapsFlags">Can it be controlled automatically or manually?</param>
-        void GetRange(
+        [PreserveSig]
+        uint GetRange(
             [In] CameraControlPropertyName Property,
             [Out] out int pMin,
             [Out] out int pMax,
@@ -75,7 +76,8 @@ namespace VL.MediaFoundation
         /// <param name="Property">The property to set.</param>
         /// <param name="lValue">The new value of the property.</param>
         /// <param name="Flags">Control it manually or automatically.</param>
-        void Set(
+        [PreserveSig]
+        uint Set(
             [In] CameraControlPropertyName Property,
             [In] int lValue,
             [In] CameraControlFlags Flags
@@ -87,7 +89,8 @@ namespace VL.MediaFoundation
         /// <param name="Property">The property to retrieve.</param>
         /// <param name="lValue">The current value of the property.</param>
         /// <param name="Flags">Is it currently manual or automatic?.</param>
-        void Get(
+        [PreserveSig]
+        uint Get(
             [In] CameraControlPropertyName Property,
             [Out] out int lValue,
             [Out] out CameraControlFlags Flags
@@ -140,7 +143,8 @@ namespace VL.MediaFoundation
         /// <param name="pSteppingDelta">The step size.</param>
         /// <param name="pDefault">The default value.</param>
         /// <param name="pCapsFlags">Shows if it can be controlled automatically and/or manually.</param>
-        void GetRange(
+        [PreserveSig]
+        uint GetRange(
             [In] VideoProcAmpProperty Property,
             [Out] out int pMin,
             [Out] out int pMax,
@@ -155,7 +159,8 @@ namespace VL.MediaFoundation
         /// <param name="Property">The property to set.</param>
         /// <param name="lValue">The new value of the property.</param>
         /// <param name="Flags">The auto or manual setting.</param>
-        void Set(
+        [PreserveSig]
+        uint Set(
             [In] VideoProcAmpProperty Property,
             [In] int lValue,
             [In] VideoProcAmpFlags Flags
@@ -167,7 +172,8 @@ namespace VL.MediaFoundation
         /// <param name="Property">The property to retrieve.</param>
         /// <param name="lValue">The current value of the property.</param>
         /// <param name="Flags">Is it manual or automatic?</param>
-        void Get(
+        [PreserveSig]
+        uint Get(
             [In] VideoProcAmpProperty Property,
             [Out] out int lValue,
             [Out] out VideoProcAmpFlags Flags
