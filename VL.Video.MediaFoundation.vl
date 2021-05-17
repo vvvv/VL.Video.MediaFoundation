@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Document xmlns:p="property" Id="GCeR2VbZxmMN6ZcU8vYNGe" LanguageVersion="2021.3.1.89" Version="0.128">
-  <NugetDependency Id="OddDUH5t00UQDOaM5VIUbR" Location="VL.CoreLib" Version="2021.3.1" />
+<Document xmlns:p="property" Id="GCeR2VbZxmMN6ZcU8vYNGe" LanguageVersion="2021.3.2.109" Version="0.128">
+  <NugetDependency Id="OddDUH5t00UQDOaM5VIUbR" Location="VL.CoreLib" Version="2021.3.2" />
   <Patch Id="RGTfRCPLQo7PrXo7dPC5Ad">
     <Canvas Id="USHGZ5YZJZ5NCZiBRK95Vs" DefaultCategory="Video.MediaFoundation" CanvasType="FullCategory">
       <Canvas Id="E85TIfV85NyN7HiBWXsv1t" Name="Advanced" Position="497,234">
@@ -607,7 +607,6 @@
       </Patch>
     </Node>
   </Patch>
-  <NugetDependency Id="CIaIqv37RcIOugCory9kns" Location="SharpDX.MediaFoundation" Version="4.2.0" />
   <NugetDependency Id="LozAUHC3yMPOTrviaKMV0q" Location="VL.Stride.Windows" Version="0.9.90-g7445968757" />
   <PlatformDependency Id="QoeqsqOSs36P831LYwJ2F5" Location="./src/bin/Debug/net472/VL.Video.MediaFoundation.dll" />
   <NodeFactoryDependency Id="IMKEckb6PLINiWhI9EoUMQ" Location="VL.Video.MediaFoundation.ControlNodes" IsForward="true" />
