@@ -75,6 +75,7 @@ namespace VL.MediaFoundation
                     ErrorCode = (MediaEngineErr)param1;
                     break;
                 case MediaEngineEvent.LoadedMetadata:
+                case MediaEngineEvent.FormatChange:
                     invalidated = true;
                     break;
             }
