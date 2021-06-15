@@ -2,12 +2,12 @@
   "profiles": {
     "VideoPlayback": {
       "commandName": "Executable",
-      "executablePath": "C:\\Program Files\\vvvv\\vvvv_gamma_2021.3.2\\vvvv.exe",
+      "executablePath": "$(ExecutablePath)",
       "commandLineArgs": "--package-repositories \"$(PackageRepositories)\" -o \"$(MSBuildThisFileDirectory)..\\help\\HowTo Play a video file.vl\""
     },
     "VideoCapture": {
       "commandName": "Executable",
-      "executablePath": "C:\\Program Files\\vvvv\\vvvv_gamma_2021.3.2\\vvvv.exe",
+      "executablePath": "$(ExecutablePath)",
       "commandLineArgs": "--package-repositories \"$(PackageRepositories)\" -o \"$(MSBuildThisFileDirectory)..\\help\\HowTo Capture video input from a camera.vl\""
     }
   }

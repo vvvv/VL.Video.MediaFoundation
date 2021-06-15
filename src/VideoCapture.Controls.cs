@@ -48,27 +48,27 @@ namespace VL.MediaFoundation
         IEnumerable<Property<VideoProcAmpProperty>> IControls<VideoProcAmpProperty>.GetProperties() => Properties;
     }
 
-    sealed class Property<TName> : IVLPin<float?>
+    sealed class Property<TName> : IVLPin<Optional<float>>
     {
         public readonly TName Name;
-        public readonly BehaviorSubject<float?> Subject;
+        public readonly BehaviorSubject<Optional<float>> Subject;
 
         public Property(TName name)
         {
             Name = name;
-            Subject = new BehaviorSubject<float?>(default);
+            Subject = new BehaviorSubject<Optional<float>>(default);
         }
 
-        public float? Value
+        public Optional<float> Value
         {
             get => Subject.Value;
             set
             {
-                if (value != Value)
+                if (!value.Equals(Value))
                     Subject.OnNext(value);
             }
         }
 
-        object IVLPin.Value { get => Value; set => Value = (float?)value; }
+        object IVLPin.Value { get => Value; set => Value = (Optional<float>)value; }
     }
 }

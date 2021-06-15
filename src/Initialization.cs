@@ -28,7 +28,7 @@ namespace VL.MediaFoundation
                 var nodes = ImmutableArray.Create(
                     f.NewNodeDescription(nameof(CameraControls), "Video.MediaFoundation.Advanced", fragmented: false, bc =>
                     {
-                        return bc.Implementation(
+                        return bc.NewNode(
                             inputs: CameraControls.Default.Properties.Select(p => Pin(bc, p.Name.ToString())),
                             outputs: new[] { bc.Pin("Output", typeof(CameraControls)) },
                             newNode: ibc =>
@@ -41,7 +41,7 @@ namespace VL.MediaFoundation
                     }),
                     f.NewNodeDescription(nameof(VideoControls), "Video.MediaFoundation.Advanced", fragmented: false, bc =>
                     {
-                        return bc.Implementation(
+                        return bc.NewNode(
                             inputs: VideoControls.Default.Properties.Select(p => Pin(bc, p.Name.ToString())),
                             outputs: new[] { bc.Pin("Output", typeof(VideoControls)) },
                             newNode: ibc =>
@@ -56,6 +56,6 @@ namespace VL.MediaFoundation
             });
         }
 
-        static IVLPinDescription Pin(NodeBuilding.NodeDescriptionBuildContext bc, string name) => bc.Pin(name, typeof(float?));
+        static IVLPinDescription Pin(NodeBuilding.NodeDescriptionBuildContext bc, string name) => bc.Pin(name, typeof(Optional<float>));
     }
 }

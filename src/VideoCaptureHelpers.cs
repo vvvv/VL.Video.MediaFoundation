@@ -154,7 +154,7 @@ namespace VL.MediaFoundation
                 }));
         }
 
-        static IDisposable Subscribe(this MediaSource mediaSource, CameraControlPropertyName propertyName, IObservable<float?> observableValue)
+        static IDisposable Subscribe(this MediaSource mediaSource, CameraControlPropertyName propertyName, IObservable<Optional<float>> observableValue)
         {
             var flags = CameraControlFlags.None;
 
@@ -179,17 +179,17 @@ namespace VL.MediaFoundation
                 var cameraControl = Marshal.GetObjectForIUnknown(mediaSource.NativePointer) as IAMCameraControl;
                 if (cameraControl != null)
                 {
-                    if (value is null)
-                        cameraControl.Set(propertyName, @default, CameraControlFlags.Auto);
-                    else
+                    if (value.HasValue)
                         cameraControl.Set(propertyName, (int)VLMath.Map(value.Value, 0f, 1f, min, max, MapMode.Clamp), CameraControlFlags.Manual);
+                    else
+                        cameraControl.Set(propertyName, @default, CameraControlFlags.Auto);
 
                     Marshal.ReleaseComObject(cameraControl);
                 }
             });
         }
 
-        static IDisposable Subscribe(this MediaSource mediaSource, VideoProcAmpProperty propertyName, IObservable<float?> observableValue)
+        static IDisposable Subscribe(this MediaSource mediaSource, VideoProcAmpProperty propertyName, IObservable<Optional<float>> observableValue)
         {
             var flags = VideoProcAmpFlags.None;
 
@@ -214,10 +214,10 @@ namespace VL.MediaFoundation
                 var videoControl = Marshal.GetObjectForIUnknown(mediaSource.NativePointer) as IAMVideoProcAmp;
                 if (videoControl != null)
                 {
-                    if (value is null)
-                        videoControl.Set(propertyName, @default, VideoProcAmpFlags.Auto);
-                    else
+                    if (value.HasValue)
                         videoControl.Set(propertyName, (int)VLMath.Map(value.Value, 0f, 1f, min, max, MapMode.Clamp), VideoProcAmpFlags.Manual);
+                    else
+                        videoControl.Set(propertyName, @default, VideoProcAmpFlags.Auto);
 
                     Marshal.ReleaseComObject(videoControl);
                 }
