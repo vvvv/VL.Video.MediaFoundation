@@ -280,7 +280,9 @@ namespace VL.MediaFoundation
                     videoFrames.CompleteAdding();
                     try
                     {
-                        pollTask.Wait();
+                        // There're cameras (like NDI) which get stuck in the 2. ReadSample call
+                        if (!pollTask.Wait(500))
+                            pollTask = null;
 
                         foreach (var f in videoFrames)
                             f.Dispose();
@@ -292,7 +294,7 @@ namespace VL.MediaFoundation
                     }
                     finally
                     {
-                        pollTask.Dispose();
+                        pollTask?.Dispose();
                         pollTask = default;
                         videoFrames.Dispose();
                         videoFrames = default;
