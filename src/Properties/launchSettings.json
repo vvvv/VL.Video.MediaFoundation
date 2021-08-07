@@ -3,7 +3,7 @@
     "VideoPlayback": {
       "commandName": "Executable",
       "executablePath": "$(ExecutablePath)",
-      "commandLineArgs": "--package-repositories \"$(PackageRepositories)\" -o \"$(MSBuildThisFileDirectory)..\\help\\HowTo Play a video file.vl\""
+      "commandLineArgs": "--package-repositories \"$(PackageRepositories)\" -o \"$(MSBuildThisFileDirectory)..\\help\\HowTo Play a video file with Skia.vl\""
     },
     "VideoCapture": {
       "commandName": "Executable",

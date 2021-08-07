@@ -11,9 +11,9 @@
     <VersionSuffix>alpha</VersionSuffix>
 
     <!-- Passed to vvvv.exe when starting from within VS -->
-    <PackageRepositories>$(MSBuildThisFileDirectory)..\..</PackageRepositories>
-    <VLVersion>2021.4.0-0243-g2ae7e92e7e</VLVersion>
-    <ExecutablePath>C:\Program Files\vvvv\vvvv_gamma_$(VLVersion)\vvvv.exe</ExecutablePath>
+    <PackageRepositories>$(MSBuildThisFileDirectory)..\..;C:\Users\elias\vvvv\vvvv\vvvv50;C:\Users\elias\vvvv\vvvv\public-vl</PackageRepositories>
+    <VLVersion>2021.4.0-0299-g680dbe04b5</VLVersion>
+    <ExecutablePath>C:\Users\elias\vvvv\vvvv\vvvv50\VVVV.Gamma\src\bin\Debug\net472\vvvv.exe</ExecutablePath>
 
     <!-- Package properties -->
     <Authors>vvvv group</Authors>
@@ -43,6 +43,12 @@
     <Content Include="..\**\*.vl">
       <PackagePath>%(RecursiveDir)%(Filename)%(Extension)</PackagePath>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="VL.Skia">
+      <HintPath>..\..\..\vvvv\public-vl\VL.Skia\src\bin\Debug\net472\VL.Skia.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <Target Name="DownloadNugetIcon">
