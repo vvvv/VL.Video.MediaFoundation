@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VL.Video.MediaFoundation\VL.Video.MediaFoundation.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="VL.Skia">
+      <HintPath>..\..\..\..\vvvv\public-vl\VL.Skia\src\bin\Debug\net472\VL.Skia.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

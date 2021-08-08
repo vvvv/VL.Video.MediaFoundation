@@ -3,7 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VL.Video.MediaFoundation", "VL.Video.MediaFoundation.csproj", "{B6C0AE46-66B5-4054-A564-3D18F88DAD3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VL.Video.MediaFoundation", "VL.Video.MediaFoundation\VL.Video.MediaFoundation.csproj", "{CAEE6C9B-A5EE-43D2-88F4-0E8DA4E06C70}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VL.Video.MediaFoundation.Skia", "VL.Video.MediaFoundation.Skia\VL.Video.MediaFoundation.Skia.csproj", "{13F241B9-9A85-4222-8C89-C032EA7FABB2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VL.Video.MediaFoundation.Stride", "VL.Video.MediaFoundation.Stride\VL.Video.MediaFoundation.Stride.csproj", "{0065CBA2-4512-42B3-ACEC-647B972AE338}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4C3C4E99-58DD-48E1-ADE8-3BF0FF85756B}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +20,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B6C0AE46-66B5-4054-A564-3D18F88DAD3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B6C0AE46-66B5-4054-A564-3D18F88DAD3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B6C0AE46-66B5-4054-A564-3D18F88DAD3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B6C0AE46-66B5-4054-A564-3D18F88DAD3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAEE6C9B-A5EE-43D2-88F4-0E8DA4E06C70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAEE6C9B-A5EE-43D2-88F4-0E8DA4E06C70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAEE6C9B-A5EE-43D2-88F4-0E8DA4E06C70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAEE6C9B-A5EE-43D2-88F4-0E8DA4E06C70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13F241B9-9A85-4222-8C89-C032EA7FABB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13F241B9-9A85-4222-8C89-C032EA7FABB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13F241B9-9A85-4222-8C89-C032EA7FABB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13F241B9-9A85-4222-8C89-C032EA7FABB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0065CBA2-4512-42B3-ACEC-647B972AE338}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0065CBA2-4512-42B3-ACEC-647B972AE338}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0065CBA2-4512-42B3-ACEC-647B972AE338}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0065CBA2-4512-42B3-ACEC-647B972AE338}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

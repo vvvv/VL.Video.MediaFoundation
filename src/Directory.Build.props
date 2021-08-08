@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+
+    <Year>$([System.DateTime]::Now.ToString('yyyy'))</Year>
+    <VersionPrefix>0.0.12</VersionPrefix>
+    <VersionSuffix>alpha</VersionSuffix>
+
+    <!-- Passed to vvvv.exe when starting from within VS -->
+    <PackageRepositories>$(MSBuildThisFileDirectory)..\..;C:\Users\elias\vvvv\vvvv\vvvv50;C:\Users\elias\vvvv\vvvv\public-vl</PackageRepositories>
+    <VLVersion>2021.4.0-0299-g680dbe04b5</VLVersion>
+    <ExecutablePath>C:\Users\elias\vvvv\vvvv\vvvv50\VVVV.Gamma\src\bin\Debug\net472\vvvv.exe</ExecutablePath>
+
+    <!-- Package properties -->
+    <Authors>vvvv group</Authors>
+    <Owners>$(Authors)</Owners>
+    <Copyright>Copyright © $(Year) by $(Authors). All rights reserved.</Copyright>
+    <Description>Video player and capture nodes based on the Windows MediaFoundation API</Description>
+    <PackageProjectUrl>http://vvvv.org</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/vvvv/VL.Video.MediaFoundation</RepositoryUrl>
+    <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageTags>VL, videoin, videoplayer, camera, capture, movie, stream</PackageTags>
+    <PackageOutputPath>..\bin\</PackageOutputPath>
+    <PackageId>VL.Video.MediaFoundation</PackageId>
+    <PackageIcon>nugeticon.png</PackageIcon>
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);DownloadNugetIcon</TargetsForTfmSpecificContentInPackage>
+  </PropertyGroup>
+  
+</Project>

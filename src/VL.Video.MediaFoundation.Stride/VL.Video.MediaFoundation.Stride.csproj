@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VL.Video.MediaFoundation\VL.Video.MediaFoundation.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="VL.Stride.Runtime" Version="$(VLVersion)">
+      <!-- Already shipped with vvvv itself -->
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <OutputPath></OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="VL.Core" Version="$(VLVersion)">
+      <!-- Already shipped with vvvv itself -->
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="SharpDX.Direct3D11" Version="4.2.0" />
+    <PackageReference Include="SharpDX.MediaFoundation" Version="4.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\**\*.vl">
+      <PackagePath>%(RecursiveDir)%(Filename)%(Extension)</PackagePath>
+    </Content>
+  </ItemGroup>
+
+  <Target Name="DownloadNugetIcon">
+    <DownloadFile SourceUrl="https://raw.githubusercontent.com/vvvv/PublicContent/master/nugeticon.png" DestinationFolder="$(IntermediateOutputPath)" />
+    <ItemGroup>
+      <TfmSpecificPackageFile Include="$(IntermediateOutputPath)nugeticon.png" PackagePath="\" />
+    </ItemGroup>
+  </Target>
+
+</Project>
