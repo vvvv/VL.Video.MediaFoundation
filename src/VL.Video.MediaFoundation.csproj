@@ -7,12 +7,12 @@
     <OutputPath></OutputPath>
 
     <Year>$([System.DateTime]::Now.ToString('yyyy'))</Year>
-    <VersionPrefix>0.0.12</VersionPrefix>
+    <VersionPrefix>0.0.13</VersionPrefix>
     <VersionSuffix>alpha</VersionSuffix>
 
     <!-- Passed to vvvv.exe when starting from within VS -->
     <PackageRepositories>$(MSBuildThisFileDirectory)..\..</PackageRepositories>
-    <VLVersion>2021.4.0-0243-g2ae7e92e7e</VLVersion>
+    <VLVersion>2021.4.0-0388-ge2a327dce8</VLVersion>
     <ExecutablePath>C:\Program Files\vvvv\vvvv_gamma_$(VLVersion)\vvvv.exe</ExecutablePath>
 
     <!-- Package properties -->
