@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Pack>
+	<VLDocument link="HowTo Play a video file.vl" tags="movie stream avi wmv mp4 h264 mjpeg mpeg dv"/>
+	<VLDocument link="HowTo Play a video file from a url.vl" tags="web movie stream avi wmv mp4 h264 mjpeg mpeg dv"/>
+	<VLDocument link="HowTo Capture video input from a camera.vl" tags="usb webcam"/>
+</Pack>

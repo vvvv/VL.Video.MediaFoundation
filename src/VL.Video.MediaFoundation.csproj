@@ -24,7 +24,7 @@
     <RepositoryUrl>https://github.com/vvvv/VL.Video.MediaFoundation</RepositoryUrl>
     <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
     <PackageReleaseNotes></PackageReleaseNotes>
-    <PackageTags>VL, videoin, videoplayer, camera, capture, movie, stream</PackageTags>
+    <PackageTags>VL, videoin, videoplayer, camera, capture, movie, stream, avi, wmv, mp4, h264, mjpeg, mpeg, dv, mov</PackageTags>
     <PackageOutputPath>..\bin\</PackageOutputPath>
     <PackageId>VL.Video.MediaFoundation</PackageId>
     <PackageIcon>nugeticon.png</PackageIcon>
