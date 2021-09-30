@@ -57,7 +57,7 @@
     ************************ VideoIn ************************
 
 -->
-      <Node Name="VideoIn" Bounds="260,235" Id="EXFOac2lMH0NOo34w6lLvB">
+      <Node Name="VideoIn" Bounds="260,235" Id="EXFOac2lMH0NOo34w6lLvB" Summary="Capture video from USB cameras" Remarks="Supports any camera that comes with a UVC 1.1 driver" Tags="capture,stream,webcam,camera">
         <p:NodeReference LastCategoryFullName="Primitive" LastSymbolSource="builtin">
           <Choice Kind="ContainerDefinition" Name="Process" />
         </p:NodeReference>
@@ -292,8 +292,8 @@
                 <Choice Kind="TypeFlag" Name="Float32" />
               </p:TypeAnnotation>
             </Pin>
-            <Pin Id="QGpJs3sIJ5xOfYCxtuqKG5" Name="Camera Controls" Kind="InputPin" Bounds="400,665" Visibility="Optional" />
-            <Pin Id="S5AJWY441sPOIAIROUO7cd" Name="Video Controls" Kind="InputPin" Bounds="562,728" Visibility="Optional" />
+            <Pin Id="QGpJs3sIJ5xOfYCxtuqKG5" Name="Camera Controls" Kind="InputPin" Bounds="400,665" />
+            <Pin Id="S5AJWY441sPOIAIROUO7cd" Name="Video Controls" Kind="InputPin" Bounds="562,728" />
             <Pin Id="ODdh5kMbkKkPY09QovDjES" Name="Wait Time In Milliseconds" Kind="InputPin" Bounds="562,356" Visibility="Optional" Summary="If greater than 0, blocks up to the specified amount of ms to wait for the next frame. Useful to sync to the device fps." />
             <Pin Id="IShDKFcqeECQBIX5nhKjAx" Name="Enabled" Kind="InputPin" Bounds="630,414" DefaultValue="True">
               <p:TypeAnnotation LastCategoryFullName="Primitive" LastSymbolSource="CoreLibBasics.vl">

@@ -26,7 +26,7 @@ namespace VL.MediaFoundation
             {
                 // TODO: fragmented = true causes troubles on disconnect, apparently the default value injection can't deal with nullables -> injects 0 instead of null
                 var nodes = ImmutableArray.Create(
-                    f.NewNodeDescription(nameof(CameraControls), "Video.MediaFoundation.Advanced", fragmented: false, bc =>
+                    f.NewNodeDescription(nameof(CameraControls), "Video.MediaFoundation", fragmented: false, bc =>
                     {
                         return bc.NewNode(
                             inputs: CameraControls.Default.Properties.Select(p => Pin(bc, p.Name.ToString())),
@@ -37,9 +37,12 @@ namespace VL.MediaFoundation
                                 return ibc.Node(
                                     inputs: controls.Properties,
                                     outputs: new[] { ibc.Output(() => controls) });
-                            });
+                            },
+                            summary: "Controls camera parameters like zoom, exposure,...",
+                            remarks: "Connects to the VideoIn node.\r\nNote that not all cameras will support all of the available properties"
+                            );
                     }),
-                    f.NewNodeDescription(nameof(VideoControls), "Video.MediaFoundation.Advanced", fragmented: false, bc =>
+                    f.NewNodeDescription(nameof(VideoControls), "Video.MediaFoundation", fragmented: false, bc =>
                     {
                         return bc.NewNode(
                             inputs: VideoControls.Default.Properties.Select(p => Pin(bc, p.Name.ToString())),
@@ -50,7 +53,10 @@ namespace VL.MediaFoundation
                                 return ibc.Node(
                                     inputs: controls.Properties,
                                     outputs: new[] { ibc.Output(() => controls) });
-                            });
+                            },
+                            summary: "Controls video parameters like brightness, contrast,...",
+                            remarks: "Connects to the VideoIn node.\r\nNote that not all cameras will support all of the available properties"
+                            );
                     }));
                 return NodeBuilding.NewFactoryImpl(nodes);
             });
