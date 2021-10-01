@@ -1,10 +1,13 @@
 ﻿using SharpDX.Direct3D;
 using SharpDX.Direct3D11;
+using Stride.Core;
+using Stride.Graphics;
 using System.Collections.Immutable;
 using System.Linq;
 using VL.Core;
 using VL.Core.CompilerServices;
 using VL.Lib.Basics.Resources;
+using DeviceCreationFlags = SharpDX.Direct3D11.DeviceCreationFlags;
 
 [assembly: AssemblyInitializer(typeof(VL.MediaFoundation.Initialization))]
 
@@ -22,6 +25,9 @@ namespace VL.MediaFoundation
                     return ResourceProvider.NewPooledPerApp(nodeContext, () => new Device(DriverType.Hardware, DeviceCreationFlags.BgraSupport | DeviceCreationFlags.VideoSupport));
                 });
             }
+
+            factory.RegisterService<IRefCounter<Texture>>(TextureRefCounter.Default);
+
             factory.RegisterNodeFactory("VL.Video.MediaFoundation.ControlNodes", f =>
             {
                 // TODO: fragmented = true causes troubles on disconnect, apparently the default value injection can't deal with nullables -> injects 0 instead of null

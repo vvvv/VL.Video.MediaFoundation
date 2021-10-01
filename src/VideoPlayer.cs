@@ -14,14 +14,16 @@ namespace VL.MediaFoundation
     public abstract class VideoPlayer<TImage> : IDisposable
     {
         private readonly Producing<TImage> output = new Producing<TImage>();
+        private readonly TextureProvider<TImage> textureProvider;
 
-        private Device device;
-        private MediaEngine engine;
+        private readonly MediaEngine engine;
         private Size2 renderTargetSize;
 
-        protected void Initialize(Device device)
+        internal VideoPlayer(TextureProvider<TImage> renderService)
         {
-            this.device = device ?? throw new ArgumentNullException(nameof(device));
+            this.textureProvider = renderService ?? throw new ArgumentNullException(nameof(renderService));
+
+            var device = renderService.Device;
 
             // Initialize MediaFoundation
             MediaManagerService.Initialize();
@@ -251,6 +253,8 @@ namespace VL.MediaFoundation
             {
                 if (renderTargetSize == default)
                 {
+                    //textureProvider.Recycle();
+
                     engine.GetNativeVideoSize(out var width, out var height);
 
                     // Apply user specified size
@@ -264,33 +268,19 @@ namespace VL.MediaFoundation
                 }
 
                 // _SRGB doesn't work :/ Getting invalid argument exception in TransferVideoFrame
-                var videoFrame = new Texture2D(device, new Texture2DDescription()
-                {
-                    Height = renderTargetSize.Height,
-                    Width = renderTargetSize.Width,
-                    ArraySize = 1,
-                    BindFlags = BindFlags.RenderTarget | BindFlags.ShaderResource,
-                    CpuAccessFlags = CpuAccessFlags.None,
-                    Format = SharpDX.DXGI.Format.B8G8R8A8_UNorm,
-                    MipLevels = 1,
-                    OptionFlags = ResourceOptionFlags.None,
-                    SampleDescription = new SharpDX.DXGI.SampleDescription(1, 0),
-                    Usage = ResourceUsage.Default
-                });
+                var videoFrame = textureProvider.GetTexture(renderTargetSize.Width, renderTargetSize.Height);
 
                 engine.TransferVideoFrame(
                     videoFrame,
                     ToVideoRect(SourceBounds),
-                    new RawRectangle(0, 0, videoFrame.Description.Width, videoFrame.Description.Height),
+                    new RawRectangle(0, 0, renderTargetSize.Width, renderTargetSize.Height),
                     ToRawColorBGRA(BorderColor));
 
-                return AsImage(videoFrame);
+                return textureProvider.AsImage(videoFrame);
             }
 
             return default;
         }
-
-        protected abstract TImage AsImage(Texture2D videoTexture);
 
         static VideoNormalizedRect? ToVideoRect(RectangleF? rect)
         {
@@ -318,13 +308,15 @@ namespace VL.MediaFoundation
             return default;
         }
 
-        public virtual void Dispose()
+        public void Dispose()
         {
             output.Dispose();
 
             engine.Shutdown();
             engine.PlaybackEvent -= Engine_PlaybackEvent;
             engine.Dispose();
+
+            textureProvider.Dispose();
         }
     }
 
