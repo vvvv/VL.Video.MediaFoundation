@@ -2,35 +2,26 @@
 using SharpDX.Direct3D11;
 using SharpDX.Mathematics.Interop;
 using SharpDX.MediaFoundation;
-using Stride.Core;
 using Stride.Core.Mathematics;
-using Stride.Engine;
-using Stride.Graphics;
-using Stride.Rendering;
 using System;
 using System.Diagnostics;
 using VL.Core;
 using VL.Lib.Basics.Resources;
-using VL.Stride;
-using PixelFormat = Stride.Graphics.PixelFormat;
 
 namespace VL.MediaFoundation
 {
     // Good source: https://stackoverflow.com/questions/40913196/how-to-properly-use-a-hardware-accelerated-media-foundation-source-reader-to-dec
-    public partial class VideoPlayer : IDisposable
+    public abstract class VideoPlayer<TImage> : IDisposable
     {
-        private readonly IResourceHandle<RenderDrawContext> renderDrawContextHandle;
-        private readonly ColorSpaceConverter colorSpaceConverter;
+        private readonly Producing<TImage> output = new Producing<TImage>();
+
+        private Device device;
         private MediaEngine engine;
-        private bool invalidated;
+        private Size2 renderTargetSize;
 
-        public VideoPlayer(NodeContext nodeContext)
+        protected void Initialize(Device device)
         {
-            renderDrawContextHandle = nodeContext.GetGameProvider()
-                .Bind(g => RenderContext.GetShared(g.Services).GetThreadContext())
-                .GetHandle() ?? throw new ServiceNotFoundException(typeof(IResourceProvider<Game>));
-
-            colorSpaceConverter = new ColorSpaceConverter(renderDrawContextHandle.Resource);
+            this.device = device ?? throw new ArgumentNullException(nameof(device));
 
             // Initialize MediaFoundation
             MediaManagerService.Initialize();
@@ -43,20 +34,14 @@ namespace VL.MediaFoundation
                 VideoOutputFormat = (int)SharpDX.DXGI.Format.B8G8R8A8_UNorm
             };
 
-            var graphicsDevice = renderDrawContextHandle.Resource.GraphicsDevice;
-            var device = SharpDXInterop.GetNativeDevice(graphicsDevice) as Device;
-            if (device != null)
-            {
-                // Add multi thread protection on device (MF is multi-threaded)
-                using var deviceMultithread = device.QueryInterface<DeviceMultithread>();
-                deviceMultithread.SetMultithreadProtected(true);
+            // Add multi thread protection on device (MF is multi-threaded)
+            using var deviceMultithread = device.QueryInterface<DeviceMultithread>();
+            deviceMultithread.SetMultithreadProtected(true);
 
-
-                // Reset device
-                using var manager = new DXGIDeviceManager();
-                manager.ResetDevice(device);
-                mediaEngineAttributes.DxgiManager = manager;
-            }
+            // Reset device
+            using var manager = new DXGIDeviceManager();
+            manager.ResetDevice(device);
+            mediaEngineAttributes.DxgiManager = manager;
 
             using var classFactory = new MediaEngineClassFactory();
             engine = new MediaEngine(classFactory, mediaEngineAttributes);
@@ -76,7 +61,7 @@ namespace VL.MediaFoundation
                     break;
                 case MediaEngineEvent.LoadedMetadata:
                 case MediaEngineEvent.FormatChange:
-                    invalidated = true;
+                    renderTargetSize = default;
                     break;
             }
         }
@@ -154,7 +139,7 @@ namespace VL.MediaFoundation
                 if (value != textureSize)
                 {
                     textureSize = value;
-                    invalidated = true;
+                    renderTargetSize = default;
                 }
             }
         }
@@ -196,7 +181,7 @@ namespace VL.MediaFoundation
         public MediaEngineErr ErrorCode { get; private set; }
 
         // This method is not really needed but makes it simpler to work with inside VL
-        public Texture Update(
+        public TImage Update(
             string url,
             bool play = false,
             float rate = 1f,
@@ -222,19 +207,16 @@ namespace VL.MediaFoundation
             TextureSize = new Size2(textureSize.X, textureSize.Y);
             SourceBounds = sourceBounds;
             BorderColor = borderColor;
-            Update();
-            return currentVideoFrame;
+
+            return output.Resource = Update();
         }
 
-        void Update()
+        TImage Update()
         {
             if (ReadyState <= ReadyState.HaveNothing)
             {
-                currentVideoFrame = null;
-                renderTarget?.Dispose();
-                renderTarget = null;
-                invalidated = true;
-                return;
+                renderTargetSize = default;
+                return default;
             }
 
             if (ReadyState >= ReadyState.HaveMetadata)
@@ -267,12 +249,8 @@ namespace VL.MediaFoundation
 
             if (ReadyState >= ReadyState.HaveCurrentData && engine.OnVideoStreamTick(out var presentationTimeTicks))
             {
-                if (invalidated || currentVideoFrame is null)
+                if (renderTargetSize == default)
                 {
-                    invalidated = false;
-
-                    renderTarget?.Dispose();
-
                     engine.GetNativeVideoSize(out var width, out var height);
 
                     // Apply user specified size
@@ -282,27 +260,37 @@ namespace VL.MediaFoundation
                     if (x.Height > 0)
                         height = x.Height;
 
-                    var graphicsDevice = renderDrawContextHandle.Resource.GraphicsDevice;
-
-                    // _SRGB doesn't work :/ Getting invalid argument exception in TransferVideoFrame
-                    renderTarget = Texture.New2D(graphicsDevice, width, height, PixelFormat.B8G8R8A8_UNorm, TextureFlags.RenderTarget | TextureFlags.ShaderResource);
+                    renderTargetSize = new Size2(width, height);
                 }
 
-                if (SharpDXInterop.GetNativeResource(renderTarget) is Texture2D nativeRenderTarget)
+                // _SRGB doesn't work :/ Getting invalid argument exception in TransferVideoFrame
+                var videoFrame = new Texture2D(device, new Texture2DDescription()
                 {
-                    engine.TransferVideoFrame(
-                        nativeRenderTarget, 
-                        ToVideoRect(SourceBounds), 
-                        new RawRectangle(0, 0, renderTarget.ViewWidth, renderTarget.ViewHeight), 
-                        ToRawColorBGRA(BorderColor));
+                    Height = renderTargetSize.Height,
+                    Width = renderTargetSize.Width,
+                    ArraySize = 1,
+                    BindFlags = BindFlags.RenderTarget | BindFlags.ShaderResource,
+                    CpuAccessFlags = CpuAccessFlags.None,
+                    Format = SharpDX.DXGI.Format.B8G8R8A8_UNorm,
+                    MipLevels = 1,
+                    OptionFlags = ResourceOptionFlags.None,
+                    SampleDescription = new SharpDX.DXGI.SampleDescription(1, 0),
+                    Usage = ResourceUsage.Default
+                });
 
-                    // Apply color space conversion if necessary
-                    currentVideoFrame = colorSpaceConverter.ToDeviceColorSpace(renderTarget);
-                }
+                engine.TransferVideoFrame(
+                    videoFrame,
+                    ToVideoRect(SourceBounds),
+                    new RawRectangle(0, 0, videoFrame.Description.Width, videoFrame.Description.Height),
+                    ToRawColorBGRA(BorderColor));
+
+                return AsImage(videoFrame);
             }
+
+            return default;
         }
-        Texture renderTarget;
-        Texture currentVideoFrame;
+
+        protected abstract TImage AsImage(Texture2D videoTexture);
 
         static VideoNormalizedRect? ToVideoRect(RectangleF? rect)
         {
@@ -330,13 +318,13 @@ namespace VL.MediaFoundation
             return default;
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
+            output.Dispose();
+
             engine.Shutdown();
             engine.PlaybackEvent -= Engine_PlaybackEvent;
             engine.Dispose();
-            colorSpaceConverter.Dispose();
-            renderTarget?.Dispose();
         }
     }
 

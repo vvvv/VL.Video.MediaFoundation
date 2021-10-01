@@ -26,6 +26,7 @@ namespace VL.MediaFoundation
 
         private readonly SerialDisposable deviceSubscription = new SerialDisposable();
         private readonly IResourceHandle<RenderDrawContext> renderDrawContextHandle;
+        private readonly Producing<Texture> output = new Producing<Texture>();
         private readonly ColorSpaceConverter colorSpaceConverter;
         private BlockingCollection<Texture> videoFrames;
         private string deviceSymbolicLink;
@@ -122,17 +123,8 @@ namespace VL.MediaFoundation
 
         public Texture CurrentVideoFrame
         {
-            get => currentVideoFrame;
-            private set
-            {
-                if (value != currentVideoFrame)
-                {
-                    currentVideoFrame?.Dispose();
-                    currentVideoFrame = value;
-                }
-            }
+            get => output.Resource;
         }
-        Texture currentVideoFrame;
 
         public int DiscardedFrames => discardedFrames;
         public float ActualFPS => actualFps;
@@ -148,7 +140,7 @@ namespace VL.MediaFoundation
 
                 FetchCurrentVideoFrame(waitTimeInMilliseconds);
             }
-            return currentVideoFrame;
+            return CurrentVideoFrame;
 
             MediaSource CreateMediaSource()
             {
@@ -309,7 +301,7 @@ namespace VL.MediaFoundation
             if (videoFrames != null && videoFrames.TryTake(out var texture, waitTimeInMilliseconds))
             {
                 // Set the texture as current output
-                CurrentVideoFrame = ToDeviceColorSpace(texture);
+                output.Resource = ToDeviceColorSpace(texture);
                 return;
             }
         }
@@ -339,8 +331,7 @@ namespace VL.MediaFoundation
         public void Dispose()
         {
             deviceSubscription.Dispose();
-            currentVideoFrame?.Dispose();
-            colorSpaceConverter.Dispose();
+            output.Dispose();
             renderDrawContextHandle.Dispose();
         }
     }
