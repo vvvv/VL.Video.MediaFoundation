@@ -9,21 +9,18 @@ using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
-using VL.Core;
 using VL.Lib.Basics.Resources;
-using VL.Stride;
 
 namespace VL.MediaFoundation
 {
     // Good source: https://stackoverflow.com/questions/40913196/how-to-properly-use-a-hardware-accelerated-media-foundation-source-reader-to-dec
-    public partial class VideoCapture<TImage> : IDisposable
-        where TImage : IDisposable
+    public partial class VideoCapture : IDisposable
     {
         private static readonly Guid s_IID_ID3D11Texture2D = new Guid("6f15aaf2-d208-4e89-9ab4-489535d34f9c");
 
         private readonly SerialDisposable deviceSubscription = new SerialDisposable();
-        private readonly Producing<TImage> output = new Producing<TImage>();
-        private readonly TextureProvider<TImage> renderService;
+        private readonly Producing<Texture2D> output = new Producing<Texture2D>();
+        private readonly DeviceProvider deviceProvider;
         private BlockingCollection<Texture2D> videoFrames;
         private string deviceSymbolicLink;
         private Int2 preferredSize;
@@ -32,9 +29,9 @@ namespace VL.MediaFoundation
         private int discardedFrames;
         private float actualFps;
 
-        internal VideoCapture(TextureProvider<TImage> renderService)
+        internal VideoCapture(DeviceProvider deviceProvider)
         {
-            this.renderService = renderService ?? throw new ArgumentNullException(nameof(renderService));
+            this.deviceProvider = deviceProvider ?? throw new ArgumentNullException(nameof(deviceProvider));
         }
 
         public VideoCaptureDeviceEnumEntry Device
@@ -109,7 +106,7 @@ namespace VL.MediaFoundation
             }
         }
 
-        public TImage CurrentVideoFrame
+        public Texture2D CurrentVideoFrame
         {
             get => output.Resource;
         }
@@ -117,7 +114,7 @@ namespace VL.MediaFoundation
         public int DiscardedFrames => discardedFrames;
         public float ActualFPS => actualFps;
 
-        public TImage Update(int waitTimeInMilliseconds)
+        public Texture2D Update(int waitTimeInMilliseconds)
         {
             if (enabled)
             {
@@ -171,7 +168,7 @@ namespace VL.MediaFoundation
                     sourceReaderAttributes.Set(SourceReaderAttributeKeys.EnableAdvancedVideoProcessing, true);
 
                     // Hardware acceleration
-                    var d3dDevice = renderService.Device;
+                    var d3dDevice = deviceProvider.Device;
                     // Add multi thread protection on device (MF is multi-threaded)
                     var deviceMultithread = d3dDevice.QueryInterface<DeviceMultithread>();
                     deviceMultithread.SetMultithreadProtected(true);
@@ -274,7 +271,7 @@ namespace VL.MediaFoundation
             // Fetch the texture
             if (videoFrames != null && videoFrames.TryTake(out var texture, waitTimeInMilliseconds))
             {
-                output.Resource = renderService.AsImage(texture);
+                output.Resource = texture;
             }
         }
 
@@ -282,7 +279,7 @@ namespace VL.MediaFoundation
         {
             deviceSubscription.Dispose();
             output.Dispose();
-            renderService.Dispose();
+            deviceProvider.Dispose();
         }
     }
 }

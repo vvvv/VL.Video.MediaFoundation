@@ -11,13 +11,13 @@ using VL.Stride;
 
 namespace VL.MediaFoundation
 {
-    sealed class StrideTextureProvider : TextureProvider<Texture>
+    sealed class StrideImageAllocator : ImageAllocator<Texture>
     {
         private readonly ConditionalWeakTable<Texture2D, Texture> textureMap = new ConditionalWeakTable<Texture2D, Texture>();
         private readonly IResourceHandle<RenderDrawContext> renderDrawContextHandle;
         private readonly RenderDrawContext renderContext;
 
-        public StrideTextureProvider(NodeContext nodeContext)
+        public StrideImageAllocator(NodeContext nodeContext)
         {
             renderDrawContextHandle = nodeContext.GetGameProvider()
                 .Bind(g => RenderContext.GetShared(g.Services).GetThreadContext())

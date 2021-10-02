@@ -11,19 +11,19 @@ using VL.Lib.Basics.Resources;
 namespace VL.MediaFoundation
 {
     // Good source: https://stackoverflow.com/questions/40913196/how-to-properly-use-a-hardware-accelerated-media-foundation-source-reader-to-dec
-    public abstract class VideoPlayer<TImage> : IDisposable
+    public abstract class VideoPlayer : IDisposable
     {
-        private readonly Producing<TImage> output = new Producing<TImage>();
-        private readonly TextureProvider<TImage> textureProvider;
+        private readonly Producing<Texture2D> output = new Producing<Texture2D>();
 
+        private readonly DeviceProvider deviceProvider;
         private readonly MediaEngine engine;
         private Size2 renderTargetSize;
 
-        internal VideoPlayer(TextureProvider<TImage> renderService)
+        internal VideoPlayer(DeviceProvider deviceProvider)
         {
-            this.textureProvider = renderService ?? throw new ArgumentNullException(nameof(renderService));
+            this.deviceProvider = deviceProvider ?? throw new ArgumentNullException(nameof(deviceProvider));
 
-            var device = renderService.Device;
+            var device = deviceProvider.Device;
 
             // Initialize MediaFoundation
             MediaManagerService.Initialize();
@@ -183,7 +183,7 @@ namespace VL.MediaFoundation
         public MediaEngineErr ErrorCode { get; private set; }
 
         // This method is not really needed but makes it simpler to work with inside VL
-        public TImage Update(
+        public Texture2D Update(
             string url,
             bool play = false,
             float rate = 1f,
@@ -213,7 +213,7 @@ namespace VL.MediaFoundation
             return output.Resource = Update();
         }
 
-        TImage Update()
+        Texture2D Update()
         {
             if (ReadyState <= ReadyState.HaveNothing)
             {
@@ -268,7 +268,19 @@ namespace VL.MediaFoundation
                 }
 
                 // _SRGB doesn't work :/ Getting invalid argument exception in TransferVideoFrame
-                var videoFrame = textureProvider.GetTexture(renderTargetSize.Width, renderTargetSize.Height);
+                var videoFrame = new Texture2D(deviceProvider.Device, new Texture2DDescription()
+                {
+                    Width = renderTargetSize.Width,
+                    Height = renderTargetSize.Height,
+                    ArraySize = 1,
+                    BindFlags = BindFlags.RenderTarget | BindFlags.ShaderResource,
+                    CpuAccessFlags = CpuAccessFlags.None,
+                    Format = SharpDX.DXGI.Format.B8G8R8A8_UNorm,
+                    MipLevels = 1,
+                    OptionFlags = ResourceOptionFlags.None,
+                    SampleDescription = new SharpDX.DXGI.SampleDescription(1, 0),
+                    Usage = ResourceUsage.Default
+                });
 
                 engine.TransferVideoFrame(
                     videoFrame,
@@ -276,7 +288,7 @@ namespace VL.MediaFoundation
                     new RawRectangle(0, 0, renderTargetSize.Width, renderTargetSize.Height),
                     ToRawColorBGRA(BorderColor));
 
-                return textureProvider.AsImage(videoFrame);
+                return videoFrame;
             }
 
             return default;
@@ -316,7 +328,7 @@ namespace VL.MediaFoundation
             engine.PlaybackEvent -= Engine_PlaybackEvent;
             engine.Dispose();
 
-            textureProvider.Dispose();
+            deviceProvider.Dispose();
         }
     }
 

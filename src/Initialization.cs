@@ -27,6 +27,7 @@ namespace VL.MediaFoundation
             }
 
             factory.RegisterService<IRefCounter<Texture>>(TextureRefCounter.Default);
+            factory.RegisterService<IRefCounter<Texture2D>>(Texture2DRefCounter.Default);
 
             factory.RegisterNodeFactory("VL.Video.MediaFoundation.ControlNodes", f =>
             {

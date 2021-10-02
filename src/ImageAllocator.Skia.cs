@@ -8,11 +8,11 @@ using Device = SharpDX.Direct3D11.Device;
 
 namespace VL.MediaFoundation
 {
-    sealed class SkiaTextureProvider : TextureProvider<SKImage>
+    sealed class SkiaImageAllocator : ImageAllocator<SKImage>
     {
         private readonly RenderContext renderContext;
 
-        public SkiaTextureProvider(NodeContext nodeContext)
+        public SkiaImageAllocator(NodeContext nodeContext)
         {
             renderContext = RenderContext.ForCurrentThread();
 
