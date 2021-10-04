@@ -14,7 +14,7 @@ using VL.Lib.Basics.Resources;
 namespace VL.MediaFoundation
 {
     // Good source: https://stackoverflow.com/questions/40913196/how-to-properly-use-a-hardware-accelerated-media-foundation-source-reader-to-dec
-    public partial class VideoCapture : IDisposable
+    public sealed partial class VideoCapture : IDisposable
     {
         private static readonly Guid s_IID_ID3D11Texture2D = new Guid("6f15aaf2-d208-4e89-9ab4-489535d34f9c");
 
@@ -29,7 +29,7 @@ namespace VL.MediaFoundation
         private int discardedFrames;
         private float actualFps;
 
-        internal VideoCapture(DeviceProvider deviceProvider)
+        public VideoCapture(DeviceProvider deviceProvider)
         {
             this.deviceProvider = deviceProvider ?? throw new ArgumentNullException(nameof(deviceProvider));
         }
@@ -221,9 +221,10 @@ namespace VL.MediaFoundation
                         if (dxgiBuffer != null)
                         {
                             dxgiBuffer.GetResource(s_IID_ID3D11Texture2D, out var pTexture);
-                            var texture = new Texture2D(pTexture);
+                            var texture = new LinkedTexture2D(pTexture, new CompositeDisposable(dxgiBuffer, sample));
                             try
                             {
+                                Trace.TraceInformation(pTexture.ToString());
                                 videoFrames.Add(texture);
                             }
                             catch (InvalidOperationException)
@@ -231,7 +232,10 @@ namespace VL.MediaFoundation
                                 texture.Dispose();
                             }
                         }
-                        sample.Dispose();
+                        else
+                        {
+                            sample.Dispose();
+                        }
                     }
                 });
 

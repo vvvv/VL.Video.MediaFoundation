@@ -11,19 +11,22 @@ using VL.Lib.Basics.Resources;
 namespace VL.MediaFoundation
 {
     // Good source: https://stackoverflow.com/questions/40913196/how-to-properly-use-a-hardware-accelerated-media-foundation-source-reader-to-dec
-    public abstract class VideoPlayer : IDisposable
+    public sealed class VideoPlayer : IDisposable
     {
-        private readonly Producing<Texture2D> output = new Producing<Texture2D>();
-
         private readonly DeviceProvider deviceProvider;
+        private readonly TexturePool texturePool;
         private readonly MediaEngine engine;
         private Size2 renderTargetSize;
+        private long presentationTimeTicks;
+        private readonly Producing<Texture2D> output = new Producing<Texture2D>();
 
-        internal VideoPlayer(DeviceProvider deviceProvider)
+        public VideoPlayer(DeviceProvider deviceProvider)
         {
             this.deviceProvider = deviceProvider ?? throw new ArgumentNullException(nameof(deviceProvider));
 
             var device = deviceProvider.Device;
+
+            this.texturePool = new TexturePool(device);
 
             // Initialize MediaFoundation
             MediaManagerService.Initialize();
@@ -210,7 +213,7 @@ namespace VL.MediaFoundation
             SourceBounds = sourceBounds;
             BorderColor = borderColor;
 
-            return output.Resource = Update();
+            return Update();
         }
 
         Texture2D Update()
@@ -249,8 +252,10 @@ namespace VL.MediaFoundation
                     engine.Pause();
             }
 
-            if (ReadyState >= ReadyState.HaveCurrentData && engine.OnVideoStreamTick(out var presentationTimeTicks))
+            if (ReadyState >= ReadyState.HaveCurrentData && engine.OnVideoStreamTick(out var presentationTimeTicks) && presentationTimeTicks != this.presentationTimeTicks)
             {
+                this.presentationTimeTicks = presentationTimeTicks;
+
                 if (renderTargetSize == default)
                 {
                     //textureProvider.Recycle();
@@ -267,31 +272,34 @@ namespace VL.MediaFoundation
                     renderTargetSize = new Size2(width, height);
                 }
 
-                // _SRGB doesn't work :/ Getting invalid argument exception in TransferVideoFrame
-                var videoFrame = new Texture2D(deviceProvider.Device, new Texture2DDescription()
+                if (renderTargetSize != default)
                 {
-                    Width = renderTargetSize.Width,
-                    Height = renderTargetSize.Height,
-                    ArraySize = 1,
-                    BindFlags = BindFlags.RenderTarget | BindFlags.ShaderResource,
-                    CpuAccessFlags = CpuAccessFlags.None,
-                    Format = SharpDX.DXGI.Format.B8G8R8A8_UNorm,
-                    MipLevels = 1,
-                    OptionFlags = ResourceOptionFlags.None,
-                    SampleDescription = new SharpDX.DXGI.SampleDescription(1, 0),
-                    Usage = ResourceUsage.Default
-                });
+                    var videoFrame = texturePool.Rent(new Texture2DDescription()
+                    {
+                        Width = renderTargetSize.Width,
+                        Height = renderTargetSize.Height,
+                        ArraySize = 1,
+                        BindFlags = BindFlags.RenderTarget | BindFlags.ShaderResource,
+                        CpuAccessFlags = CpuAccessFlags.None,
+                        // _SRGB doesn't work :/ Getting invalid argument exception in TransferVideoFrame
+                        Format = SharpDX.DXGI.Format.B8G8R8A8_UNorm,
+                        MipLevels = 1,
+                        OptionFlags = ResourceOptionFlags.None,
+                        SampleDescription = new SharpDX.DXGI.SampleDescription(1, 0),
+                        Usage = ResourceUsage.Default
+                    });
 
-                engine.TransferVideoFrame(
-                    videoFrame,
-                    ToVideoRect(SourceBounds),
-                    new RawRectangle(0, 0, renderTargetSize.Width, renderTargetSize.Height),
-                    ToRawColorBGRA(BorderColor));
+                    engine.TransferVideoFrame(
+                        videoFrame,
+                        ToVideoRect(SourceBounds),
+                        new RawRectangle(0, 0, renderTargetSize.Width, renderTargetSize.Height),
+                        ToRawColorBGRA(BorderColor));
 
-                return videoFrame;
+                    return output.Resource = videoFrame;
+                }
             }
 
-            return default;
+            return output.Resource;
         }
 
         static VideoNormalizedRect? ToVideoRect(RectangleF? rect)
@@ -322,7 +330,7 @@ namespace VL.MediaFoundation
 
         public void Dispose()
         {
-            output.Dispose();
+            output?.Dispose();
 
             engine.Shutdown();
             engine.PlaybackEvent -= Engine_PlaybackEvent;

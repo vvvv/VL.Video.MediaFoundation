@@ -9,17 +9,26 @@ namespace VL.MediaFoundation
 
         public void Init(Texture2D resource)
         {
-            resource?.RefCounted();
+            if (resource is IRefCounted r)
+                r.AddRef();
+            else
+                resource?.RefCounted();
         }
 
         public void AddRef(Texture2D resource)
         {
-            resource?.AddRef();
+            if (resource is IRefCounted r)
+                r.AddRef();
+            else
+                resource?.AddRef();
         }
 
         public void Release(Texture2D resource)
         {
-            resource?.Release();
+            if (resource is IRefCounted r)
+                r.Release();
+            else
+                resource?.Release();
         }
     }
 }

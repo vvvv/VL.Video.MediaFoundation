@@ -2,11 +2,11 @@
 using System;
 using System.Collections.Generic;
 
-namespace VL.Video.MediaFoundation
+namespace VL.MediaFoundation
 {
-    class TexturePool : IDisposable
+    sealed partial class TexturePool : IDisposable
     {
-        private readonly Dictionary<Texture2DDescription, Stack<Texture2D>> cache = new Dictionary<Texture2DDescription, Stack<Texture2D>>();
+        private readonly Dictionary<Texture2DDescription, Stack<PooledTextured2D>> cache = new Dictionary<Texture2DDescription, Stack<PooledTextured2D>>();
 
         public TexturePool(Device device)
         {
@@ -15,26 +15,24 @@ namespace VL.Video.MediaFoundation
 
         public Device Device { get; }
 
-        public Texture2D Rent(Texture2DDescription description)
+        internal PooledTextured2D Rent(in Texture2DDescription description)
         {
             lock (cache)
             {
-                var stack = cache.EnsureValue(description, s => new Stack<Texture2D>(1));
+                var stack = GetStack(in description);
                 if (stack.Count > 0)
                     return stack.Pop();
 
-                return new Texture2D(Device, description);
+                return new PooledTextured2D(this, Device, description);
             }
         }
 
-        public void Return(Texture2D texture)
+        internal void Return(PooledTextured2D texture)
         {
             lock (cache)
             {
                 var description = texture.Description;
-                if (!cache.TryGetValue(description, out var stack))
-                    throw new InvalidOperationException();
-
+                var stack = GetStack(in description);
                 stack.Push(texture);
             }
         }
@@ -55,6 +53,11 @@ namespace VL.Video.MediaFoundation
         public void Dispose()
         {
             Recycle();
+        }
+
+        private Stack<PooledTextured2D> GetStack(in Texture2DDescription description)
+        {
+            return cache.EnsureValue(description, s => new Stack<PooledTextured2D>(2));
         }
     }
 }

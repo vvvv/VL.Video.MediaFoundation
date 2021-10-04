@@ -10,7 +10,7 @@ using VL.Stride;
 
 namespace VL.MediaFoundation
 {
-    class StrideDeviceProvider : DeviceProvider
+    public class StrideDeviceProvider : DeviceProvider
     {
         private readonly IResourceHandle<RenderDrawContext> renderDrawContextHandle;
 

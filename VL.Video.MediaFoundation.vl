@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Document xmlns:p="property" Id="GCeR2VbZxmMN6ZcU8vYNGe" LanguageVersion="2021.4.0.455" Version="0.128">
-  <NugetDependency Id="OddDUH5t00UQDOaM5VIUbR" Location="VL.CoreLib" Version="2021.4.0-0455-gf5a76a21e8" />
+<Document xmlns:p="property" Id="GCeR2VbZxmMN6ZcU8vYNGe" LanguageVersion="2021.4.0.458" Version="0.128">
+  <NugetDependency Id="OddDUH5t00UQDOaM5VIUbR" Location="VL.CoreLib" Version="2021.4.0-0458-g12f67edc27" />
   <Patch Id="RGTfRCPLQo7PrXo7dPC5Ad">
     <Canvas Id="USHGZ5YZJZ5NCZiBRK95Vs" DefaultCategory="Video.MediaFoundation" CanvasType="FullCategory">
       <Canvas Id="E85TIfV85NyN7HiBWXsv1t" Name="Advanced" Position="497,234">
@@ -64,10 +64,10 @@
         <Patch Id="UsZjm0NpxKJOn7kwmKNweq">
           <Canvas Id="KuF4UnnhmRHMxY2aAbALPG" CanvasType="Group">
             <Node Bounds="625,506,85,26" Id="ETHcLdPj5OOPzxcrGs6QOy">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.StrideVideoCapture" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.StrideDeviceProvider" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="Create" />
-                <CategoryReference Kind="AssemblyCategory" Name="StrideVideoCapture" NeedsToBeDirectParent="true" />
+                <CategoryReference Kind="AssemblyCategory" Name="StrideDeviceProvider" NeedsToBeDirectParent="true" />
               </p:NodeReference>
               <Pin Id="M3kGD3tIHPUPrRl0vAR5Al" Name="Node Context" Kind="InputPin" />
               <Pin Id="QMkQeOi2jOsOTF0g33uLZy" Name="Output" Kind="StateOutputPin" />
@@ -77,7 +77,7 @@
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="ProcessAppFlag" Name="VideoInCore" />
               </p:NodeReference>
-              <Pin Id="CLrsOUDcejNLfWrlY8wNoB" Name="VideoCapture" Kind="InputPin" />
+              <Pin Id="GopD41bD2cqQDmnjuAlcci" Name="Device Provider" Kind="InputPin" />
               <Pin Id="DfesKSOAj4EO3Ila2kFfOm" Name="Device" Kind="InputPin" />
               <Pin Id="QjeVpE7tbu1L0kmT5LTkJu" Name="Preferred Size" Kind="InputPin" />
               <Pin Id="HlUWkWKGUZ6PTPCbHSjMDB" Name="Preferred FPS" Kind="InputPin" />
@@ -94,7 +94,7 @@
             <Fragment Id="SkWQCGwxN1KQI0zG5UPiWW" Patch="QvCu62Lhf7WPMOxTMQ3o7W" Enabled="true" />
             <Fragment Id="ONBEzmtPt6tNlUp2eNOxL7" Patch="EKbtahLbMq6M0LFvh3Jvr7" Enabled="true" />
           </ProcessDefinition>
-          <Link Id="G7nSaaUbYqROXHrfBAiJat" Ids="QMkQeOi2jOsOTF0g33uLZy,CLrsOUDcejNLfWrlY8wNoB" />
+          <Link Id="TUo1zbIfQfYO2mt9x8o1BA" Ids="QMkQeOi2jOsOTF0g33uLZy,GopD41bD2cqQDmnjuAlcci" />
           <Patch Id="QvCu62Lhf7WPMOxTMQ3o7W" Name="Create" ParticipatingElements="ETHcLdPj5OOPzxcrGs6QOy" />
           <Patch Id="EKbtahLbMq6M0LFvh3Jvr7" Name="Update">
             <Pin Id="MxeZSrBzcXuLyDbCcHovfc" Name="Device" Kind="InputPin" />
@@ -123,21 +123,21 @@
         <Patch Id="BXvJDyNSqBcLb0gyXgF9NZ">
           <Canvas Id="Gg2QS1Wg1l9M7dAk9RKsg2" CanvasType="Group">
             <Node Bounds="224,198,58,26" Id="DV39z8q4XZ2OsCCEnQDUDp">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.StrideVideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationNode" Name="Create" />
-                <CategoryReference Kind="AssemblyCategory" Name="StrideVideoPlayer" NeedsToBeDirectParent="true" />
+                <CategoryReference Kind="AssemblyCategory" Name="VideoPlayer" NeedsToBeDirectParent="true" />
               </p:NodeReference>
-              <Pin Id="UDyKwHjLFiENkRflqXjZE2" Name="Node Context" Kind="InputPin" />
+              <Pin Id="LIPHtOGRfYePpPzc1KKikk" Name="Device Provider" Kind="InputPin" />
               <Pin Id="SPhH7DVTQWjPFXdCeabm7u" Name="Output" Kind="StateOutputPin" />
             </Node>
             <ControlPoint Id="D228dko9n3JPxEbcJ0ZKyG" Bounds="226,141" />
             <Pad Id="MQXFQyXUcHPN11S8cbfzvP" SlotId="DpoWupsOjxuQSxVY930XwZ" Bounds="225,279" />
             <Node Bounds="222,431,245,19" AutoConnect="true" Id="Du0vCopVusHOTVzSp23qxZ">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer`1" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="Update" />
-                <CategoryReference Kind="AssemblyCategory" Name="VideoPlayer`1" NeedsToBeDirectParent="true" />
+                <CategoryReference Kind="AssemblyCategory" Name="VideoPlayer" NeedsToBeDirectParent="true" />
               </p:NodeReference>
               <Pin Id="D7btSTJKH7ELeDaaQSKDON" Name="Input" Kind="StateInputPin" />
               <Pin Id="RcuNhUJVdsHOHUMYDyfL7u" Name="Url" Kind="InputPin" />
@@ -156,17 +156,17 @@
               <Pin Id="G7bOmtiXeSoNusuLWrdzZD" Name="Result" Kind="OutputPin" />
             </Node>
             <Node Bounds="482,537,73,26" Id="UWolVM769ySNb2pREGzuXa">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer`1" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="CurrentTime" />
-                <CategoryReference Kind="AssemblyCategory" Name="VideoPlayer`1" NeedsToBeDirectParent="true" />
+                <CategoryReference Kind="AssemblyCategory" Name="VideoPlayer" NeedsToBeDirectParent="true" />
               </p:NodeReference>
               <Pin Id="GLEkmZMOJOILDeFFvesjwb" Name="Input" Kind="StateInputPin" />
               <Pin Id="M5b2PWBfSDoQGUdrzKn5AW" Name="Output" Kind="OutputPin" />
               <Pin Id="QgIAjrYLE8mPgruIkfPeOH" Name="Current Time" Kind="OutputPin" />
             </Node>
             <Node Bounds="643,536,58,26" Id="GctlfEJbJjxPM1NKSLPR6x">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer`1" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="Duration" />
               </p:NodeReference>
@@ -178,7 +178,7 @@
             <ControlPoint Id="SWks5GMxvDcPBFS2k8rDlY" Bounds="551,593" />
             <ControlPoint Id="IpSjoZTAy9nNzoiHIy37L2" Bounds="700,592" />
             <Node Bounds="381,542,58,26" Id="BFOIB13ixSsLfNbj0TUNdD">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer`1" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="Playing" />
               </p:NodeReference>
@@ -188,7 +188,7 @@
             </Node>
             <ControlPoint Id="IfC6CFYOcDoLRnsIXarUPk" Bounds="434,602" />
             <Node Bounds="799,542,66,26" Id="DJblD7vRaXBLuy7xouCHK8">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer`1" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="ReadyState" />
               </p:NodeReference>
@@ -198,7 +198,7 @@
             </Node>
             <ControlPoint Id="B9DkwX7rnVbMRbNXsyeBvN" Bounds="862,606" />
             <Node Bounds="979,541,77,26" Id="FGRgl3c3F05MGqch7C6yts">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer`1" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="NetworkState" />
               </p:NodeReference>
@@ -208,16 +208,16 @@
             </Node>
             <ControlPoint Id="VB8qW1h3z23NlIZGtCI093" Bounds="1052,603" />
             <Node Bounds="106,364,58,26" Id="C4f4PKVSYfkNTtxJIGxnAt">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer`1" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="Dispose" />
-                <CategoryReference Kind="AssemblyCategory" Name="VideoPlayer`1" NeedsToBeDirectParent="true" />
+                <CategoryReference Kind="AssemblyCategory" Name="VideoPlayer" NeedsToBeDirectParent="true" />
               </p:NodeReference>
               <Pin Id="EBqXj4MnskfPsXA1r9a7cO" Name="Input" Kind="StateInputPin" />
               <Pin Id="NaHZCCcn0AtMu4OC7pfr3t" Name="Output" Kind="StateOutputPin" />
             </Node>
             <Node Bounds="1214,536,62,26" Id="IRTFfF9oIcuNKqjCYu7qg7">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer`1" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="ErrorCode" />
               </p:NodeReference>
@@ -229,13 +229,21 @@
             <ControlPoint Id="ULwAmh0zUH7NZqWUaYGUfS" Bounds="493,324" />
             <ControlPoint Id="FDdroFfxXXQLAWgDF6Ephq" Bounds="480,300" />
             <ControlPoint Id="EzZYfU2PlvlLhpFVPdLHA0" Bounds="471,269" />
+            <Node Bounds="224,161,90,26" Id="TKjUkZueTuJMooK2YJWnbp">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.StrideDeviceProvider" LastSymbolSource="VL.Video.MediaFoundation.dll">
+                <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+                <CategoryReference Kind="AssemblyCategory" Name="StrideDeviceProvider" />
+                <Choice Kind="OperationCallFlag" Name="Create" />
+              </p:NodeReference>
+              <Pin Id="PqWzdJMWRJgNI7wSOQ77BZ" Name="Node Context" Kind="InputPin" />
+              <Pin Id="Ka7dKmkxRlVNoNu7OhBoth" Name="Output" Kind="StateOutputPin" />
+            </Node>
           </Canvas>
           <ProcessDefinition Id="Ekyait8Q7RjP3TA44icawU">
             <Fragment Id="L2mNA1S3DH8NmsPCK6MG5X" Patch="JTnW9BMNi24Lv6WaWsKT1Y" Enabled="true" />
             <Fragment Id="LvRD2JBbrvhOlqfvW7mgFh" Patch="Rtyn4SZLslsOLIHLBtc6ED" Enabled="true" />
           </ProcessDefinition>
           <Slot Id="DpoWupsOjxuQSxVY930XwZ" Name="VideoPlayer" />
-          <Link Id="N1ubkPKzvDjLlFIOKrvR8O" Ids="D228dko9n3JPxEbcJ0ZKyG,UDyKwHjLFiENkRflqXjZE2" />
           <Link Id="A5OyXRjDLOAQWmlfiMjDiF" Ids="NbzGQThG25aPRPuX8Zy4lb,D228dko9n3JPxEbcJ0ZKyG" IsHidden="true" />
           <Link Id="D6j7h2iDOY7MjafLWnas9P" Ids="SPhH7DVTQWjPFXdCeabm7u,MQXFQyXUcHPN11S8cbfzvP" />
           <Link Id="R7EhtQT0PkJPhnOFhqUDyw" Ids="MQXFQyXUcHPN11S8cbfzvP,D7btSTJKH7ELeDaaQSKDON" />
@@ -291,6 +299,8 @@
             <Pin Id="GY7PkWPqHcAO69B3IMdTDO" Name="Error Code" Kind="OutputPin" Bounds="1613,524" />
           </Patch>
           <Patch Id="EF45x3UgXT5OE2xhoWwCMy" Name="Dispose" ParticipatingElements="C4f4PKVSYfkNTtxJIGxnAt" />
+          <Link Id="N8IKrF7lxYIPFre9QLyVEg" Ids="Ka7dKmkxRlVNoNu7OhBoth,LIPHtOGRfYePpPzc1KKikk" />
+          <Link Id="TC7yAzsX2cGOe4m3YjmGPa" Ids="D228dko9n3JPxEbcJ0ZKyG,PqWzdJMWRJgNI7wSOQ77BZ" />
         </Patch>
       </Node>
       <!--
@@ -396,21 +406,21 @@
         <Patch Id="D2cr410JKRiQENknZ27BxK">
           <Canvas Id="CJN1JK2yuyfLtz3Xk8Kf7d" CanvasType="Group">
             <Node Bounds="224,198,58,26" Id="GIG54MqancOPc7Z1dlZrNW">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.SkiaVideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationNode" Name="Create" />
-                <CategoryReference Kind="AssemblyCategory" Name="SkiaVideoPlayer" NeedsToBeDirectParent="true" />
+                <CategoryReference Kind="AssemblyCategory" Name="VideoPlayer" NeedsToBeDirectParent="true" />
               </p:NodeReference>
-              <Pin Id="KBA4ozIZ1hlLDmgrZpVSBe" Name="Node Context" Kind="InputPin" />
+              <Pin Id="NEQ42bZfW2jPTrJGRouOiV" Name="Device Provider" Kind="InputPin" />
               <Pin Id="IFEOhPZ46VgQXnYljKQbfi" Name="Output" Kind="StateOutputPin" />
             </Node>
             <ControlPoint Id="KuxKmWXZ3YsNG076m0a4k1" Bounds="226,141" />
             <Pad Id="Q5GlOhudgMFPHZ1cEsuaks" SlotId="IZHFHiQgxnXODHaUfVgqgw" Bounds="225,279" />
             <Node Bounds="222,431,245,19" AutoConnect="true" Id="VDhlwk7XQEUNc50QPLnmd9">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer`1" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="Update" />
-                <CategoryReference Kind="AssemblyCategory" Name="VideoPlayer`1" NeedsToBeDirectParent="true" />
+                <CategoryReference Kind="AssemblyCategory" Name="VideoPlayer" NeedsToBeDirectParent="true" />
               </p:NodeReference>
               <Pin Id="R2nqxzVlta8L9LE6UptWi5" Name="Input" Kind="StateInputPin" />
               <Pin Id="DLuefqZbh8AQRWoGYgNk79" Name="Url" Kind="InputPin" />
@@ -429,17 +439,17 @@
               <Pin Id="E9U4SzQS3cQNkzcyXZM9tf" Name="Result" Kind="OutputPin" />
             </Node>
             <Node Bounds="482,537,73,26" Id="TruiWxg44wtLpHr47ovonI">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer`1" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="CurrentTime" />
-                <CategoryReference Kind="AssemblyCategory" Name="VideoPlayer`1" NeedsToBeDirectParent="true" />
+                <CategoryReference Kind="AssemblyCategory" Name="VideoPlayer" NeedsToBeDirectParent="true" />
               </p:NodeReference>
               <Pin Id="RPIOmNICBpMN1y8GCvkKbe" Name="Input" Kind="StateInputPin" />
               <Pin Id="Hef6lY8QPSwOiIrPz4sWrZ" Name="Output" Kind="OutputPin" />
               <Pin Id="QoUrdsyWgloO6rJtNfE5uU" Name="Current Time" Kind="OutputPin" />
             </Node>
             <Node Bounds="643,536,58,26" Id="Alw4ubqT3qZQLOC3sIfa6x">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer`1" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="Duration" />
               </p:NodeReference>
@@ -451,7 +461,7 @@
             <ControlPoint Id="Cg1IMWIZx8GMI4UaueooFT" Bounds="551,593" />
             <ControlPoint Id="HAvKxKSybBULTr2mD9evSo" Bounds="700,592" />
             <Node Bounds="381,542,58,26" Id="ETMo53GkmAJQPXTJyb6izv">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer`1" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="Playing" />
               </p:NodeReference>
@@ -461,7 +471,7 @@
             </Node>
             <ControlPoint Id="V6zvWhSUgaUPdjo6zmHIiB" Bounds="434,602" />
             <Node Bounds="799,542,66,26" Id="J8mgOKoPgjKLs3cV93fe33">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer`1" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="ReadyState" />
               </p:NodeReference>
@@ -471,7 +481,7 @@
             </Node>
             <ControlPoint Id="IODTiifSLMPMVWPp7wJxo5" Bounds="862,606" />
             <Node Bounds="979,541,77,26" Id="Vqj0rfOxg8KOGJA9QmWldV">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer`1" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="NetworkState" />
               </p:NodeReference>
@@ -481,16 +491,16 @@
             </Node>
             <ControlPoint Id="V2F9FtPh4N6OoR0BfQm70j" Bounds="1052,603" />
             <Node Bounds="106,364,58,26" Id="SQ0swebJQJ4LBaK9HT5JZ0">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer`1" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="Dispose" />
-                <CategoryReference Kind="AssemblyCategory" Name="VideoPlayer`1" NeedsToBeDirectParent="true" />
+                <CategoryReference Kind="AssemblyCategory" Name="VideoPlayer" NeedsToBeDirectParent="true" />
               </p:NodeReference>
               <Pin Id="BPRhnzFeuJhN3aUZqLJYG8" Name="Input" Kind="StateInputPin" />
               <Pin Id="M3CzgE1qUpJPOjJnkwBbJT" Name="Output" Kind="StateOutputPin" />
             </Node>
             <Node Bounds="1214,536,62,26" Id="ScKXzRSVKOgLjGW9TUZhvt">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer`1" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="ErrorCode" />
               </p:NodeReference>
@@ -502,13 +512,21 @@
             <ControlPoint Id="KFIVXUUSquHLEYhba7iYRm" Bounds="493,324" />
             <ControlPoint Id="MLeusPLF483LwbWh5TV3k8" Bounds="480,300" />
             <ControlPoint Id="QMwCCliwohwNLrW5yS5fpD" Bounds="471,269" />
+            <Node Bounds="221,158,83,26" Id="RMAX4MPuqlsQYsV09jmyOb">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.SkiaDeviceProvider" LastSymbolSource="VL.Video.MediaFoundation.dll">
+                <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+                <CategoryReference Kind="AssemblyCategory" Name="SkiaDeviceProvider" />
+                <Choice Kind="OperationCallFlag" Name="Create" />
+              </p:NodeReference>
+              <Pin Id="AdSB1F95hruP7mtp5LOBin" Name="Node Context" Kind="InputPin" />
+              <Pin Id="HcLyZGnjmswLEGfKsZGnhK" Name="Output" Kind="StateOutputPin" />
+            </Node>
           </Canvas>
           <ProcessDefinition Id="PKXjpVO2XO6PsNqnuWyZpN">
             <Fragment Id="G8RElS96Zs8PCF5i5NGSRi" Patch="TQc0bfDaHcnOzoxI15ZvAc" Enabled="true" />
             <Fragment Id="Kthxevkk5yIN5I0LJVD0NZ" Patch="L1dpNboKECsPX80Pk1zApt" Enabled="true" />
           </ProcessDefinition>
           <Slot Id="IZHFHiQgxnXODHaUfVgqgw" Name="VideoPlayer" />
-          <Link Id="N5t9y6TnpD2MFWpxXRmBZF" Ids="KuxKmWXZ3YsNG076m0a4k1,KBA4ozIZ1hlLDmgrZpVSBe" />
           <Link Id="AdVCYX2m5dOO8ZDdsdhnev" Ids="D1kVmp3cRKmPT81O4fTI7G,KuxKmWXZ3YsNG076m0a4k1" IsHidden="true" />
           <Link Id="UALbaz81VRiNi5aqcWj0Q4" Ids="IFEOhPZ46VgQXnYljKQbfi,Q5GlOhudgMFPHZ1cEsuaks" />
           <Link Id="F6hSDH3n2u5NyuQi9zeTp3" Ids="Q5GlOhudgMFPHZ1cEsuaks,R2nqxzVlta8L9LE6UptWi5" />
@@ -564,6 +582,8 @@
             <Pin Id="APcVyagOpeOLc2fNiJXc8M" Name="Error Code" Kind="OutputPin" Bounds="1613,524" />
           </Patch>
           <Patch Id="RMSFBSQXkURPpQkEkDBXXp" Name="Dispose" ParticipatingElements="SQ0swebJQJ4LBaK9HT5JZ0" />
+          <Link Id="Otgs4MZmPAyPorrK6FOAfX" Ids="KuxKmWXZ3YsNG076m0a4k1,AdSB1F95hruP7mtp5LOBin" />
+          <Link Id="ETPgvx2pIWeMKpQPAaCJrn" Ids="HcLyZGnjmswLEGfKsZGnhK,NEQ42bZfW2jPTrJGRouOiV" />
         </Patch>
       </Node>
       <!--
@@ -670,10 +690,10 @@
           <Canvas Id="MMlBRuWGFpTOAWEQ7QLErp" CanvasType="Group">
             <ControlPoint Id="C7vKWduj8HFM5d0nEVS6Uc" Bounds="334,186" />
             <Node Bounds="257,816,88,26" Id="JloOtnUOqvTObxRWSYQlN8">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture`1" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="Update" />
-                <CategoryReference Kind="AssemblyCategory" Name="VideoCapture`1" NeedsToBeDirectParent="true" />
+                <CategoryReference Kind="AssemblyCategory" Name="VideoCapture" NeedsToBeDirectParent="true" />
               </p:NodeReference>
               <Pin Id="HuAJJKX97FeNySiA0VjZ29" Name="Input" Kind="StateInputPin" />
               <Pin Id="CurNhE7DCzVMLfzhwa6uC0" Name="Wait Time In Milliseconds" Kind="InputPin" />
@@ -685,7 +705,7 @@
             <Pad Id="RvPvKYE5zxgNNPtV0n45Ad" SlotId="IlZGeqNOjdOLNiqwHlUTTA" Bounds="258,309" />
             <ControlPoint Id="RDAocBocemhPEwiRsbBdq8" Bounds="576,552" />
             <Node Bounds="256,426,65,26" Id="BEJi7ODGmbeO0mQZm5S5nn">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture`1" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="SetDevice" />
               </p:NodeReference>
@@ -694,9 +714,10 @@
               <Pin Id="HXEdAmANlaJLWdespX736x" Name="Output" Kind="StateOutputPin" />
             </Node>
             <Node Bounds="254,500" Id="EYTAjKHifMLM1HdnQJ7naB">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture`1" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="SetEnabled" />
+                <CategoryReference Kind="AssemblyCategory" Name="VideoCapture" NeedsToBeDirectParent="true" />
               </p:NodeReference>
               <Pin Id="GYm5HSD61MnPXRT1XYdFJ0" Name="Input" Kind="StateInputPin" />
               <Pin Id="SsI0Q2i89YGPbysPYOsbu2" Name="Value" Kind="InputPin" />
@@ -704,7 +725,7 @@
             </Node>
             <ControlPoint Id="HQLpCurxt2RLceds6ZHUFG" Bounds="699,474" />
             <Node Bounds="455,916,65,26" Id="BzLGJwJEaqCOUIT3Fx4c7v">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture`1" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="DiscardedFrames" />
               </p:NodeReference>
@@ -713,16 +734,16 @@
               <Pin Id="SoykqUKZbdAPNmoQddC8pm" Name="Discarded Frames" Kind="OutputPin" />
             </Node>
             <Node Bounds="180,384" Id="InwlR33CPT5MCHyaCp4qGW">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture`1" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="Dispose" />
-                <CategoryReference Kind="AssemblyCategory" Name="VideoCapture`1" NeedsToBeDirectParent="true" />
+                <CategoryReference Kind="AssemblyCategory" Name="VideoCapture" NeedsToBeDirectParent="true" />
               </p:NodeReference>
               <Pin Id="Hdy7wlAaHAiQQY1WbY5oTX" Name="Input" Kind="StateInputPin" />
               <Pin Id="NJtM23OCnFENuQWlOIskSc" Name="Output" Kind="StateOutputPin" />
             </Node>
             <Node Bounds="667,916,65,26" Id="TFwEQBWdZ31PgEBcwUW9BN">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture`1" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="ActualFPS" />
               </p:NodeReference>
@@ -787,7 +808,7 @@
             </Node>
             <ControlPoint Id="Apb23HrFzpjL0EuIhF8GQE" Bounds="814,455" />
             <Node Bounds="255,581" Id="J28S6hz2MqKNtceSh7ugjb">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture`1" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="SetPreferredSize" />
               </p:NodeReference>
@@ -796,7 +817,7 @@
               <Pin Id="Sfyzg2IRPmcLVN4UQVDgKP" Name="Output" Kind="StateOutputPin" />
             </Node>
             <Node Bounds="254,643,65,26" Id="S2pPzAzzncIOJrieqvxBx9">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture`1" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="SetPreferredFps" />
               </p:NodeReference>
@@ -805,7 +826,7 @@
               <Pin Id="TPNbumnK0lgN0rqJzSxsCb" Name="Output" Kind="StateOutputPin" />
             </Node>
             <Node Bounds="255,703,103,26" Id="Dew0p2OAP8lPDR7g4UGDQl">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture`1" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="SetCameraControls" />
               </p:NodeReference>
@@ -815,7 +836,7 @@
             </Node>
             <ControlPoint Id="TCK4tAexlZKOKjBywO1hkC" Bounds="467,642" />
             <Node Bounds="255,763,94,26" Id="IvMwI4qG3lMLoHTgFqQnoW">
-              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture`1" LastSymbolSource="VL.Video.MediaFoundation.dll">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="SetVideoControls" />
               </p:NodeReference>
@@ -824,7 +845,16 @@
               <Pin Id="EqiQkOQpu4NNu3PPENrLaA" Name="Output" Kind="StateOutputPin" />
             </Node>
             <ControlPoint Id="F1Xtcl3OkLnLKgAEs6Xj1s" Bounds="499,670" />
-            <ControlPoint Id="UmqGCixEU46NHKH4HZuBCz" Bounds="259,168" />
+            <Node Bounds="264,226,65,26" Id="VIbWZAVJYPEMeM6UCjsaTZ">
+              <p:NodeReference LastCategoryFullName="VL.MediaFoundation.VideoCapture" LastSymbolSource="VL.Video.MediaFoundation.dll">
+                <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+                <CategoryReference Kind="AssemblyCategory" Name="VideoCapture" />
+                <Choice Kind="OperationCallFlag" Name="Create" />
+              </p:NodeReference>
+              <Pin Id="V1oNozDz9bXMUq5p128DwC" Name="Device Provider" Kind="InputPin" />
+              <Pin Id="Hd79Wlxfd3QP3wtwFJbC7E" Name="Output" Kind="StateOutputPin" />
+            </Node>
+            <ControlPoint Id="PQIHADKIDoHMIh6lEZFc0b" Bounds="267,143" />
           </Canvas>
           <ProcessDefinition Id="McYGPEutkAGLyjEBWuWFGs">
             <Fragment Id="GFPM4ukIfrdMSEDBXqURW6" Patch="FqVG7zqavq2Nj01D7RGI1j" Enabled="true" />
@@ -869,10 +899,11 @@
           <Link Id="E1UelxQuPR9MRcJT5VkUwG" Ids="EqiQkOQpu4NNu3PPENrLaA,HuAJJKX97FeNySiA0VjZ29" />
           <Link Id="KmqRlC7hAdhOr2MW9wTrjr" Ids="F1Xtcl3OkLnLKgAEs6Xj1s,FI03KRtGFwVLrX4mnq4T1H" />
           <Link Id="NQDsmO2OOquP7Hmf4Wk49p" Ids="OQO4hAbKEKkK97YrO3fJyJ,F1Xtcl3OkLnLKgAEs6Xj1s" IsHidden="true" />
-          <Link Id="S816aLtRVCJPbNLsasGx2t" Ids="UmqGCixEU46NHKH4HZuBCz,RvPvKYE5zxgNNPtV0n45Ad" />
-          <Link Id="SYLIiBTMeffQFDOpmNTrL1" Ids="OuUKfPBlIigMXh9Kjz2TbK,UmqGCixEU46NHKH4HZuBCz" IsHidden="true" />
+          <Link Id="BjDRIcgfQAFODT4NmdZRmB" Ids="Hd79Wlxfd3QP3wtwFJbC7E,RvPvKYE5zxgNNPtV0n45Ad" />
+          <Link Id="UYzyUqCR2x3OpFnJoKt9hY" Ids="PQIHADKIDoHMIh6lEZFc0b,V1oNozDz9bXMUq5p128DwC" />
+          <Link Id="SJB2t8CVCMfMhh9TMv8fpY" Ids="Edgs4JOzKgxLA3JjZy2zu8,PQIHADKIDoHMIh6lEZFc0b" IsHidden="true" />
           <Patch Id="FqVG7zqavq2Nj01D7RGI1j" Name="Create">
-            <Pin Id="OuUKfPBlIigMXh9Kjz2TbK" Name="VideoCapture" Kind="InputPin" />
+            <Pin Id="Edgs4JOzKgxLA3JjZy2zu8" Name="Device Provider" Kind="InputPin" />
           </Patch>
           <Patch Id="Fh7KDEf1DXaPS5I5cXyLPH" Name="Update">
             <Pin Id="JHmsiSSnD12Ogcvisur68g" Name="Device" Kind="InputPin" />
@@ -902,6 +933,134 @@
           <Patch Id="EfrrzbwzFUbMRY4W8JFqKj" Name="Dispose" ParticipatingElements="InwlR33CPT5MCHyaCp4qGW" />
         </Patch>
       </Node>
+      <!--
+
+    ************************ AsTexture ************************
+
+-->
+      <Node Name="AsTexture" Bounds="465,515" Id="R1AUwCLdsdGLvjIFEd4qRt">
+        <p:NodeReference LastCategoryFullName="Primitive" LastSymbolSource="builtin">
+          <Choice Kind="ContainerDefinition" Name="Process" />
+        </p:NodeReference>
+        <Patch Id="CPkm11Z5jy9NsusEW7Bfh6">
+          <Canvas Id="E2adWXCpBRxLGy6NN0CbgZ" CanvasType="Group">
+            <Node Bounds="482,366" Id="D7cZiEXrdmBMzXAscJOlRb">
+              <p:NodeReference LastCategoryFullName="VL.Video.MediaFoundation.StrideConverter" LastSymbolSource="VL.Video.MediaFoundation.dll">
+                <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+                <CategoryReference Kind="AssemblyCategory" Name="StrideConverter" />
+                <Choice Kind="OperationCallFlag" Name="Create" />
+              </p:NodeReference>
+              <Pin Id="ClIUgsLSViePiCkqVYaXuh" Name="Node Context" Kind="InputPin" />
+              <Pin Id="HeywXBWpYJBLX818k5nYnL" Name="Output" Kind="StateOutputPin" />
+            </Node>
+            <Pad Id="NbrAstxJmnbNUl8OBvJ0HR" SlotId="BPSLiOjcFPFLeraEAqLwUp" Bounds="486,446" />
+            <Node Bounds="506,473" Id="Mhs6X6ODPHVPQOvg7BixYB">
+              <p:NodeReference LastCategoryFullName="VL.Video.MediaFoundation.Converter`2" LastSymbolSource="VL.Video.MediaFoundation.dll">
+                <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+                <Choice Kind="OperationCallFlag" Name="Update" />
+                <CategoryReference Kind="AssemblyCategory" Name="Converter`2" NeedsToBeDirectParent="true" />
+              </p:NodeReference>
+              <Pin Id="CXEfdhy9rHPO7f54D4eW63" Name="Input" Kind="StateInputPin" />
+              <Pin Id="Bja0mha6dfkLokAAxCfxb8" Name="Resource" Kind="InputPin" />
+              <Pin Id="IqTQS3ZdE1XQaMsFyrCsNe" Name="Output" Kind="StateOutputPin" />
+              <Pin Id="OKn2gaVFsLKMlRY1SLXlh8" Name="Result" Kind="OutputPin" />
+            </Node>
+            <ControlPoint Id="KytW9vhStXhM1G6YJkHfLT" Bounds="604,420" />
+            <ControlPoint Id="FK4sdpNP8YNNCBdzLDXRz6" Bounds="578,557" />
+            <Node Bounds="448,539" Id="CDvuafLPaxlP3hmL0DLUfl">
+              <p:NodeReference LastCategoryFullName="VL.Video.MediaFoundation.StrideConverter" LastSymbolSource="VL.Video.MediaFoundation.dll">
+                <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+                <CategoryReference Kind="AssemblyCategory" Name="StrideConverter" />
+                <Choice Kind="OperationCallFlag" Name="Dispose" />
+              </p:NodeReference>
+              <Pin Id="BI2SJqdgGFuPPQofISF24u" Name="Input" Kind="StateInputPin" />
+              <Pin Id="EXbPfySM1n9LsjMw1ulSAV" Name="Output" Kind="StateOutputPin" />
+            </Node>
+          </Canvas>
+          <Patch Id="PQPYS4FqylCL5ZRV9m1ara" Name="Create" ParticipatingElements="D7cZiEXrdmBMzXAscJOlRb" />
+          <Patch Id="GMKu51U9gT2MEMatYU6885" Name="Update">
+            <Pin Id="NraavT8RS3XM8UJgJtiz9Y" Name="Native Texture" Kind="InputPin" Bounds="607,418" />
+            <Pin Id="OODSCpZIugcNpIdvFskZur" Name="Result" Kind="OutputPin" Bounds="578,557" />
+          </Patch>
+          <ProcessDefinition Id="C8hICkYmlmvM7AJgO0i8uC">
+            <Fragment Id="JlOyql4EqzHLkZpmeISbxY" Patch="PQPYS4FqylCL5ZRV9m1ara" Enabled="true" />
+            <Fragment Id="PrkiuyivctOLB3DVnIZJt3" Patch="GMKu51U9gT2MEMatYU6885" Enabled="true" />
+          </ProcessDefinition>
+          <Slot Id="BPSLiOjcFPFLeraEAqLwUp" Name="Output" />
+          <Link Id="KX1NINkVSvlQJz7XG51ZmV" Ids="HeywXBWpYJBLX818k5nYnL,NbrAstxJmnbNUl8OBvJ0HR" />
+          <Link Id="DT5YUZu8u4mLYxBH5dYXYI" Ids="NbrAstxJmnbNUl8OBvJ0HR,CXEfdhy9rHPO7f54D4eW63" />
+          <Link Id="K6h8JrYvaQcPl18kz3sbuW" Ids="NraavT8RS3XM8UJgJtiz9Y,KytW9vhStXhM1G6YJkHfLT" IsHidden="true" />
+          <Link Id="BOCBHc4JHA3OFCkTYKsL1O" Ids="OKn2gaVFsLKMlRY1SLXlh8,FK4sdpNP8YNNCBdzLDXRz6" />
+          <Link Id="PJAUgAcD6wUPgh4Gp2ElBK" Ids="FK4sdpNP8YNNCBdzLDXRz6,OODSCpZIugcNpIdvFskZur" IsHidden="true" />
+          <Link Id="PFPNy50kubFQGye1e6MwOF" Ids="KytW9vhStXhM1G6YJkHfLT,Bja0mha6dfkLokAAxCfxb8" />
+          <Link Id="DAtdHjfM8ccQWDIBKQd0dt" Ids="NbrAstxJmnbNUl8OBvJ0HR,BI2SJqdgGFuPPQofISF24u" />
+          <Patch Id="Fcnh0xiVEaaL61mtSEdwnJ" Name="Dispose" ParticipatingElements="CDvuafLPaxlP3hmL0DLUfl" />
+        </Patch>
+      </Node>
+      <!--
+
+    ************************ AsSKImage ************************
+
+-->
+      <Node Name="AsSKImage" Bounds="463,563" Id="QyxPEZ2CEa5NmGvUge4Bon">
+        <p:NodeReference LastCategoryFullName="Primitive" LastSymbolSource="builtin">
+          <Choice Kind="ContainerDefinition" Name="Process" />
+        </p:NodeReference>
+        <Patch Id="SjtoxjmDen8NOUl4W3f3A8">
+          <Canvas Id="OPLyx9yF4gKOBsuBPk7Kjk" CanvasType="Group">
+            <Node Bounds="482,366" Id="QIYgs5SmeADMK2h9wsloNz">
+              <p:NodeReference LastCategoryFullName="VL.Video.MediaFoundation.SkiaConverter" LastSymbolSource="VL.Video.MediaFoundation.dll">
+                <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+                <Choice Kind="OperationCallFlag" Name="Create" />
+                <CategoryReference Kind="AssemblyCategory" Name="SkiaConverter" NeedsToBeDirectParent="true" />
+              </p:NodeReference>
+              <Pin Id="O5X8CcxxRvZOSmCrZTaOcg" Name="Node Context" Kind="InputPin" />
+              <Pin Id="R9cEPkmGEwgNy4K7cnrEjN" Name="Output" Kind="StateOutputPin" />
+            </Node>
+            <Pad Id="EAGJ6EUNWv2NI5mPpc3Wsn" SlotId="IuwsPHEZxyMPf7oP2xFBqZ" Bounds="486,446" />
+            <Node Bounds="506,473" Id="ARl3ayWSVJ7P5unYwKGRMY">
+              <p:NodeReference LastCategoryFullName="VL.Video.MediaFoundation.Converter`2" LastSymbolSource="VL.Video.MediaFoundation.dll">
+                <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+                <Choice Kind="OperationCallFlag" Name="Update" />
+                <CategoryReference Kind="AssemblyCategory" Name="Converter`2" NeedsToBeDirectParent="true" />
+              </p:NodeReference>
+              <Pin Id="EAE98ZpTYvwMEPaf8jR2H6" Name="Input" Kind="StateInputPin" />
+              <Pin Id="DoqpX6q2tXLNTdgARUs7cU" Name="Resource" Kind="InputPin" />
+              <Pin Id="Rl9VcVaYropMQkPmYwZNub" Name="Output" Kind="StateOutputPin" />
+              <Pin Id="QBvSCcmEjOcN4Iou6ZNFzS" Name="Result" Kind="OutputPin" />
+            </Node>
+            <ControlPoint Id="L6PAki0zevIMzjbRMf5UXr" Bounds="604,420" />
+            <ControlPoint Id="KfinMLQlGqINHAikMgFBk4" Bounds="578,557" />
+            <Node Bounds="443,541" Id="BHw4QBZMpKlQCNX82YFUNM">
+              <p:NodeReference LastCategoryFullName="VL.Video.MediaFoundation.SkiaConverter" LastSymbolSource="VL.Video.MediaFoundation.dll">
+                <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+                <CategoryReference Kind="AssemblyCategory" Name="SkiaConverter" />
+                <Choice Kind="OperationCallFlag" Name="Dispose" />
+              </p:NodeReference>
+              <Pin Id="Mq8FtGk3qMzNeGxZq10gPy" Name="Input" Kind="StateInputPin" />
+              <Pin Id="Di5vqR2XAPZNQd0gKKSeVu" Name="Output" Kind="StateOutputPin" />
+            </Node>
+          </Canvas>
+          <Patch Id="M9QMeenche0OfjcLRDRNsV" Name="Create" ParticipatingElements="QIYgs5SmeADMK2h9wsloNz" />
+          <Patch Id="P7VvIEVSmk2NrV2eXqtOt5" Name="Update">
+            <Pin Id="ES45JEVpQPXL16jEcp2djf" Name="Native Texture" Kind="InputPin" Bounds="607,418" />
+            <Pin Id="VIFChr8XIRiLXIJf8uInZG" Name="Result" Kind="OutputPin" Bounds="578,557" />
+          </Patch>
+          <ProcessDefinition Id="Sivk9LUj7JqPFUU744bolY">
+            <Fragment Id="K7DXpd6dhtLO8ZNi0OkLut" Patch="M9QMeenche0OfjcLRDRNsV" Enabled="true" />
+            <Fragment Id="ItwGRSY8tYqOBCiTL8saaC" Patch="P7VvIEVSmk2NrV2eXqtOt5" Enabled="true" />
+          </ProcessDefinition>
+          <Slot Id="IuwsPHEZxyMPf7oP2xFBqZ" Name="Output" />
+          <Link Id="CEhmv7De7oFLSs70rgNAOe" Ids="R9cEPkmGEwgNy4K7cnrEjN,EAGJ6EUNWv2NI5mPpc3Wsn" />
+          <Link Id="EaKVFXFoP2JMy1qT4UX5uK" Ids="EAGJ6EUNWv2NI5mPpc3Wsn,EAE98ZpTYvwMEPaf8jR2H6" />
+          <Link Id="ORI8hpRkuCEPamsYZceSdr" Ids="ES45JEVpQPXL16jEcp2djf,L6PAki0zevIMzjbRMf5UXr" IsHidden="true" />
+          <Link Id="VZ0tKIxTjA9NjWHCzvZULx" Ids="QBvSCcmEjOcN4Iou6ZNFzS,KfinMLQlGqINHAikMgFBk4" />
+          <Link Id="TEOzLI8gatBNRKyFovcBtU" Ids="KfinMLQlGqINHAikMgFBk4,VIFChr8XIRiLXIJf8uInZG" IsHidden="true" />
+          <Link Id="CdJv0hTljifMTD01wP7Sk3" Ids="L6PAki0zevIMzjbRMf5UXr,DoqpX6q2tXLNTdgARUs7cU" />
+          <Link Id="Bu7xRNueySXOPqRymrr7Hb" Ids="EAGJ6EUNWv2NI5mPpc3Wsn,Mq8FtGk3qMzNeGxZq10gPy" />
+          <Patch Id="K0vti1pAOyCMqePbt3g3H8" Name="Dispose" ParticipatingElements="BHw4QBZMpKlQCNX82YFUNM" />
+        </Patch>
+      </Node>
     </Canvas>
     <!--
 
@@ -915,133 +1074,113 @@
       </p:NodeReference>
       <Patch Id="USrRMUfaDhjL0OdzMBgq5r">
         <Canvas Id="Se1ptwyWfjpNfHklbJZN3q" CanvasType="Group">
-          <Node Bounds="481,348" Id="UbTFXuWMYWaNxJpik26qJh">
-            <p:NodeReference LastCategoryFullName="Video.MediaFoundation" LastSymbolSource="VL.Video.MediaFoundation.vl">
-              <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
-              <Choice Kind="ProcessAppFlag" Name="VideoIn" />
-            </p:NodeReference>
-            <Pin Id="GFw8X7NkX08MjVRNavkEfj" Name="Device" Kind="InputPin" DefaultValue="Intel(R) RealSense(TM) Depth Camera 435 with RGB Module RGB" />
-            <Pin Id="L9e3TRmklqkLKjA9TK6I1r" Name="Preferred Size" Kind="InputPin" />
-            <Pin Id="PsKmliz491OMS33wdCIKKI" Name="Preferred FPS" Kind="InputPin" DefaultValue="30" />
-            <Pin Id="U16v2rLxwb3OgA39gHi2Br" Name="Camera Controls" Kind="InputPin" />
-            <Pin Id="M7NRiabmEgwLNEIywJVot9" Name="Video Controls" Kind="InputPin" />
-            <Pin Id="HgEkuKbTbzoMrzu4jgvycC" Name="Enabled" Kind="InputPin" />
-            <Pin Id="SfLxrZg41VCNXPx8l3ta0b" Name="Output" Kind="OutputPin" />
-            <Pin Id="E4fbogNXkEkOlSFovNm3LH" Name="Discarded Frames" Kind="OutputPin" />
-            <Pin Id="DOCcldAN3ZjOZC46vpUmQ6" Name="Actual FPS" Kind="OutputPin" />
-            <Pin Id="SxBDIUvztZsMSt8dbgxtph" Name="Supported Formats" Kind="OutputPin" />
-          </Node>
-          <Node Bounds="432,481" Id="VxlTIGPHwEQPPXIKvzu4vJ">
-            <p:NodeReference LastCategoryFullName="Stride.Rendering" LastSymbolSource="VL.Stride.Rendering.ShaderFX.vl">
-              <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
-              <Choice Kind="ProcessAppFlag" Name="FullscreenQuadRenderer" />
-            </p:NodeReference>
-            <Pin Id="JpXcTApE2h8MbLSESR22fX" Name="Transformation" Kind="InputPin" />
-            <Pin Id="RMY5xKnhVIePj0N8eNuIW8" Name="Texture" Kind="InputPin" />
-            <Pin Id="DbtkYNQu9eZPnGeYwf6hge" Name="Sampler" Kind="InputPin" />
-            <Pin Id="AT4aTsM9xvLMfS8l7iACai" Name="Sample Mode" Kind="InputPin" />
-            <Pin Id="Lyi7cie14QXNaxS1gZMijT" Name="Blend State" Kind="InputPin" />
-            <Pin Id="S4nbmPeLEzvO7wDCzT8Sa0" Name="Color" Kind="InputPin" />
-            <Pin Id="GVJvih9ByLqNBaO3g4nQtQ" Name="Rasterizer State" Kind="InputPin" />
-            <Pin Id="Fc9zk8rDaRlM40afJi2txU" Name="Depth Stencil State" Kind="InputPin" />
-            <Pin Id="QzcjfaDp6e6MEXrCDGyRHb" Name="Output" Kind="OutputPin" />
-          </Node>
-          <Node Bounds="447,566" Id="MRvxaUvLkn0NWroDC0Vvkc">
-            <p:NodeReference LastCategoryFullName="Stride" LastSymbolSource="VL.Stride.Engine.vl">
-              <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
-              <Choice Kind="ProcessAppFlag" Name="RenderWindow" />
-            </p:NodeReference>
-            <Pin Id="D1X2ia0javbMaQJXOr1e4O" Name="Bounds" Kind="InputPin" DefaultValue="1026, 552, 786, 432" />
-            <Pin Id="HPm8SStLASsOz2rf03RcCG" Name="Input" Kind="InputPin" />
-            <Pin Id="SihwyHb0l58L4dQns3zo2v" Name="Render View" Kind="InputPin" />
-            <Pin Id="Sud5vNY0R3zN2f3VptGv95" Name="Title" Kind="InputPin" />
-            <Pin Id="UL8F6xgsWi6O17MZRcKM9R" Name="Clear Color" Kind="InputPin" />
-            <Pin Id="Mq6XoRirvWTMgjeSCfbusw" Name="Clear" Kind="InputPin" />
-            <Pin Id="C6BTQaFHNsVMUjTpC9SX2A" Name="Edit Mode" Kind="InputPin" />
-            <Pin Id="AA0GzxOU5CNNTkJjeJujkV" Name="Enable Keyboard Shortcuts" Kind="InputPin" />
-            <Pin Id="Q9nssAomrujNV4RYfCangm" Name="Enabled" Kind="InputPin" />
-            <Pin Id="MrutEQcTzstNX6DDGzrBSY" Name="Present Interval" Kind="InputPin" DefaultValue="Default" />
-            <Pin Id="Q9kUmqDdPjFPv6m1frdF6N" Name="Output" Kind="OutputPin" />
-            <Pin Id="BEMBuiNzlTaQC60JLmxfXT" Name="Client Bounds" Kind="OutputPin" />
-            <Pin Id="PQMULKg30PRLefXITqkE05" Name="Input Source" Kind="OutputPin" />
-            <Pin Id="StwinbOMob6QA5g0k388ut" Name="Back Buffer" Kind="OutputPin" />
-            <Pin Id="MOSSAeU1AB1NRcBzOe2OAc" Name="Depth Buffer" Kind="OutputPin" />
-          </Node>
-          <Node Bounds="831,401" Id="Gr497KrmU7pNooy4YWdGI8">
+          <Node Bounds="283,283" Id="HOnxeJsQr70QM2qgdNQN6G">
             <p:NodeReference LastCategoryFullName="Video.MediaFoundation" LastSymbolSource="VL.Video.MediaFoundation.vl">
               <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
               <Choice Kind="ProcessAppFlag" Name="VideoPlayer" />
             </p:NodeReference>
-            <Pin Id="FjJSpdVGdEjLYg2Ye45bB0" Name="Filename" Kind="InputPin" DefaultValue="C:\Users\elias\Downloads\sintel-1024-surround.mp4" />
-            <Pin Id="IJuVvoEd782MRYdG2tI4mj" Name="Play" Kind="InputPin" />
-            <Pin Id="EIkDT7QFt1HQRMhz9RXGlg" Name="Rate" Kind="InputPin" />
-            <Pin Id="BgzhFRFsWirO9QIV87sFHU" Name="Seek Time" Kind="InputPin" />
-            <Pin Id="HF0AbK5yztROvFnziuvRyu" Name="Seek" Kind="InputPin" />
-            <Pin Id="Ui5FADcBcUsNzPEF4CZLwo" Name="Loop Start Time" Kind="InputPin" />
-            <Pin Id="VF79xvlQRR4OizRtsd8eWM" Name="Loop End Time" Kind="InputPin" />
-            <Pin Id="TmeTyBh6AhpNF5SbofS4MH" Name="Loop" Kind="InputPin" />
-            <Pin Id="RgmrDGoX0ZeLI0FbtyYJQR" Name="Volume" Kind="InputPin" />
-            <Pin Id="SDelqwA9AA3QSgdjslwnqM" Name="Output" Kind="OutputPin" />
-            <Pin Id="VMefrDDGl9NQJ9AzykISeJ" Name="Playing" Kind="OutputPin" />
-            <Pin Id="PJj6qo4rFzxOjMO5EzKJSC" Name="Current Time" Kind="OutputPin" />
-            <Pin Id="MGY1ZM44AmOO0RZhUYhQJG" Name="Duration" Kind="OutputPin" />
-            <Pin Id="IA6B1hWZwBWN9Z3RRwwutK" Name="Ready State" Kind="OutputPin" />
-            <Pin Id="FGrd6syXwCoMuAyZatcygU" Name="Error Code" Kind="OutputPin" />
+            <Pin Id="A2NgSI30xZpPlvTFZ5RdOR" Name="Filename" Kind="InputPin" DefaultValue="C:\Users\elias\Downloads\sintel-1024-surround.mp4" />
+            <Pin Id="AB56bYXrGRzMk3nnuDjrYI" Name="Play" Kind="InputPin" DefaultValue="True" />
+            <Pin Id="Ek2HqjFqsMWLBZ9wnmaZIe" Name="Rate" Kind="InputPin" />
+            <Pin Id="VwbdmDq6pRWQZy1ZChpgUV" Name="Seek Time" Kind="InputPin" />
+            <Pin Id="GCN5xwg71W3NyrxLWoRcYe" Name="Seek" Kind="InputPin" />
+            <Pin Id="APyEEaQEKKPNGY2HRpUnsM" Name="Loop Start Time" Kind="InputPin" />
+            <Pin Id="LBevDeLnSEVMSIjLJ3UfO7" Name="Loop End Time" Kind="InputPin" />
+            <Pin Id="Jc8AoDZoiT1Qa6uGA0F0up" Name="Loop" Kind="InputPin" />
+            <Pin Id="FRf3Jq6OoYsLKXHd4mDl8d" Name="Volume" Kind="InputPin" />
+            <Pin Id="OeQW78swJsCOzSI6VwQejK" Name="Output" Kind="OutputPin" />
+            <Pin Id="UpOnkU6TnXRLqR2UzjegUT" Name="Playing" Kind="OutputPin" />
+            <Pin Id="IqWXMxPUAv8PJDT1vOzxYd" Name="Current Time" Kind="OutputPin" />
+            <Pin Id="HA0zHVBZynlLudQlA3C9H7" Name="Duration" Kind="OutputPin" />
+            <Pin Id="DFxfGCiNd7YMegNdqEpL8k" Name="Ready State" Kind="OutputPin" />
+            <Pin Id="LiniC8EyjY9O6eNETbKCKe" Name="Error Code" Kind="OutputPin" />
           </Node>
-          <Node Bounds="861,431" Id="VAbPn7ROyc4OsSiqlcaGkZ">
+          <Node Bounds="367,466,63,19" Id="JKFeSOK1ithNeQr5zfDBVQ">
             <p:NodeReference LastCategoryFullName="Video.MediaFoundation" LastSymbolSource="VL.Video.MediaFoundation.vl">
               <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
-              <Choice Kind="ProcessAppFlag" Name="VideoPlayer" />
+              <Choice Kind="ProcessAppFlag" Name="AsTexture" />
             </p:NodeReference>
-            <Pin Id="OWSmSLinxOaLKkNtHOdTGi" Name="Filename" Kind="InputPin" DefaultValue="C:\Users\elias\Downloads\sintel-1024-surround.mp4" />
-            <Pin Id="QZ6shtquXIwLt4XPqnxXUE" Name="Play" Kind="InputPin" />
-            <Pin Id="FRz06IBzuXDOuX2fXO5ENl" Name="Rate" Kind="InputPin" />
-            <Pin Id="Nqo3k5wM3SVMThlVXOjfvB" Name="Seek Time" Kind="InputPin" />
-            <Pin Id="JEdqyH0QydfPHCam1kfTuh" Name="Seek" Kind="InputPin" />
-            <Pin Id="U8HZpONIlp3L1k5hlxVp1S" Name="Loop Start Time" Kind="InputPin" />
-            <Pin Id="MUVPMCRAW8SP6aD8hP0XwJ" Name="Loop End Time" Kind="InputPin" />
-            <Pin Id="PM40eK28WdrL6TIT5gZEyb" Name="Loop" Kind="InputPin" />
-            <Pin Id="NQ7HEGpOnslNpvFryX3FfL" Name="Volume" Kind="InputPin" />
-            <Pin Id="BGpWMMGOkRpLKbIhMk2wjD" Name="Output" Kind="OutputPin" />
-            <Pin Id="ISWuwVIPTfOOp15wf3RpS9" Name="Playing" Kind="OutputPin" />
-            <Pin Id="Enn4lJYaYARLcMAWDHWGHn" Name="Current Time" Kind="OutputPin" />
-            <Pin Id="JYF46fRWTYmLbhoDjPOTL7" Name="Duration" Kind="OutputPin" />
-            <Pin Id="N4m9Jzn7jsjMvKiqnDg3bq" Name="Ready State" Kind="OutputPin" />
-            <Pin Id="G2IsXhIWfBWO2LXNrWG8Oo" Name="Error Code" Kind="OutputPin" />
+            <Pin Id="PhYYauox9bWMF1yJOPOBd0" Name="Native Texture" Kind="InputPin" />
+            <Pin Id="TPfrk1fOPfkNCPtguFP0T0" Name="Result" Kind="OutputPin" />
           </Node>
-          <Node Bounds="891,461" Id="M769OcdYpEVOFCUF3Is8GL">
+          <Pad Id="FqFtXUvkrATMQoMrnWQQzh" Comment="" Bounds="361,574,190,132" ShowValueBox="true" isIOBox="true" />
+          <Pad Id="MrlqmCej1rALyD0jcdUjaf" Comment="Seek" Bounds="417,205,35,35" ShowValueBox="true" isIOBox="true" Value="False">
+            <p:TypeAnnotation>
+              <Choice Kind="TypeFlag" Name="Boolean" />
+              <FullNameCategoryReference ID="Primitive" />
+            </p:TypeAnnotation>
+            <p:ValueBoxSettings>
+              <p:buttonmode p:Assembly="VL.UI.Forms" p:Type="VL.HDE.PatchEditor.Editors.ButtonModeEnum">Bang</p:buttonmode>
+            </p:ValueBoxSettings>
+          </Pad>
+          <Node Bounds="637,411,69,19" Id="AjnoYox9IcxO5xXgTGfvoV">
+            <p:NodeReference LastCategoryFullName="Control" LastSymbolSource="CoreLibBasics.vl">
+              <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+              <Choice Kind="ProcessAppFlag" Name="FrameDelay" />
+            </p:NodeReference>
+            <Pin Id="Qm2sDT6eqOyMPvhvslMIhk" Name="Value" Kind="InputPin" />
+            <Pin Id="OFRDDmtRBGLLD5LWgvP70X" Name="Value" Kind="OutputPin" />
+          </Node>
+          <Node Bounds="636,467,63,19" Id="GS8lKdhujXlOoOaTdDRhuk">
             <p:NodeReference LastCategoryFullName="Video.MediaFoundation" LastSymbolSource="VL.Video.MediaFoundation.vl">
               <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
-              <Choice Kind="ProcessAppFlag" Name="VideoPlayer" />
+              <Choice Kind="ProcessAppFlag" Name="AsTexture" />
             </p:NodeReference>
-            <Pin Id="O2oLCHJGdR0QdMli76dOmX" Name="Filename" Kind="InputPin" DefaultValue="C:\Users\elias\Downloads\sintel-1024-surround.mp4" />
-            <Pin Id="AXA0cBtn4QIPXZ4f9iGB3F" Name="Play" Kind="InputPin" />
-            <Pin Id="H5Dq8NfwbQpPIOSpIfaeBW" Name="Rate" Kind="InputPin" />
-            <Pin Id="Kg15nMCpZRzLtY9yuWSRiO" Name="Seek Time" Kind="InputPin" />
-            <Pin Id="Ebac3wwdjH2L84DFnTQJao" Name="Seek" Kind="InputPin" />
-            <Pin Id="KpZi2q93hiwOhH5AwRrzRh" Name="Loop Start Time" Kind="InputPin" />
-            <Pin Id="UTz7iqLo7uAL6A8hMjYoIA" Name="Loop End Time" Kind="InputPin" />
-            <Pin Id="PY2J4mAivsyNklgMwvMOLs" Name="Loop" Kind="InputPin" />
-            <Pin Id="VrIVrE8jXOiMGoD9EXU8F8" Name="Volume" Kind="InputPin" />
-            <Pin Id="M4kSEzqpyCJL6dcS6ZtOYu" Name="Output" Kind="OutputPin" />
-            <Pin Id="P3Em9s9OpjOOWyTT7CevSp" Name="Playing" Kind="OutputPin" />
-            <Pin Id="Sfh2mtrloBCLaDDoAK0PlA" Name="Current Time" Kind="OutputPin" />
-            <Pin Id="AIg3rwrveFkPQbW8SF8Qy7" Name="Duration" Kind="OutputPin" />
-            <Pin Id="LyVmPkwaHkFOXHKRZR7O5W" Name="Ready State" Kind="OutputPin" />
-            <Pin Id="LMULq6CjS2cMX8Nl9Nj5yu" Name="Error Code" Kind="OutputPin" />
+            <Pin Id="DqvFyMM084kNIZoy4LkxiY" Name="Native Texture" Kind="InputPin" />
+            <Pin Id="EIHjcuMGrZ4MemyJh14P52" Name="Result" Kind="OutputPin" />
           </Node>
-          <Node Bounds="676,349" Id="EusygdzybP1Lsm1Xrr6vqp">
-            <p:NodeReference LastCategoryFullName="Animation" LastSymbolSource="CoreLibBasics.vl">
+          <Pad Id="DdmGiioFqETNkDfRFeRYWN" Comment="" Bounds="644,576,190,132" ShowValueBox="true" isIOBox="true" />
+          <Node Bounds="916,410,69,19" Id="Geqil9S8XMeLhNpx1u5hWR">
+            <p:NodeReference LastCategoryFullName="Control" LastSymbolSource="CoreLibBasics.vl">
               <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
-              <Choice Kind="ProcessAppFlag" Name="LFO" />
+              <Choice Kind="ProcessAppFlag" Name="FrameDelay" />
             </p:NodeReference>
-            <Pin Id="VON5vHgsKptP83MvSExkNr" Name="Period" Kind="InputPin" />
-            <Pin Id="DSZU72p9nUkPXiP9XhLFkS" Name="Pause" Kind="InputPin" />
-            <Pin Id="BvpfXdsryi3OeBY07lK5LN" Name="Reset" Kind="ApplyPin" />
-            <Pin Id="H5kA9CxGmDVPmHVIDubiDk" Name="Phase" Kind="OutputPin" />
-            <Pin Id="PAHPLcheokUONyZ5HXBpWJ" Name="On New Cycle" Kind="OutputPin" />
-            <Pin Id="GYOMeuFAZT7Oy2n7Lp0CeE" Name="Cycles" Kind="OutputPin" />
+            <Pin Id="J3ZczNQ4pJdOVfUsrGhg6o" Name="Value" Kind="InputPin" />
+            <Pin Id="DQdppqWFPiaOm747kGu8tE" Name="Value" Kind="OutputPin" />
           </Node>
+          <Node Bounds="915,466,63,19" Id="VPPR3nzWbIHOGUxbYT0WFb">
+            <p:NodeReference LastCategoryFullName="Video.MediaFoundation" LastSymbolSource="VL.Video.MediaFoundation.vl">
+              <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+              <Choice Kind="ProcessAppFlag" Name="AsTexture" />
+            </p:NodeReference>
+            <Pin Id="CzHFi2C9ZnBLSHbAtZqeGm" Name="Native Texture" Kind="InputPin" />
+            <Pin Id="JogcSsK6EipNtSvni4QwEN" Name="Result" Kind="OutputPin" />
+          </Node>
+          <Pad Id="Rnt4nedbwW5LFpYw5Go552" Comment="" Bounds="923,575,190,132" ShowValueBox="true" isIOBox="true" />
+          <Node Bounds="1231,414,69,19" Id="Vwhuu6cNBjwMR2MawFH3Hq">
+            <p:NodeReference LastCategoryFullName="Control" LastSymbolSource="CoreLibBasics.vl">
+              <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+              <Choice Kind="ProcessAppFlag" Name="FrameDelay" />
+            </p:NodeReference>
+            <Pin Id="NmvZPdO2URQOnYz9Rd9eyT" Name="Value" Kind="InputPin" />
+            <Pin Id="RcHBkUDRyP9MpdXJ5VrLtF" Name="Value" Kind="OutputPin" />
+          </Node>
+          <Node Bounds="1230,470,63,19" Id="PNoNIP6EYXzOwHYPMmOox3">
+            <p:NodeReference LastCategoryFullName="Video.MediaFoundation" LastSymbolSource="VL.Video.MediaFoundation.vl">
+              <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+              <Choice Kind="ProcessAppFlag" Name="AsTexture" />
+            </p:NodeReference>
+            <Pin Id="CcQ8l01YgnIMxhDUl4O4B6" Name="Native Texture" Kind="InputPin" />
+            <Pin Id="BVVyJ5gk2OSNSak6Q2Toc5" Name="Result" Kind="OutputPin" />
+          </Node>
+          <Pad Id="RPSnqHfFFmfMDUa9ZXXcne" Comment="" Bounds="1238,579,190,132" ShowValueBox="true" isIOBox="true" />
+          <Node Bounds="1545,421,69,19" Id="IDN8kTGI6XHMFWkAo6Gtiu">
+            <p:NodeReference LastCategoryFullName="Control" LastSymbolSource="CoreLibBasics.vl">
+              <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+              <Choice Kind="ProcessAppFlag" Name="FrameDelay" />
+            </p:NodeReference>
+            <Pin Id="MSZILXcC4LvLb1zl07Ot8O" Name="Value" Kind="InputPin" />
+            <Pin Id="Jqt0yjB4B9LObRTBgWTZng" Name="Value" Kind="OutputPin" />
+          </Node>
+          <Node Bounds="1544,477,63,19" Id="BfUZvGvrgsHLnGqyCiQMJk">
+            <p:NodeReference LastCategoryFullName="Video.MediaFoundation" LastSymbolSource="VL.Video.MediaFoundation.vl">
+              <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+              <Choice Kind="ProcessAppFlag" Name="AsTexture" />
+            </p:NodeReference>
+            <Pin Id="EJvacnuLTWDORiHA5IVzjD" Name="Native Texture" Kind="InputPin" />
+            <Pin Id="NIYkxkF7bbaMlIRAu1Cwjp" Name="Result" Kind="OutputPin" />
+          </Node>
+          <Pad Id="CcTAq1jH0K7PGE6KK7Mnwh" Comment="" Bounds="1552,586,190,132" ShowValueBox="true" isIOBox="true" />
         </Canvas>
         <Patch Id="DvqzELwRyk2OL6h7rxly3l" Name="Create" />
         <Patch Id="IoJZQS932QyLWsZGhjzp0D" Name="Update" />
@@ -1049,13 +1188,26 @@
           <Fragment Id="PQNpZ7qz6YkPD2NrICmVVK" Patch="DvqzELwRyk2OL6h7rxly3l" Enabled="true" />
           <Fragment Id="SyhRvYbzR4aOi9tKWwNS1L" Patch="IoJZQS932QyLWsZGhjzp0D" Enabled="true" />
         </ProcessDefinition>
-        <Link Id="FoYeZqjgW4pPXPXKNN8JRu" Ids="SfLxrZg41VCNXPx8l3ta0b,RMY5xKnhVIePj0N8eNuIW8" />
-        <Link Id="TTyfb5XdIvfNvXdaGx2FVz" Ids="QzcjfaDp6e6MEXrCDGyRHb,HPm8SStLASsOz2rf03RcCG" />
+        <Link Id="NmsuV7WoK2KNLY1cac1nzG" Ids="OeQW78swJsCOzSI6VwQejK,PhYYauox9bWMF1yJOPOBd0" />
+        <Link Id="LPT5lS9isBbOe0j5oo6leG" Ids="TPfrk1fOPfkNCPtguFP0T0,FqFtXUvkrATMQoMrnWQQzh" />
+        <Link Id="PqzaFQYQ4ZYLJQpe4n9Hlu" Ids="MrlqmCej1rALyD0jcdUjaf,GCN5xwg71W3NyrxLWoRcYe" />
+        <Link Id="Vdr41gOBK1sMzZpr51jiob" Ids="OeQW78swJsCOzSI6VwQejK,Qm2sDT6eqOyMPvhvslMIhk" />
+        <Link Id="KwXx4sUJVpPMstQ0RseVKz" Ids="OFRDDmtRBGLLD5LWgvP70X,DqvFyMM084kNIZoy4LkxiY" />
+        <Link Id="Qf2505pXjrfPGpeI9H1dQd" Ids="EIHjcuMGrZ4MemyJh14P52,DdmGiioFqETNkDfRFeRYWN" />
+        <Link Id="Lv8Dc4U4C2tOxixHNYaAJ0" Ids="DQdppqWFPiaOm747kGu8tE,CzHFi2C9ZnBLSHbAtZqeGm" />
+        <Link Id="LnG1Q8G7tIVMJduNal2rTe" Ids="JogcSsK6EipNtSvni4QwEN,Rnt4nedbwW5LFpYw5Go552" />
+        <Link Id="KOAheGEeQSXQYu6mbo03r9" Ids="OFRDDmtRBGLLD5LWgvP70X,J3ZczNQ4pJdOVfUsrGhg6o" />
+        <Link Id="DCGo65GzMH9Nd8N1CrdWa7" Ids="RcHBkUDRyP9MpdXJ5VrLtF,CcQ8l01YgnIMxhDUl4O4B6" />
+        <Link Id="SJb0r8jjC5TP1MihOzd3Tg" Ids="BVVyJ5gk2OSNSak6Q2Toc5,RPSnqHfFFmfMDUa9ZXXcne" />
+        <Link Id="POrflBGrIGEQIJox0c727q" Ids="DQdppqWFPiaOm747kGu8tE,NmvZPdO2URQOnYz9Rd9eyT" />
+        <Link Id="PQCpG6JkzaEMXEPEiMexgw" Ids="Jqt0yjB4B9LObRTBgWTZng,EJvacnuLTWDORiHA5IVzjD" />
+        <Link Id="MuZamxbsE8HQTCshSowRwv" Ids="NIYkxkF7bbaMlIRAu1Cwjp,CcTAq1jH0K7PGE6KK7Mnwh" />
+        <Link Id="JlcGh1vmimmONEml1GSYp7" Ids="RcHBkUDRyP9MpdXJ5VrLtF,MSZILXcC4LvLb1zl07Ot8O" />
       </Patch>
     </Node>
   </Patch>
-  <NugetDependency Id="LozAUHC3yMPOTrviaKMV0q" Location="VL.Stride.Windows" Version="2021.4.0-0455-gf5a76a21e8" />
+  <NugetDependency Id="LozAUHC3yMPOTrviaKMV0q" Location="VL.Stride.Windows" Version="2021.4.0-0458-g12f67edc27" />
   <PlatformDependency Id="QoeqsqOSs36P831LYwJ2F5" Location="./src/bin/Debug/net472/VL.Video.MediaFoundation.dll" />
   <NodeFactoryDependency Id="IMKEckb6PLINiWhI9EoUMQ" Location="VL.Video.MediaFoundation.ControlNodes" IsForward="true" />
-  <NugetDependency Id="Fu7YLYsk4ADP61CvbY6U0p" Location="VL.Stride" Version="2021.4.0-0455-gf5a76a21e8" />
+  <NugetDependency Id="Fu7YLYsk4ADP61CvbY6U0p" Location="VL.Stride" Version="2021.4.0-0458-g12f67edc27" />
 </Document>

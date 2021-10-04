@@ -1,27 +1,34 @@
 ﻿using SharpDX.Direct3D11;
 using SharpDX.DXGI;
 using SkiaSharp;
+using System;
 using VL.Core;
-using VL.Lib.Basics.Resources;
 using VL.Skia;
 using VL.Skia.Egl;
 
 namespace VL.Video.MediaFoundation
 {
-    class SkiaConverter
+    public class SkiaConverter : Converter<Texture2D, SKImage>
     {
         private readonly RenderContext renderContext;
 
         public SkiaConverter(NodeContext nodeContext)
+            : base(nodeContext)
         {
             renderContext = RenderContext.ForCurrentThread();
         }
 
-        public SKImage AsImage(Texture2D nativeTexture)
+        public override void Dispose()
+        {
+            base.Dispose();
+            renderContext.Dispose();
+        }
+
+        protected override SKImage Convert(Texture2D resource, IDisposable resourceHandle)
         {
             var eglContext = renderContext.EglContext;
             var eglDisplay = eglContext.Dislpay;
-            var eglImage = eglContext.CreateImageFromD3D11Texture(nativeTexture.NativePointer);
+            var eglImage = eglContext.CreateImageFromD3D11Texture(resource.NativePointer);
 
             uint textureId = 0;
             NativeGles.glGenTextures(1, ref textureId);
@@ -29,7 +36,7 @@ namespace VL.Video.MediaFoundation
             NativeGles.glEGLImageTargetTexture2DOES(NativeGles.GL_TEXTURE_2D, eglImage);
             NativeGles.glBindTexture(NativeGles.GL_TEXTURE_2D, 0);
 
-            var description = nativeTexture.Description;
+            var description = resource.Description;
             var colorType = GetColorType(description.Format);
             var glInfo = new GRGlTextureInfo(
                 id: textureId,
@@ -53,11 +60,8 @@ namespace VL.Video.MediaFoundation
                 {
                     NativeGles.glDeleteTextures(1, ref textureId);
                     eglImage.Dispose();
-                    nativeTexture.Release();
+                    resourceHandle.Dispose();
                 });
-
-            if (image != null)
-                nativeTexture.AddRef();
 
             return image;
         }

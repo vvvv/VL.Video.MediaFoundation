@@ -4,41 +4,34 @@ using Stride.Engine;
 using Stride.Graphics;
 using Stride.Rendering;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VL.Core;
 using VL.Lib.Basics.Resources;
 using VL.Stride;
 
 namespace VL.Video.MediaFoundation
 {
-    class StrideConverter
+    public class StrideConverter : Converter<Texture2D, Texture>
     {
         private readonly IResourceHandle<RenderDrawContext> renderDrawContextHandle;
 
         public StrideConverter(NodeContext nodeContext)
+            : base(nodeContext)
         {
             renderDrawContextHandle = nodeContext.GetGameProvider()
                 .Bind(g => RenderContext.GetShared(g.Services).GetThreadContext())
                 .GetHandle() ?? throw new ServiceNotFoundException(typeof(IResourceProvider<Game>));
         }
 
-        public Texture AsTexture(Texture2D nativeTexture)
+        public override void Dispose()
         {
-            if (nativeTexture is null)
-                return null;
+            base.Dispose();
+            renderDrawContextHandle.Dispose();
+        }
 
-            var texture = SharpDXInterop.CreateTextureFromNative(renderDrawContextHandle.Resource.GraphicsDevice, nativeTexture, takeOwnership: false);
-            if (texture != null)
-            {
-                nativeTexture.AddRef();
-                texture.Destroyed += (s, e) =>
-                {
-                    nativeTexture.Release();
-                };
-            }
+        protected override Texture Convert(Texture2D resource, IDisposable resourceHandle)
+        {
+            var texture = SharpDXInterop.CreateTextureFromNative(renderDrawContextHandle.Resource.GraphicsDevice, resource, takeOwnership: true);
+            resourceHandle.DisposeBy(texture);
             return texture;
         }
     }
