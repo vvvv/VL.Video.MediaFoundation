@@ -7,7 +7,7 @@
     <OutputPath></OutputPath>
 
     <Year>$([System.DateTime]::Now.ToString('yyyy'))</Year>
-    <VersionPrefix>1.0.0</VersionPrefix>
+    <VersionPrefix>1.0.1</VersionPrefix>
     <VersionSuffix></VersionSuffix>
 
     <!-- Passed to vvvv.exe when starting from within VS -->
@@ -40,7 +40,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="..\**\*.vl">
+    <Content Include="..\help\*.*">
       <PackagePath>%(RecursiveDir)%(Filename)%(Extension)</PackagePath>
     </Content>
   </ItemGroup>
