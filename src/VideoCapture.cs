@@ -11,7 +11,7 @@ using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using VL.Lib.Basics.Resources;
 
-namespace VL.MediaFoundation
+namespace VL.Video.MediaFoundation
 {
     // Good source: https://stackoverflow.com/questions/40913196/how-to-properly-use-a-hardware-accelerated-media-foundation-source-reader-to-dec
     public sealed partial class VideoCapture : IDisposable
@@ -19,9 +19,9 @@ namespace VL.MediaFoundation
         private static readonly Guid s_IID_ID3D11Texture2D = new Guid("6f15aaf2-d208-4e89-9ab4-489535d34f9c");
 
         private readonly SerialDisposable deviceSubscription = new SerialDisposable();
-        private readonly Producing<Texture2D> output = new Producing<Texture2D>();
+        private readonly Producing<VideoFrame> output = new Producing<VideoFrame>();
         private readonly DeviceProvider deviceProvider;
-        private BlockingCollection<Texture2D> videoFrames;
+        private BlockingCollection<VideoFrame> videoFrames;
         private string deviceSymbolicLink;
         private Int2 preferredSize;
         private float preferredFps;
@@ -106,7 +106,7 @@ namespace VL.MediaFoundation
             }
         }
 
-        public Texture2D CurrentVideoFrame
+        public VideoFrame CurrentVideoFrame
         {
             get => output.Resource;
         }
@@ -114,7 +114,7 @@ namespace VL.MediaFoundation
         public int DiscardedFrames => discardedFrames;
         public float ActualFPS => actualFps;
 
-        public Texture2D Update(int waitTimeInMilliseconds)
+        public VideoFrame Update(int waitTimeInMilliseconds)
         {
             if (enabled)
             {
@@ -149,7 +149,7 @@ namespace VL.MediaFoundation
 
             IDisposable StartNewCapture()
             {
-                var videoFrames = new BlockingCollection<Texture2D>(boundedCapacity: 1);
+                var videoFrames = new BlockingCollection<VideoFrame>(boundedCapacity: 1);
 
                 var pollTask = Task.Run(() =>
                 {
@@ -216,20 +216,20 @@ namespace VL.MediaFoundation
                             continue;
                         }
 
-                        using var buffer = sample.BufferCount == 1 ? sample.GetBufferByIndex(0) : sample.ConvertToContiguousBuffer();
-                        using var dxgiBuffer = buffer.QueryInterfaceOrNull<DXGIBuffer>();
+                        var buffer = sample.BufferCount == 1 ? sample.GetBufferByIndex(0) : sample.ConvertToContiguousBuffer();
+                        var dxgiBuffer = buffer.QueryInterfaceOrNull<DXGIBuffer>();
                         if (dxgiBuffer != null)
                         {
                             dxgiBuffer.GetResource(s_IID_ID3D11Texture2D, out var pTexture);
-                            var texture = new LinkedTexture2D(pTexture, new CompositeDisposable(dxgiBuffer, sample));
+                            var texture = new Texture2D(pTexture);
+                            var frame = new VideoFrame(texture, new CompositeDisposable(texture, dxgiBuffer, buffer, sample));
                             try
                             {
-                                Trace.TraceInformation(pTexture.ToString());
-                                videoFrames.Add(texture);
+                                videoFrames.Add(frame);
                             }
                             catch (InvalidOperationException)
                             {
-                                texture.Dispose();
+                                frame.Dispose();
                             }
                         }
                         else
@@ -264,7 +264,6 @@ namespace VL.MediaFoundation
                         pollTask?.Dispose();
                         pollTask = default;
                         videoFrames.Dispose();
-                        videoFrames = default;
                     }
                 });
             }
@@ -273,9 +272,9 @@ namespace VL.MediaFoundation
         void FetchCurrentVideoFrame(int waitTimeInMilliseconds)
         {
             // Fetch the texture
-            if (videoFrames != null && videoFrames.TryTake(out var texture, waitTimeInMilliseconds))
+            if (videoFrames != null && videoFrames.TryTake(out var frame, waitTimeInMilliseconds))
             {
-                output.Resource = texture;
+                output.Resource = frame;
             }
         }
 

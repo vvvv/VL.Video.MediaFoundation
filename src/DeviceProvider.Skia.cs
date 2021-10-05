@@ -2,7 +2,7 @@
 using VL.Core;
 using VL.Skia;
 
-namespace VL.MediaFoundation
+namespace VL.Video.MediaFoundation
 {
     public class SkiaDeviceProvider : DeviceProvider
     {

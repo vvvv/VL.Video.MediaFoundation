@@ -1,7 +1,7 @@
 ﻿using SharpDX.Direct3D11;
 using System;
 
-namespace VL.MediaFoundation
+namespace VL.Video.MediaFoundation
 {
     public abstract class DeviceProvider : IDisposable
     {

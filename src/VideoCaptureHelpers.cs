@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using VL.Core;
 
-namespace VL.MediaFoundation
+namespace VL.Video.MediaFoundation
 {
     public static class VideoCaptureHelpers
     {

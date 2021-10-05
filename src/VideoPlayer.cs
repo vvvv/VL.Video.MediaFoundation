@@ -8,7 +8,7 @@ using System.Diagnostics;
 using VL.Core;
 using VL.Lib.Basics.Resources;
 
-namespace VL.MediaFoundation
+namespace VL.Video.MediaFoundation
 {
     // Good source: https://stackoverflow.com/questions/40913196/how-to-properly-use-a-hardware-accelerated-media-foundation-source-reader-to-dec
     public sealed class VideoPlayer : IDisposable
@@ -18,7 +18,7 @@ namespace VL.MediaFoundation
         private readonly MediaEngine engine;
         private Size2 renderTargetSize;
         private long presentationTimeTicks;
-        private readonly Producing<Texture2D> output = new Producing<Texture2D>();
+        private readonly Producing<VideoFrame> output = new Producing<VideoFrame>();
 
         public VideoPlayer(DeviceProvider deviceProvider)
         {
@@ -55,7 +55,6 @@ namespace VL.MediaFoundation
 
         private void Engine_PlaybackEvent(MediaEngineEvent mediaEvent, long param1, int param2)
         {
-            Trace.TraceInformation(mediaEvent.ToString());
             switch (mediaEvent)
             {
                 case MediaEngineEvent.LoadStart:
@@ -186,7 +185,7 @@ namespace VL.MediaFoundation
         public MediaEngineErr ErrorCode { get; private set; }
 
         // This method is not really needed but makes it simpler to work with inside VL
-        public Texture2D Update(
+        public VideoFrame Update(
             string url,
             bool play = false,
             float rate = 1f,
@@ -216,7 +215,7 @@ namespace VL.MediaFoundation
             return Update();
         }
 
-        Texture2D Update()
+        VideoFrame Update()
         {
             if (ReadyState <= ReadyState.HaveNothing)
             {
@@ -258,7 +257,7 @@ namespace VL.MediaFoundation
 
                 if (renderTargetSize == default)
                 {
-                    //textureProvider.Recycle();
+                    texturePool.Recycle();
 
                     engine.GetNativeVideoSize(out var width, out var height);
 
@@ -290,7 +289,7 @@ namespace VL.MediaFoundation
                     });
 
                     engine.TransferVideoFrame(
-                        videoFrame,
+                        videoFrame.NativeTexture,
                         ToVideoRect(SourceBounds),
                         new RawRectangle(0, 0, renderTargetSize.Width, renderTargetSize.Height),
                         ToRawColorBGRA(BorderColor));

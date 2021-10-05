@@ -1,12 +1,13 @@
 ﻿using SharpDX.Direct3D11;
 using System;
 using System.Collections.Generic;
+using System.Reactive.Disposables;
 
-namespace VL.MediaFoundation
+namespace VL.Video.MediaFoundation
 {
-    sealed partial class TexturePool : IDisposable
+    sealed class TexturePool : IDisposable
     {
-        private readonly Dictionary<Texture2DDescription, Stack<PooledTextured2D>> cache = new Dictionary<Texture2DDescription, Stack<PooledTextured2D>>();
+        private readonly Dictionary<Texture2DDescription, Stack<Texture2D>> cache = new Dictionary<Texture2DDescription, Stack<Texture2D>>();
 
         public TexturePool(Device device)
         {
@@ -15,19 +16,17 @@ namespace VL.MediaFoundation
 
         public Device Device { get; }
 
-        internal PooledTextured2D Rent(in Texture2DDescription description)
+        internal VideoFrame Rent(in Texture2DDescription description)
         {
             lock (cache)
             {
                 var stack = GetStack(in description);
-                if (stack.Count > 0)
-                    return stack.Pop();
-
-                return new PooledTextured2D(this, Device, description);
+                var texture = stack.Count > 0 ? stack.Pop() : new Texture2D(Device, description);
+                return new VideoFrame(texture, Disposable.Create(texture, t => Return(t)));
             }
         }
 
-        internal void Return(PooledTextured2D texture)
+        void Return(Texture2D texture)
         {
             lock (cache)
             {
@@ -55,9 +54,9 @@ namespace VL.MediaFoundation
             Recycle();
         }
 
-        private Stack<PooledTextured2D> GetStack(in Texture2DDescription description)
+        private Stack<Texture2D> GetStack(in Texture2DDescription description)
         {
-            return cache.EnsureValue(description, s => new Stack<PooledTextured2D>(2));
+            return cache.EnsureValue(description, s => new Stack<Texture2D>(2));
         }
     }
 }

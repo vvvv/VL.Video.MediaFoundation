@@ -1,5 +1,4 @@
-﻿using SharpDX.Direct3D11;
-using Stride.Core;
+﻿using Stride.Core;
 using Stride.Engine;
 using Stride.Graphics;
 using Stride.Rendering;
@@ -10,16 +9,20 @@ using VL.Stride;
 
 namespace VL.Video.MediaFoundation
 {
-    public class StrideConverter : Converter<Texture2D, Texture>
+    public class StrideConverter : Converter<Texture>
     {
         private readonly IResourceHandle<RenderDrawContext> renderDrawContextHandle;
+        private readonly RenderDrawContext renderDrawContext;
+        private readonly GraphicsDevice graphicsDevice;
 
         public StrideConverter(NodeContext nodeContext)
-            : base(nodeContext)
         {
             renderDrawContextHandle = nodeContext.GetGameProvider()
                 .Bind(g => RenderContext.GetShared(g.Services).GetThreadContext())
                 .GetHandle() ?? throw new ServiceNotFoundException(typeof(IResourceProvider<Game>));
+
+            renderDrawContext = renderDrawContextHandle.Resource;
+            graphicsDevice = renderDrawContext.GraphicsDevice;
         }
 
         public override void Dispose()
@@ -28,11 +31,39 @@ namespace VL.Video.MediaFoundation
             renderDrawContextHandle.Dispose();
         }
 
-        protected override Texture Convert(Texture2D resource, IDisposable resourceHandle)
+        protected override Texture Convert(VideoFrame frame)
         {
-            var texture = SharpDXInterop.CreateTextureFromNative(renderDrawContextHandle.Resource.GraphicsDevice, resource, takeOwnership: true);
-            resourceHandle.DisposeBy(texture);
-            return texture;
+            var texture = SharpDXInterop.CreateTextureFromNative(graphicsDevice, frame.NativeTexture, takeOwnership: true);
+            if (texture != null)
+            {
+                frame.AddRef();
+                frame.DisposeBy(texture);
+            }
+            return ToDeviceColorSpace(texture);
+        }
+
+        private Texture ToDeviceColorSpace(Texture texture)
+        {
+            // Check if conversion is needed
+            if (graphicsDevice.ColorSpace == ColorSpace.Gamma)
+                return texture;
+
+            var desc = texture.Description;
+            if (desc.Format.IsSRgb() || !desc.Format.HasSRgbEquivalent())
+                return texture;
+
+            // Create texture with sRGB format
+            desc.Format = desc.Format.ToSRgb();
+            desc.Flags = TextureFlags.ShaderResource;
+            var srgbTexture = Texture.New(graphicsDevice, desc);
+
+            // Copy the texture
+            renderDrawContext.CommandList.Copy(texture, srgbTexture);
+
+            // Release input texture
+            texture.Dispose();
+
+            return srgbTexture;
         }
     }
 }

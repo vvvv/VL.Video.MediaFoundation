@@ -4,7 +4,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace VL.MediaFoundation
+namespace VL.Video.MediaFoundation
 {
     // See CppSDK\SDK\include\shared\ksmedia.h
     //    typedef enum {

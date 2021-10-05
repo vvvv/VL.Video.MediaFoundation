@@ -1,45 +1,29 @@
 ﻿using System;
-using System.Reactive.Disposables;
-using VL.Core;
 using VL.Lib.Basics.Resources;
 
 namespace VL.Video.MediaFoundation
 {
-    public abstract class Converter<TIn, TOut> : IDisposable
-        where TIn: class
+    public abstract class Converter<TOut> : IDisposable
         where TOut: class
     {
         private readonly Producing<TOut> output = new Producing<TOut>();
-        private readonly IRefCounter<TIn> refCounter;
-        private TIn current;
-
-        public Converter(NodeContext nodeContext)
-        {
-            refCounter = nodeContext.GetRefCounter<TIn>();
-        }
+        private VideoFrame current;
 
         public virtual void Dispose()
         {
             output.Dispose();
         }
 
-        public TOut Update(TIn resource)
+        public TOut Update(VideoFrame frame)
         {
-            if (resource != current)
+            if (frame != current)
             {
-                this.current = resource;
-
-                if (resource is null)
-                    output.Resource = null;
-                else
-                {
-                    refCounter?.AddRef(resource);
-                    output.Resource = Convert(resource, Disposable.Create(() => refCounter?.Release(resource)));
-                }
+                this.current = frame;
+                output.Resource = frame != null ? Convert(frame) : null;
             }
             return output.Resource;
         }
 
-        protected abstract TOut Convert(TIn resource, IDisposable resourceHandle);
+        protected abstract TOut Convert(VideoFrame frame);
     }
 }

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Document xmlns:p="property" Id="JuY9PG38vGNOkS7ym7t7mh" LanguageVersion="2021.4.0.419" Version="0.128">
-  <NugetDependency Id="Gj2X4Tql09gOq0jy9yu36j" Location="VL.CoreLib" Version="2021.4.0-0419-g7f7c4a6cb1" />
+<Document xmlns:p="property" Id="JuY9PG38vGNOkS7ym7t7mh" LanguageVersion="2021.4.0.458" Version="0.128">
+  <NugetDependency Id="Gj2X4Tql09gOq0jy9yu36j" Location="VL.CoreLib" Version="2021.4.0-0458-g12f67edc27" />
   <Patch Id="PNn7TZV6ad3P1MdWzEMnc6">
     <Canvas Id="AVxdp3P1HUsQFBWkhFkFnV" DefaultCategory="Main" BordersChecked="false" CanvasType="FullCategory" />
     <!--
@@ -42,9 +42,7 @@
               <Choice Kind="TypeFlag" Name="Boolean" />
             </p:TypeAnnotation>
           </Pad>
-          <Pad Id="EVDmfgO4OZpOM0uBKa8CLs" Comment="Duration" Bounds="336,552,55,15" ShowValueBox="true" isIOBox="true" />
-          <Pad Id="HohvOjGJHOPLOlcCO7s7fF" Comment="Current Time" Bounds="208,552,35,15" ShowValueBox="true" isIOBox="true" />
-          <Pad Id="IIqoJaJFhu7LrDpNcoSoQx" Comment="Filename" Bounds="144,119,140,15" ShowValueBox="true" isIOBox="true" Value="Birds_H264.mp4">
+          <Pad Id="IIqoJaJFhu7LrDpNcoSoQx" Comment="Filename" Bounds="144,119,140,15" ShowValueBox="true" isIOBox="true" Value="..\..\..\..\Downloads\sintel-1024-surround.mp4">
             <p:TypeAnnotation LastCategoryFullName="IO" LastSymbolSource="CoreLibBasics.vl">
               <Choice Kind="TypeFlag" Name="Path" />
             </p:TypeAnnotation>
@@ -115,7 +113,7 @@
               <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
               <Choice Kind="ProcessAppFlag" Name="TextureWindow" />
             </p:NodeReference>
-            <Pin Id="ITPyszyzYPhL7KJS0deFPw" Name="Bounds" Kind="InputPin" DefaultValue="1138, 93, 481, 349" />
+            <Pin Id="ITPyszyzYPhL7KJS0deFPw" Name="Bounds" Kind="InputPin" DefaultValue="1138, 93, 773, 445" />
             <Pin Id="E7GBClEXs4cM9EUR4nO00a" Name="Input" Kind="InputPin" />
             <Pin Id="UWdQU7kiFBePM4lxK7uMvI" Name="Title" Kind="InputPin" />
             <Pin Id="GDVoRZdQql4OoNaCQaozFb" Name="Clear Color" Kind="InputPin" />
@@ -129,6 +127,92 @@
             <Pin Id="Iyr7QmgBvcFQWfqBJLFzbt" Name="Client Bounds" Kind="OutputPin" />
             <Pin Id="LUCmpjhaJEQL4eHrKwkeO2" Name="Input Source" Kind="OutputPin" />
           </Node>
+          <Node Bounds="496,489" Id="RwFNaVqtGS6P98hREIKK83">
+            <p:NodeReference LastCategoryFullName="Video.MediaFoundation" LastSymbolSource="VL.Video.MediaFoundation.vl">
+              <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+              <Choice Kind="ProcessAppFlag" Name="VideoPlayer (Skia)" />
+            </p:NodeReference>
+            <Pin Id="UsWtjQOb0hxO0BZoECED2z" Name="Filename" Kind="InputPin" />
+            <Pin Id="D75bjGc2zQGNpJj4l9TCkv" Name="Play" Kind="InputPin" />
+            <Pin Id="KH9vucaQv5WP86WudCiGW7" Name="Rate" Kind="InputPin" />
+            <Pin Id="AJllI2C9hkNQSQzPq1czWr" Name="Seek Time" Kind="InputPin" />
+            <Pin Id="K0XaXsbmL7TOp0hE2YX43k" Name="Seek" Kind="InputPin" />
+            <Pin Id="FPiy3aDupq8LVuts8Hg53b" Name="Loop Start Time" Kind="InputPin" />
+            <Pin Id="RJ19e1UqsZ7Pt1bqTNrhdq" Name="Loop End Time" Kind="InputPin" />
+            <Pin Id="QLgb6PTi8IsLeEVFx1Z6dN" Name="Loop" Kind="InputPin" DefaultValue="True" />
+            <Pin Id="D10Wr0mNRwtLxdQvi8AeZp" Name="Volume" Kind="InputPin" />
+            <Pin Id="P56ubcVrcntL4ksi6KWehD" Name="Output" Kind="OutputPin" />
+            <Pin Id="CH8PdCU1WknOHesZ1emLSk" Name="Playing" Kind="OutputPin" />
+            <Pin Id="FLBwrOrkADCO82lye84IeA" Name="Current Time" Kind="OutputPin" />
+            <Pin Id="Dx9jiMW8NMyPxuLQqJd695" Name="Duration" Kind="OutputPin" />
+            <Pin Id="BaEceEV5OKcNLlFOt41yXD" Name="Ready State" Kind="OutputPin" />
+            <Pin Id="TvAM3xw2Px4OeduHWP87kL" Name="Error Code" Kind="OutputPin" />
+          </Node>
+          <Node Bounds="587,375" Id="TwawbANS3euMRedvhT7vRl">
+            <p:NodeReference LastCategoryFullName="Video.MediaFoundation" LastSymbolSource="VL.Video.MediaFoundation.vl">
+              <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+              <Choice Kind="ProcessAppFlag" Name="VideoIn (Skia)" />
+            </p:NodeReference>
+            <Pin Id="Ardz66Xiy7VPNZeHmRjiR9" Name="Device" Kind="InputPin" DefaultValue="Intel(R) RealSense(TM) Depth Camera 435 with RGB Module RGB" />
+            <Pin Id="P0bvn0vE3LsLK2CsZ6pNmW" Name="Preferred Size" Kind="InputPin" />
+            <Pin Id="Tgy36ImyvsPNnxmKSN0VlO" Name="Preferred FPS" Kind="InputPin" />
+            <Pin Id="CmrG4KH6QLCMGrYXCEtnZD" Name="Camera Controls" Kind="InputPin" />
+            <Pin Id="I7fHgr8TqzBOXYLPXO721l" Name="Video Controls" Kind="InputPin" />
+            <Pin Id="EACLbIOdljEQIPihmuX6OD" Name="Enabled" Kind="InputPin" />
+            <Pin Id="NGGKE9p55JONTyh0JKz4KI" Name="Output" Kind="OutputPin" />
+            <Pin Id="UM5rNaPgLjxL3psleLRHoX" Name="Discarded Frames" Kind="OutputPin" />
+            <Pin Id="ALVEoianIxmNJ5HCt67tcf" Name="Actual FPS" Kind="OutputPin" />
+            <Pin Id="L5XFIB0JoeJOToFwouK2ZV" Name="Supported Formats" Kind="OutputPin" />
+          </Node>
+          <Node Bounds="640,325" Id="QX4LqIfc3JtMXGLb5Z0QlV">
+            <p:NodeReference LastCategoryFullName="Video.MediaFoundation" LastSymbolSource="VL.Video.MediaFoundation.ControlNodes">
+              <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+              <Choice Kind="ProcessNode" Name="VideoControls" />
+            </p:NodeReference>
+            <Pin Id="MLiYJkN3NVnPLbgvxkvjl8" Name="Brightness" Kind="InputPin" DefaultValue="0.22" />
+            <Pin Id="V2WtIrkTvsXP2CxIZjgQ99" Name="Contrast" Kind="InputPin" DefaultValue="0.82" />
+            <Pin Id="ScsqEN0qAcxMzyCZ2Z7W70" Name="Hue" Kind="InputPin" DefaultValue="0.5" />
+            <Pin Id="Vc03LZq11zBPOEPlu6WUt3" Name="Saturation" Kind="InputPin" />
+            <Pin Id="EJgkRuhdHSkNVXJJ0PKkv3" Name="Sharpness" Kind="InputPin" />
+            <Pin Id="GDueOEjjQ1ZOYAiHm2D5xw" Name="Gamma" Kind="InputPin" DefaultValue="0.33" />
+            <Pin Id="KciakmDuW9sMweaqgpsw83" Name="ColorEnable" Kind="InputPin" />
+            <Pin Id="RhgJ9d2TmHcNKk6wj3isP4" Name="WhiteBalance" Kind="InputPin" />
+            <Pin Id="RTdx8fiAFWgQA4AN8QlNsK" Name="BacklightCompensation" Kind="InputPin" />
+            <Pin Id="LeeHvVKf8UxNqJVEx4b4rS" Name="Gain" Kind="InputPin" />
+            <Pin Id="EgkJafepmMSNdilJGNssV2" Name="Output" Kind="OutputPin" />
+          </Node>
+          <Node Bounds="500,600" Id="E8zUTH9PHxXLt829uoCNpN">
+            <p:NodeReference LastCategoryFullName="Graphics.Skia" LastSymbolSource="VL.Skia.vl">
+              <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+              <Choice Kind="ProcessAppFlag" Name="Renderer" />
+            </p:NodeReference>
+            <Pin Id="F2178zGZ68fOFJmzrGvCPS" Name="Bounds" Kind="InputPin" DefaultValue="1146, 390, 600, 400" />
+            <Pin Id="URNv8XEZTHyM1Jwom2ypNk" Name="Input" Kind="InputPin" />
+            <Pin Id="JlKGyxGgzC4NwKfTSc3t8F" Name="Color" Kind="InputPin" />
+            <Pin Id="ObNfFSn1ZrsN8de7s8F4zO" Name="Clear" Kind="InputPin" />
+            <Pin Id="VRgmAibDdKRPViWpHM4sNm" Name="Space" Kind="InputPin" />
+            <Pin Id="Pdq6up9On9iP3QmLKw6jju" Name="Show Cursor" Kind="InputPin" />
+            <Pin Id="S21YXbmPAlCLliIZIcu84C" Name="VSync" Kind="InputPin" />
+            <Pin Id="DWNcrXrte0JQBEBUg25kOf" Name="Enabled" Kind="InputPin" />
+            <Pin Id="UtfzDpzxSJCOihX2Ja3afh" Name="Form" Kind="OutputPin" />
+            <Pin Id="AG57oRvDUf4MKfdMbczCTm" Name="ClientBounds" Kind="OutputPin" />
+            <Pin Id="GearV04b2WtObHFyvf9e0D" Name="Render Time" Kind="OutputPin" />
+          </Node>
+          <Node Bounds="518,552,125,19" Id="RUUY1Q4JgmWN28QopMniHQ">
+            <p:NodeReference LastCategoryFullName="Graphics.Skia.Layers" LastSymbolSource="VL.Skia.vl">
+              <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+              <Choice Kind="ProcessAppFlag" Name="DrawImage" />
+            </p:NodeReference>
+            <Pin Id="JZBiSxVvF5mN8agz64y9uh" Name="Image" Kind="InputPin" />
+            <Pin Id="ThTVLmeRC3OOFtRpvvEwV5" Name="Position" Kind="InputPin" />
+            <Pin Id="N8uqqRWMIgOQMmLQWzIn0X" Name="Size" Kind="InputPin" />
+            <Pin Id="EkzNlWhBmsGNcLaBsjZCRF" Name="Size Mode" Kind="InputPin" />
+            <Pin Id="GoPOiyA6aGAN7zCClK12k8" Name="Anchor" Kind="InputPin" />
+            <Pin Id="U1oRsz0ivZmPeaLWdzF6Hw" Name="Paint" Kind="InputPin" />
+            <Pin Id="KhHC0tdB9ZjLt9cCWjXvVM" Name="Enabled" Kind="InputPin" />
+            <Pin Id="CfPcMC2FoTPLXyFtcMxRVp" Name="Output" Kind="OutputPin" />
+            <Pin Id="GEWrxTjyMptN4dvluz8FbZ" Name="Actual Bounds" Kind="OutputPin" />
+          </Node>
         </Canvas>
         <Patch Id="B1fNIgBbe2HOHjop6HGRX9" Name="Create" />
         <Patch Id="DcBxkBhtSUcQTPzfjLNNbp" Name="Update" />
@@ -137,8 +221,6 @@
           <Fragment Id="UIthPXQQpPhPz7CPtXuJy2" Patch="DcBxkBhtSUcQTPzfjLNNbp" Enabled="true" />
         </ProcessDefinition>
         <Link Id="R3DgFMrZGCIM3T6ouZsLWl" Ids="Bl7GSpwubtBOHveArfpi8B,LwtpuiZc057N77NjHWS5uQ" />
-        <Link Id="ABVMCsGx4fQMnhKzurLDRi" Ids="LkPZXCnxBeeM5GIUNlW9Cb,EVDmfgO4OZpOM0uBKa8CLs" />
-        <Link Id="GjuaZ0rs3aPPKDU3PNEY0M" Ids="MLCzsAXxiqvLUdHZBopy3K,HohvOjGJHOPLOlcCO7s7fF" />
         <Link Id="AcGjTdI1SrdLzbpLEDuCk0" Ids="JWGAoeJKgBHLtG5wKuCcTo,OIeIxdTIKCXNE1IstHgtaA" />
         <Link Id="TTQjSQTX054QKXmH63rwzH" Ids="O7BCkwjMVuFPSGMqvVMUjs,CMMfqFM1BLfN1UA7PYs3xy" />
         <Link Id="SW0EXMM23M5MV98mk9upEC" Ids="DxgZGKbth80OLoFyKu8Z3p,JffBTAd6yh6NvrKmdJdTdx" />
@@ -148,9 +230,16 @@
         <Link Id="SpxbHNTPIYGPJMBLlz4G3o" Ids="FbRjhvA27uKNOALjimmeMO,KK05tcFmRbZLcJFzvpBmc6" />
         <Link Id="NfC0eXSWcwtQKUUNMUecHw" Ids="IIqoJaJFhu7LrDpNcoSoQx,F3Y0PmYPSMMPKWlZ0CnNpa" />
         <Link Id="B11sbaFl3gCMHjkgLCrbj6" Ids="C5t4DGzZeJ3Mjcg9HBJZbZ,E7GBClEXs4cM9EUR4nO00a" />
+        <Link Id="NL3k3OQ0WSsL1DBX7gyZi4" Ids="IIqoJaJFhu7LrDpNcoSoQx,UsWtjQOb0hxO0BZoECED2z" />
+        <Link Id="P6y1HNTJC0cNyx62medZlC" Ids="Bl7GSpwubtBOHveArfpi8B,D75bjGc2zQGNpJj4l9TCkv" />
+        <Link Id="ImIOGEIj5MTNveotafkWrb" Ids="EgkJafepmMSNdilJGNssV2,I7fHgr8TqzBOXYLPXO721l" />
+        <Link Id="ICGTCDJ9jzVNBrEfaWvqse" Ids="P56ubcVrcntL4ksi6KWehD,JZBiSxVvF5mN8agz64y9uh" />
+        <Link Id="AoszNtZMfOfQF16ojhYMFc" Ids="CfPcMC2FoTPLXyFtcMxRVp,URNv8XEZTHyM1Jwom2ypNk" />
+        <Link Id="CyyzteyHY1wO8pUpAJSpyO" Ids="FbRjhvA27uKNOALjimmeMO,K0XaXsbmL7TOp0hE2YX43k" />
       </Patch>
     </Node>
   </Patch>
-  <NugetDependency Id="UhmBuKYpDJYP8MvjbftNYd" Location="VL.Stride" Version="2021.4.0-0419-g7f7c4a6cb1" />
+  <NugetDependency Id="UhmBuKYpDJYP8MvjbftNYd" Location="VL.Stride" Version="2021.4.0-0458-g12f67edc27" />
   <NugetDependency Id="IY12tTRFkcoMmTmyEe3oPy" Location="VL.Video.MediaFoundation" Version="0.0.0.0" />
+  <NugetDependency Id="S0ZIYjlFqw2PwyTbard6wF" Location="VL.Skia" Version="2021.4.0-0458-g12f67edc27" />
 </Document>

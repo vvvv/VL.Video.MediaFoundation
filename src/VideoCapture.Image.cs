@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using VL.Lib.Basics.Imaging;
 using ColorBGRA = Stride.Core.Mathematics.ColorBGRA;
 
-namespace VL.MediaFoundation
+namespace VL.Video.MediaFoundation
 {
     partial class VideoCapture
     {

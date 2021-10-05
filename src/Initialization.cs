@@ -9,9 +9,9 @@ using VL.Core.CompilerServices;
 using VL.Lib.Basics.Resources;
 using DeviceCreationFlags = SharpDX.Direct3D11.DeviceCreationFlags;
 
-[assembly: AssemblyInitializer(typeof(VL.MediaFoundation.Initialization))]
+[assembly: AssemblyInitializer(typeof(VL.Video.MediaFoundation.Initialization))]
 
-namespace VL.MediaFoundation
+namespace VL.Video.MediaFoundation
 {
     public sealed class Initialization : AssemblyInitializer<Initialization>
     {
@@ -27,7 +27,7 @@ namespace VL.MediaFoundation
             }
 
             factory.RegisterService<IRefCounter<Texture>>(TextureRefCounter.Default);
-            factory.RegisterService<IRefCounter<Texture2D>>(Texture2DRefCounter.Default);
+            factory.RegisterService<IRefCounter<VideoFrame>>(VideoFrameRefCounter.Default);
 
             factory.RegisterNodeFactory("VL.Video.MediaFoundation.ControlNodes", f =>
             {

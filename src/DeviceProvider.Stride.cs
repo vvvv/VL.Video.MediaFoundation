@@ -8,7 +8,7 @@ using VL.Core;
 using VL.Lib.Basics.Resources;
 using VL.Stride;
 
-namespace VL.MediaFoundation
+namespace VL.Video.MediaFoundation
 {
     public class StrideDeviceProvider : DeviceProvider
     {

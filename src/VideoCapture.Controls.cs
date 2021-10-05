@@ -5,7 +5,7 @@ using System.Collections.Immutable;
 using System.Reactive.Subjects;
 using VL.Core;
 
-namespace VL.MediaFoundation
+namespace VL.Video.MediaFoundation
 {
     interface IControls<TName>
     {

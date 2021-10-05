@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using VL.Lib;
 using VL.Lib.Collections;
 
-namespace VL.MediaFoundation
+namespace VL.Video.MediaFoundation
 {
     /// <summary>
     /// Dynamic enum of available video input devices

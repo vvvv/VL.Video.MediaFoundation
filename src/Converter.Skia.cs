@@ -8,12 +8,11 @@ using VL.Skia.Egl;
 
 namespace VL.Video.MediaFoundation
 {
-    public class SkiaConverter : Converter<Texture2D, SKImage>
+    public class SkiaConverter : Converter<SKImage>
     {
         private readonly RenderContext renderContext;
 
         public SkiaConverter(NodeContext nodeContext)
-            : base(nodeContext)
         {
             renderContext = RenderContext.ForCurrentThread();
         }
@@ -24,11 +23,10 @@ namespace VL.Video.MediaFoundation
             renderContext.Dispose();
         }
 
-        protected override SKImage Convert(Texture2D resource, IDisposable resourceHandle)
+        protected override SKImage Convert(VideoFrame frame)
         {
             var eglContext = renderContext.EglContext;
-            var eglDisplay = eglContext.Dislpay;
-            var eglImage = eglContext.CreateImageFromD3D11Texture(resource.NativePointer);
+            var eglImage = eglContext.CreateImageFromD3D11Texture(frame.NativeTexture.NativePointer);
 
             uint textureId = 0;
             NativeGles.glGenTextures(1, ref textureId);
@@ -36,14 +34,14 @@ namespace VL.Video.MediaFoundation
             NativeGles.glEGLImageTargetTexture2DOES(NativeGles.GL_TEXTURE_2D, eglImage);
             NativeGles.glBindTexture(NativeGles.GL_TEXTURE_2D, 0);
 
-            var description = resource.Description;
+            var description = frame.NativeTexture.Description;
             var colorType = GetColorType(description.Format);
             var glInfo = new GRGlTextureInfo(
                 id: textureId,
                 target: NativeGles.GL_TEXTURE_2D,
                 format: colorType.ToGlSizedFormat());
 
-            using var backendTexture = new GRBackendTexture(
+            var backendTexture = new GRBackendTexture(
                 width: description.Width,
                 height: description.Height,
                 mipmapped: false,
@@ -58,10 +56,14 @@ namespace VL.Video.MediaFoundation
                 colorspace: SKColorSpace.CreateSrgb(),
                 releaseProc: _ =>
                 {
+                    backendTexture.Dispose();
                     NativeGles.glDeleteTextures(1, ref textureId);
                     eglImage.Dispose();
-                    resourceHandle.Dispose();
+                    frame.Dispose();
                 });
+
+            if (image != null)
+                frame.AddRef();
 
             return image;
         }

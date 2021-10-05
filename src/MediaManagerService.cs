@@ -1,7 +1,7 @@
 ﻿using SharpDX.MediaFoundation;
 using System.Threading;
 
-namespace VL.MediaFoundation
+namespace VL.Video.MediaFoundation
 {
     class MediaManagerService
     {
