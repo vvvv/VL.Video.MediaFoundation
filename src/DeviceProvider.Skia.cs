@@ -20,6 +20,8 @@ namespace VL.Video.MediaFoundation
 
         public override Device Device { get; }
 
+        public override bool UsesLinearColorspace => false;
+
         public override void Dispose()
         {
             renderContext.Dispose();

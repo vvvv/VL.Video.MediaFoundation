@@ -10,6 +10,8 @@ namespace VL.Video.MediaFoundation
     {
         public abstract Device Device { get; }
 
+        public abstract bool UsesLinearColorspace { get; }
+
         public abstract void Dispose();
     }
 }

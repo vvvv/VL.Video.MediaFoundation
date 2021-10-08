@@ -13,6 +13,7 @@ namespace VL.Video.MediaFoundation
     public sealed class StrideDeviceProvider : DeviceProvider
     {
         private readonly IResourceHandle<RenderDrawContext> renderDrawContextHandle;
+        private readonly GraphicsDevice graphicsDevice;
 
         public StrideDeviceProvider(NodeContext nodeContext)
         {
@@ -20,11 +21,13 @@ namespace VL.Video.MediaFoundation
                 .Bind(g => RenderContext.GetShared(g.Services).GetThreadContext())
                 .GetHandle() ?? throw new ServiceNotFoundException(typeof(IResourceProvider<Game>));
 
-            var graphicsDevice = renderDrawContextHandle.Resource.GraphicsDevice;
+            graphicsDevice = renderDrawContextHandle.Resource.GraphicsDevice;
             Device = SharpDXInterop.GetNativeDevice(graphicsDevice) as Device;
         }
 
         public override Device Device { get; }
+
+        public override bool UsesLinearColorspace => graphicsDevice.ColorSpace == ColorSpace.Linear;
 
         public override void Dispose()
         {

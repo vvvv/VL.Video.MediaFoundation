@@ -1,5 +1,6 @@
 ﻿using SharpDX.Direct3D;
 using SharpDX.Direct3D11;
+using SharpDX.DXGI;
 using SharpDX.MediaFoundation;
 using Stride.Core.Mathematics;
 using System;
@@ -162,20 +163,8 @@ namespace VL.Video.MediaFoundation
                     using var sourceReaderAttributes = new MediaAttributes();
                     // Enable low latency - we don't want frames to get buffered
                     sourceReaderAttributes.Set(SinkWriterAttributeKeys.LowLatency, true);
-                    // Ensure DXVA is enabled
-                    sourceReaderAttributes.Set(SourceReaderAttributeKeys.DisableDxva, 0);
                     // Needed in order to read data as Argb32
                     sourceReaderAttributes.Set(SourceReaderAttributeKeys.EnableAdvancedVideoProcessing, true);
-
-                    // Hardware acceleration
-                    var d3dDevice = deviceProvider.Device;
-                    // Add multi thread protection on device (MF is multi-threaded)
-                    var deviceMultithread = d3dDevice.QueryInterface<DeviceMultithread>();
-                    deviceMultithread.SetMultithreadProtected(true);
-                    // Reset device
-                    using var manager = new DXGIDeviceManager();
-                    manager.ResetDevice(d3dDevice);
-                    sourceReaderAttributes.Set(SourceReaderAttributeKeys.D3DManager, manager);
 
                     // Connect camera and video controls
                     using var controlSubscription = new CompositeDisposable(
@@ -200,7 +189,8 @@ namespace VL.Video.MediaFoundation
                     // Read the actual FPS
                     using var currentMediaType = reader.GetCurrentMediaType(SourceReaderIndex.FirstVideoStream);
                     actualFps = VideoCaptureHelpers.ParseFrameRate(currentMediaType.Get(MediaTypeAttributeKeys.FrameRate));
-                    
+                    VideoCaptureHelpers.ParseSize(currentMediaType.Get(MediaTypeAttributeKeys.FrameSize), out var width, out var height);
+
                     // Reset the discared frame count
                     discardedFrames = 0;
 
@@ -216,18 +206,33 @@ namespace VL.Video.MediaFoundation
                             continue;
                         }
 
-                        var buffer = sample.BufferCount == 1 ? sample.GetBufferByIndex(0) : sample.ConvertToContiguousBuffer();
-                        var dxgiBuffer = buffer.QueryInterfaceOrNull<DXGIBuffer>();
-                        if (dxgiBuffer != null)
+                        var buffer = sample.ConvertToContiguousBuffer();
+                        var ptr = buffer.Lock(out var maxLength, out var currentLength);
+                        try
                         {
-                            dxgiBuffer.GetResource(s_IID_ID3D11Texture2D, out var pTexture);
-                            var texture = new Texture2D(pTexture);
-                            var frame = new VideoFrame(texture, new CompositeDisposable(texture, buffer, dxgiBuffer, sample));
+                            var texture = new Texture2D(deviceProvider.Device, new Texture2DDescription()
+                            {
+                                Width = width,
+                                Height = height,
+                                ArraySize = 1,
+                                BindFlags = BindFlags.ShaderResource,
+                                CpuAccessFlags = CpuAccessFlags.None,
+                                // _SRGB doesn't work :/ Getting invalid argument exception in TransferVideoFrame
+                                Format = deviceProvider.UsesLinearColorspace ? Format.B8G8R8A8_UNorm_SRgb : Format.B8G8R8A8_UNorm,
+                                MipLevels = 1,
+                                OptionFlags = ResourceOptionFlags.None,
+                                SampleDescription = new SampleDescription(1, 0),
+                                Usage = ResourceUsage.Immutable
+                            }, new SharpDX.DataRectangle(ptr, width * 4));
+
+                            var frame = new VideoFrame(texture, texture);
                             if (!videoFrames.TryAdd(frame))
                                 frame.Dispose();
                         }
-                        else
+                        finally
                         {
+                            buffer.Unlock();
+                            buffer.Dispose();
                             sample.Dispose();
                         }
                     }
