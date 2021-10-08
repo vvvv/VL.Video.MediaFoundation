@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Document xmlns:p="property" Id="JuY9PG38vGNOkS7ym7t7mh" LanguageVersion="2021.4.0.419" Version="0.128">
-  <NugetDependency Id="Gj2X4Tql09gOq0jy9yu36j" Location="VL.CoreLib" Version="2021.4.0-0419-g7f7c4a6cb1" />
+<Document xmlns:p="property" Id="JuY9PG38vGNOkS7ym7t7mh" LanguageVersion="2021.4.0.483" Version="0.128">
+  <NugetDependency Id="Gj2X4Tql09gOq0jy9yu36j" Location="VL.CoreLib" Version="2021.4.0-0480-g1f42b51cd3" />
   <Patch Id="PNn7TZV6ad3P1MdWzEMnc6">
     <Canvas Id="AVxdp3P1HUsQFBWkhFkFnV" DefaultCategory="Main" BordersChecked="false" CanvasType="FullCategory" />
     <!--
@@ -15,13 +15,13 @@
       </p:NodeReference>
       <Patch Id="DEkEt5HbZZcOPC8xNqJbDw">
         <Canvas Id="VFBylqUtLiHNzHvd7ezF5Z" CanvasType="Group">
-          <Node Bounds="142,477,165,19" Id="DgVQXzT7aZTNVDVCaQjTze">
+          <Node Bounds="142,477,109,19" Id="DgVQXzT7aZTNVDVCaQjTze">
             <p:NodeReference LastCategoryFullName="Video.MediaFoundation" LastSymbolSource="VL.Video.MediaFoundation.vl">
               <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
-              <Choice Kind="ProcessAppFlag" Name="VideoPlayer" />
+              <Choice Kind="ProcessAppFlag" Name="VideoPlayer (Url)" />
             </p:NodeReference>
             <p:HelpFocus p:Assembly="VL.Lang" p:Type="VL.Model.HelpPriority">High</p:HelpFocus>
-            <Pin Id="F3Y0PmYPSMMPKWlZ0CnNpa" Name="Filename" Kind="InputPin" />
+            <Pin Id="JJiDu0NAGHoOhHGEwdHpuT" Name="Url" Kind="InputPin" />
             <Pin Id="LwtpuiZc057N77NjHWS5uQ" Name="Play" Kind="InputPin" />
             <Pin Id="OIeIxdTIKCXNE1IstHgtaA" Name="Rate" Kind="InputPin" />
             <Pin Id="UsEqOE6sU4mN5XeO3Hspio" Name="Seek Time" Kind="InputPin" />
@@ -35,6 +35,7 @@
             <Pin Id="MLCzsAXxiqvLUdHZBopy3K" Name="Current Time" Kind="OutputPin" />
             <Pin Id="LkPZXCnxBeeM5GIUNlW9Cb" Name="Duration" Kind="OutputPin" />
             <Pin Id="LQaTuEsVeFDQRsvww0eaFE" Name="Ready State" Kind="OutputPin" />
+            <Pin Id="EGFuTfROdFgPOaFyGddxPI" Name="Network State" Kind="OutputPin" />
             <Pin Id="KQfqWOx5j0gOcVeaobtPlh" Name="Error Code" Kind="OutputPin" />
           </Node>
           <Pad Id="Bl7GSpwubtBOHveArfpi8B" Comment="Play" Bounds="164,175,35,35" ShowValueBox="true" isIOBox="true" Value="True">
@@ -42,13 +43,8 @@
               <Choice Kind="TypeFlag" Name="Boolean" />
             </p:TypeAnnotation>
           </Pad>
-          <Pad Id="EVDmfgO4OZpOM0uBKa8CLs" Comment="Duration" Bounds="336,552,55,15" ShowValueBox="true" isIOBox="true" />
-          <Pad Id="HohvOjGJHOPLOlcCO7s7fF" Comment="Current Time" Bounds="208,552,35,15" ShowValueBox="true" isIOBox="true" />
-          <Pad Id="IIqoJaJFhu7LrDpNcoSoQx" Comment="Filename" Bounds="144,119,140,15" ShowValueBox="true" isIOBox="true" Value="Birds_H264.mp4">
-            <p:TypeAnnotation LastCategoryFullName="IO" LastSymbolSource="CoreLibBasics.vl">
-              <Choice Kind="TypeFlag" Name="Path" />
-            </p:TypeAnnotation>
-          </Pad>
+          <Pad Id="EVDmfgO4OZpOM0uBKa8CLs" Comment="Duration" Bounds="325,587,55,15" ShowValueBox="true" isIOBox="true" />
+          <Pad Id="HohvOjGJHOPLOlcCO7s7fF" Comment="Current Time" Bounds="197,587,35,15" ShowValueBox="true" isIOBox="true" />
           <Pad Id="JWGAoeJKgBHLtG5wKuCcTo" Comment="Rate" Bounds="184,221,35,15" ShowValueBox="true" isIOBox="true" Value="1">
             <p:TypeAnnotation LastCategoryFullName="Primitive" LastSymbolSource="CoreLibBasics.vl">
               <Choice Kind="TypeFlag" Name="Float32" />
@@ -92,7 +88,7 @@
               <p:buttonmode p:Assembly="VL.UI.Forms" p:Type="VL.HDE.PatchEditor.Editors.ButtonModeEnum">Bang</p:buttonmode>
             </p:ValueBoxSettings>
           </Pad>
-          <Pad Id="RLea6ZncPyFMrWz3gZTXiO" Bounds="503,136,125,19" ShowValueBox="true" isIOBox="true" Value="Supported formats:">
+          <Pad Id="RLea6ZncPyFMrWz3gZTXiO" Bounds="596,137,125,19" ShowValueBox="true" isIOBox="true" Value="Supported formats:">
             <p:TypeAnnotation>
               <Choice Kind="TypeFlag" Name="String" />
             </p:TypeAnnotation>
@@ -101,7 +97,7 @@
               <p:stringtype p:Assembly="VL.Core" p:Type="VL.Core.StringType">Comment</p:stringtype>
             </p:ValueBoxSettings>
           </Pad>
-          <Pad Id="A8gbj2TJALuPVnnFgq6k4H" Bounds="503,159,272,19" ShowValueBox="true" isIOBox="true" Value="https://docs.microsoft.com/en-us/windows/win32/medfound/supported-media-formats-in-media-foundation">
+          <Pad Id="A8gbj2TJALuPVnnFgq6k4H" Bounds="596,160,272,19" ShowValueBox="true" isIOBox="true" Value="https://docs.microsoft.com/en-us/windows/win32/medfound/supported-media-formats-in-media-foundation">
             <p:TypeAnnotation>
               <Choice Kind="TypeFlag" Name="String" />
             </p:TypeAnnotation>
@@ -115,7 +111,7 @@
               <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
               <Choice Kind="ProcessAppFlag" Name="TextureWindow" />
             </p:NodeReference>
-            <Pin Id="ITPyszyzYPhL7KJS0deFPw" Name="Bounds" Kind="InputPin" DefaultValue="1138, 93, 481, 349" />
+            <Pin Id="ITPyszyzYPhL7KJS0deFPw" Name="Bounds" Kind="InputPin" DefaultValue="1142, 91, 786, 432" />
             <Pin Id="E7GBClEXs4cM9EUR4nO00a" Name="Input" Kind="InputPin" />
             <Pin Id="UWdQU7kiFBePM4lxK7uMvI" Name="Title" Kind="InputPin" />
             <Pin Id="GDVoRZdQql4OoNaCQaozFb" Name="Clear Color" Kind="InputPin" />
@@ -129,6 +125,13 @@
             <Pin Id="Iyr7QmgBvcFQWfqBJLFzbt" Name="Client Bounds" Kind="OutputPin" />
             <Pin Id="LUCmpjhaJEQL4eHrKwkeO2" Name="Input Source" Kind="OutputPin" />
           </Node>
+          <Pad Id="SZloiZcGP2NNfbibMOrLA2" Comment="Url" Bounds="144,137,417,10" ShowValueBox="true" isIOBox="true" Value="http://ftp.nluug.nl/pub/graphics/blender/demo/movies/ToS/tears_of_steel_1080p.mov">
+            <p:TypeAnnotation LastCategoryFullName="Primitive" LastSymbolSource="CoreLibBasics.vl">
+              <Choice Kind="TypeFlag" Name="String" />
+            </p:TypeAnnotation>
+          </Pad>
+          <Pad Id="SqVK2wiT43GPVOpgh89bEg" Comment="Network State" Bounds="317,531,71,15" ShowValueBox="true" isIOBox="true" />
+          <Pad Id="SIXPXJKGyDvO8sJNI0hIPJ" Comment="Ready State" Bounds="318,555,106,15" ShowValueBox="true" isIOBox="true" />
         </Canvas>
         <Patch Id="B1fNIgBbe2HOHjop6HGRX9" Name="Create" />
         <Patch Id="DcBxkBhtSUcQTPzfjLNNbp" Name="Update" />
@@ -146,11 +149,13 @@
         <Link Id="H4wn2cUw26rPhWlz4O6Qfi" Ids="B0HkqQPiydhNbultI0Gv0p,FFsQLsUxOZIPJCiLb3CBZF" />
         <Link Id="UJvOV4h4DnzOVbvFIA4vup" Ids="SPttUiT1ZtzLGeLweKZpMm,UsEqOE6sU4mN5XeO3Hspio" />
         <Link Id="SpxbHNTPIYGPJMBLlz4G3o" Ids="FbRjhvA27uKNOALjimmeMO,KK05tcFmRbZLcJFzvpBmc6" />
-        <Link Id="NfC0eXSWcwtQKUUNMUecHw" Ids="IIqoJaJFhu7LrDpNcoSoQx,F3Y0PmYPSMMPKWlZ0CnNpa" />
         <Link Id="B11sbaFl3gCMHjkgLCrbj6" Ids="C5t4DGzZeJ3Mjcg9HBJZbZ,E7GBClEXs4cM9EUR4nO00a" />
+        <Link Id="GC3yeYCRbLaMOlXj2BfHx5" Ids="SZloiZcGP2NNfbibMOrLA2,JJiDu0NAGHoOhHGEwdHpuT" />
+        <Link Id="ESJasGI5zKUPpPGNJtUX2W" Ids="EGFuTfROdFgPOaFyGddxPI,SqVK2wiT43GPVOpgh89bEg" />
+        <Link Id="LC5fRZVqt5pPTWAeADDFJJ" Ids="LQaTuEsVeFDQRsvww0eaFE,SIXPXJKGyDvO8sJNI0hIPJ" />
       </Patch>
     </Node>
   </Patch>
-  <NugetDependency Id="UhmBuKYpDJYP8MvjbftNYd" Location="VL.Stride" Version="2021.4.0-0419-g7f7c4a6cb1" />
   <NugetDependency Id="IY12tTRFkcoMmTmyEe3oPy" Location="VL.Video.MediaFoundation" Version="0.0.0.0" />
+  <NugetDependency Id="JIqb251hSkaONI716fkH2Y" Location="VL.Stride" Version="2021.4.0-0483-g5376d8cf6e" />
 </Document>
