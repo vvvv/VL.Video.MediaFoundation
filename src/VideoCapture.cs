@@ -1,11 +1,7 @@
 ﻿using SharpDX.Direct3D;
 using SharpDX.Direct3D11;
 using SharpDX.MediaFoundation;
-using Stride.Core;
 using Stride.Core.Mathematics;
-using Stride.Engine;
-using Stride.Graphics;
-using Stride.Rendering;
 using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
@@ -13,21 +9,19 @@ using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
-using VL.Core;
 using VL.Lib.Basics.Resources;
-using VL.Stride;
 
-namespace VL.MediaFoundation
+namespace VL.Video.MediaFoundation
 {
     // Good source: https://stackoverflow.com/questions/40913196/how-to-properly-use-a-hardware-accelerated-media-foundation-source-reader-to-dec
-    public partial class VideoCapture : IDisposable
+    public sealed partial class VideoCapture : IDisposable
     {
         private static readonly Guid s_IID_ID3D11Texture2D = new Guid("6f15aaf2-d208-4e89-9ab4-489535d34f9c");
 
         private readonly SerialDisposable deviceSubscription = new SerialDisposable();
-        private readonly IResourceHandle<RenderDrawContext> renderDrawContextHandle;
-        private readonly ColorSpaceConverter colorSpaceConverter;
-        private BlockingCollection<Texture> videoFrames;
+        private readonly Producing<VideoFrame> output = new Producing<VideoFrame>();
+        private readonly DeviceProvider deviceProvider;
+        private BlockingCollection<VideoFrame> videoFrames;
         private string deviceSymbolicLink;
         private Int2 preferredSize;
         private float preferredFps;
@@ -35,17 +29,9 @@ namespace VL.MediaFoundation
         private int discardedFrames;
         private float actualFps;
 
-        public VideoCapture(NodeContext nodeContext)
+        public VideoCapture(DeviceProvider deviceProvider)
         {
-            renderDrawContextHandle = GetRenderDrawContextHandle(nodeContext) ?? throw new ServiceNotFoundException(typeof(IResourceProvider<Game>));
-            colorSpaceConverter = new ColorSpaceConverter(renderDrawContextHandle.Resource);
-        }
-
-        static IResourceHandle<RenderDrawContext> GetRenderDrawContextHandle(NodeContext nodeContext)
-        {
-            return nodeContext.GetGameProvider()?
-                .Bind(g => RenderContext.GetShared(g.Services).GetThreadContext())
-                .GetHandle();
+            this.deviceProvider = deviceProvider ?? throw new ArgumentNullException(nameof(deviceProvider));
         }
 
         public VideoCaptureDeviceEnumEntry Device
@@ -120,24 +106,15 @@ namespace VL.MediaFoundation
             }
         }
 
-        public Texture CurrentVideoFrame
+        public VideoFrame CurrentVideoFrame
         {
-            get => currentVideoFrame;
-            private set
-            {
-                if (value != currentVideoFrame)
-                {
-                    currentVideoFrame?.Dispose();
-                    currentVideoFrame = value;
-                }
-            }
+            get => output.Resource;
         }
-        Texture currentVideoFrame;
 
         public int DiscardedFrames => discardedFrames;
         public float ActualFPS => actualFps;
 
-        public Texture Update(int waitTimeInMilliseconds)
+        public VideoFrame Update(int waitTimeInMilliseconds)
         {
             if (enabled)
             {
@@ -148,7 +125,7 @@ namespace VL.MediaFoundation
 
                 FetchCurrentVideoFrame(waitTimeInMilliseconds);
             }
-            return currentVideoFrame;
+            return CurrentVideoFrame;
 
             MediaSource CreateMediaSource()
             {
@@ -172,7 +149,7 @@ namespace VL.MediaFoundation
 
             IDisposable StartNewCapture()
             {
-                var videoFrames = new BlockingCollection<Texture>(boundedCapacity: 1);
+                var videoFrames = new BlockingCollection<VideoFrame>(boundedCapacity: 1);
 
                 var pollTask = Task.Run(() =>
                 {
@@ -191,17 +168,14 @@ namespace VL.MediaFoundation
                     sourceReaderAttributes.Set(SourceReaderAttributeKeys.EnableAdvancedVideoProcessing, true);
 
                     // Hardware acceleration
-                    var graphicsDevice = renderDrawContextHandle?.Resource.GraphicsDevice;
-                    if (graphicsDevice != null && SharpDXInterop.GetNativeDevice(graphicsDevice) is Device d3dDevice)
-                    {
-                        // Add multi thread protection on device (MF is multi-threaded)
-                        var deviceMultithread = d3dDevice.QueryInterface<DeviceMultithread>();
-                        deviceMultithread.SetMultithreadProtected(true);
-                        // Reset device
-                        using var manager = new DXGIDeviceManager();
-                        manager.ResetDevice(d3dDevice);
-                        sourceReaderAttributes.Set(SourceReaderAttributeKeys.D3DManager, manager);
-                    }
+                    var d3dDevice = deviceProvider.Device;
+                    // Add multi thread protection on device (MF is multi-threaded)
+                    var deviceMultithread = d3dDevice.QueryInterface<DeviceMultithread>();
+                    deviceMultithread.SetMultithreadProtected(true);
+                    // Reset device
+                    using var manager = new DXGIDeviceManager();
+                    manager.ResetDevice(d3dDevice);
+                    sourceReaderAttributes.Set(SourceReaderAttributeKeys.D3DManager, manager);
 
                     // Connect camera and video controls
                     using var controlSubscription = new CompositeDisposable(
@@ -243,30 +217,17 @@ namespace VL.MediaFoundation
                         }
 
                         var buffer = sample.BufferCount == 1 ? sample.GetBufferByIndex(0) : sample.ConvertToContiguousBuffer();
-
                         var dxgiBuffer = buffer.QueryInterfaceOrNull<DXGIBuffer>();
                         if (dxgiBuffer != null)
                         {
                             dxgiBuffer.GetResource(s_IID_ID3D11Texture2D, out var pTexture);
-                            var dxTexture = new Texture2D(pTexture);
-                            var texture = SharpDXInterop.CreateTextureFromNative(graphicsDevice, dxTexture, takeOwnership: true);
-
-                            buffer.DisposeBy(texture);
-                            dxgiBuffer.DisposeBy(texture);
-                            sample.DisposeBy(texture);
-
-                            try
-                            {
-                                videoFrames.Add(texture);
-                            }
-                            catch (InvalidOperationException)
-                            {
-                                texture.Dispose();
-                            }
+                            var texture = new Texture2D(pTexture);
+                            var frame = new VideoFrame(texture, new CompositeDisposable(texture, buffer, dxgiBuffer, sample));
+                            if (!videoFrames.TryAdd(frame))
+                                frame.Dispose();
                         }
                         else
                         {
-                            buffer.Dispose();
                             sample.Dispose();
                         }
                     }
@@ -297,7 +258,6 @@ namespace VL.MediaFoundation
                         pollTask?.Dispose();
                         pollTask = default;
                         videoFrames.Dispose();
-                        videoFrames = default;
                     }
                 });
             }
@@ -306,42 +266,17 @@ namespace VL.MediaFoundation
         void FetchCurrentVideoFrame(int waitTimeInMilliseconds)
         {
             // Fetch the texture
-            if (videoFrames != null && videoFrames.TryTake(out var texture, waitTimeInMilliseconds))
+            if (videoFrames != null && videoFrames.TryTake(out var frame, waitTimeInMilliseconds))
             {
-                // Set the texture as current output
-                CurrentVideoFrame = ToDeviceColorSpace(texture);
-                return;
+                output.Resource = frame;
             }
-        }
-
-        Texture ToDeviceColorSpace(Texture texture)
-        {
-            // The data coming from the capture device is in gamma space, but the texure (sadly) is not marked as such.
-            // A subsequent sampler wouldn't convert the color to linear space, but when writing it back into our sRGB render target it would get (wrongly) converted.
-            // What we'd really like to do here is simply changing the SRV but sadly that's not allowed for strongly typed resources (only TYPELESS and back buffers).
-            // So we have to do a full copy :/
-
-            //var viewDesc = value.ViewDescription;
-            //viewDesc.Format = viewDesc.Format.ToSRgb();
-            //viewDesc.Flags = TextureFlags.ShaderResource;
-            //srgbVideoFrame?.Dispose();
-            //srgbVideoFrame = value.ToTextureView(viewDesc);
-
-            var deviceColorTexture = colorSpaceConverter.ToDeviceColorSpace(texture);
-
-            // We don't need the original anymore
-            if (deviceColorTexture != texture)
-                texture.Dispose();
-
-            return deviceColorTexture;
         }
 
         public void Dispose()
         {
             deviceSubscription.Dispose();
-            currentVideoFrame?.Dispose();
-            colorSpaceConverter.Dispose();
-            renderDrawContextHandle.Dispose();
+            output.Dispose();
+            deviceProvider.Dispose();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using VL.Lib.Collections;
 
-namespace VL.MediaFoundation
+namespace VL.Video.MediaFoundation
 {
 
     [Serializable]

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>latest</LangVersion>
     <OutputPath></OutputPath>
 
     <Year>$([System.DateTime]::Now.ToString('yyyy'))</Year>
@@ -12,7 +12,7 @@
 
     <!-- Passed to vvvv.exe when starting from within VS -->
     <PackageRepositories>$(MSBuildThisFileDirectory)..\..</PackageRepositories>
-    <VLVersion>2021.4.0-0388-ge2a327dce8</VLVersion>
+    <VLVersion>2021.4.0-0458-g12f67edc27</VLVersion>
     <ExecutablePath>C:\Program Files\vvvv\vvvv_gamma_$(VLVersion)\vvvv.exe</ExecutablePath>
 
     <!-- Package properties -->
@@ -32,6 +32,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="VL.Skia" Version="$(VLVersion)">
+      <!-- Already shipped with vvvv itself -->
+      <PrivateAssets>all</PrivateAssets>      
+    </PackageReference>
     <PackageReference Include="VL.Stride.Runtime" Version="$(VLVersion)">
       <!-- Already shipped with vvvv itself -->
       <PrivateAssets>all</PrivateAssets>

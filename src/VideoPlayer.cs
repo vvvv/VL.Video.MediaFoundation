@@ -2,35 +2,31 @@
 using SharpDX.Direct3D11;
 using SharpDX.Mathematics.Interop;
 using SharpDX.MediaFoundation;
-using Stride.Core;
 using Stride.Core.Mathematics;
-using Stride.Engine;
-using Stride.Graphics;
-using Stride.Rendering;
 using System;
 using System.Diagnostics;
 using VL.Core;
 using VL.Lib.Basics.Resources;
-using VL.Stride;
-using PixelFormat = Stride.Graphics.PixelFormat;
 
-namespace VL.MediaFoundation
+namespace VL.Video.MediaFoundation
 {
     // Good source: https://stackoverflow.com/questions/40913196/how-to-properly-use-a-hardware-accelerated-media-foundation-source-reader-to-dec
-    public partial class VideoPlayer : IDisposable
+    public sealed class VideoPlayer : IDisposable
     {
-        private readonly IResourceHandle<RenderDrawContext> renderDrawContextHandle;
-        private readonly ColorSpaceConverter colorSpaceConverter;
-        private MediaEngine engine;
-        private bool invalidated;
+        private readonly DeviceProvider deviceProvider;
+        private readonly TexturePool texturePool;
+        private readonly MediaEngine engine;
+        private Size2 renderTargetSize;
+        private long presentationTimeTicks;
+        private readonly Producing<VideoFrame> output = new Producing<VideoFrame>();
 
-        public VideoPlayer(NodeContext nodeContext)
+        public VideoPlayer(DeviceProvider deviceProvider)
         {
-            renderDrawContextHandle = nodeContext.GetGameProvider()
-                .Bind(g => RenderContext.GetShared(g.Services).GetThreadContext())
-                .GetHandle() ?? throw new ServiceNotFoundException(typeof(IResourceProvider<Game>));
+            this.deviceProvider = deviceProvider ?? throw new ArgumentNullException(nameof(deviceProvider));
 
-            colorSpaceConverter = new ColorSpaceConverter(renderDrawContextHandle.Resource);
+            var device = deviceProvider.Device;
+
+            this.texturePool = new TexturePool(device);
 
             // Initialize MediaFoundation
             MediaManagerService.Initialize();
@@ -43,20 +39,14 @@ namespace VL.MediaFoundation
                 VideoOutputFormat = (int)SharpDX.DXGI.Format.B8G8R8A8_UNorm
             };
 
-            var graphicsDevice = renderDrawContextHandle.Resource.GraphicsDevice;
-            var device = SharpDXInterop.GetNativeDevice(graphicsDevice) as Device;
-            if (device != null)
-            {
-                // Add multi thread protection on device (MF is multi-threaded)
-                using var deviceMultithread = device.QueryInterface<DeviceMultithread>();
-                deviceMultithread.SetMultithreadProtected(true);
+            // Add multi thread protection on device (MF is multi-threaded)
+            using var deviceMultithread = device.QueryInterface<DeviceMultithread>();
+            deviceMultithread.SetMultithreadProtected(true);
 
-
-                // Reset device
-                using var manager = new DXGIDeviceManager();
-                manager.ResetDevice(device);
-                mediaEngineAttributes.DxgiManager = manager;
-            }
+            // Reset device
+            using var manager = new DXGIDeviceManager();
+            manager.ResetDevice(device);
+            mediaEngineAttributes.DxgiManager = manager;
 
             using var classFactory = new MediaEngineClassFactory();
             engine = new MediaEngine(classFactory, mediaEngineAttributes);
@@ -65,7 +55,6 @@ namespace VL.MediaFoundation
 
         private void Engine_PlaybackEvent(MediaEngineEvent mediaEvent, long param1, int param2)
         {
-            Trace.TraceInformation(mediaEvent.ToString());
             switch (mediaEvent)
             {
                 case MediaEngineEvent.LoadStart:
@@ -76,7 +65,7 @@ namespace VL.MediaFoundation
                     break;
                 case MediaEngineEvent.LoadedMetadata:
                 case MediaEngineEvent.FormatChange:
-                    invalidated = true;
+                    renderTargetSize = default;
                     break;
             }
         }
@@ -154,7 +143,7 @@ namespace VL.MediaFoundation
                 if (value != textureSize)
                 {
                     textureSize = value;
-                    invalidated = true;
+                    renderTargetSize = default;
                 }
             }
         }
@@ -196,7 +185,7 @@ namespace VL.MediaFoundation
         public MediaEngineErr ErrorCode { get; private set; }
 
         // This method is not really needed but makes it simpler to work with inside VL
-        public Texture Update(
+        public VideoFrame Update(
             string url,
             bool play = false,
             float rate = 1f,
@@ -222,19 +211,16 @@ namespace VL.MediaFoundation
             TextureSize = new Size2(textureSize.X, textureSize.Y);
             SourceBounds = sourceBounds;
             BorderColor = borderColor;
-            Update();
-            return currentVideoFrame;
+
+            return Update();
         }
 
-        void Update()
+        VideoFrame Update()
         {
             if (ReadyState <= ReadyState.HaveNothing)
             {
-                currentVideoFrame = null;
-                renderTarget?.Dispose();
-                renderTarget = null;
-                invalidated = true;
-                return;
+                renderTargetSize = default;
+                return default;
             }
 
             if (ReadyState >= ReadyState.HaveMetadata)
@@ -265,13 +251,13 @@ namespace VL.MediaFoundation
                     engine.Pause();
             }
 
-            if (ReadyState >= ReadyState.HaveCurrentData && engine.OnVideoStreamTick(out var presentationTimeTicks))
+            if (ReadyState >= ReadyState.HaveCurrentData && engine.OnVideoStreamTick(out var presentationTimeTicks) && presentationTimeTicks != this.presentationTimeTicks)
             {
-                if (invalidated || currentVideoFrame is null)
-                {
-                    invalidated = false;
+                this.presentationTimeTicks = presentationTimeTicks;
 
-                    renderTarget?.Dispose();
+                if (renderTargetSize == default)
+                {
+                    texturePool.Recycle();
 
                     engine.GetNativeVideoSize(out var width, out var height);
 
@@ -282,27 +268,38 @@ namespace VL.MediaFoundation
                     if (x.Height > 0)
                         height = x.Height;
 
-                    var graphicsDevice = renderDrawContextHandle.Resource.GraphicsDevice;
-
-                    // _SRGB doesn't work :/ Getting invalid argument exception in TransferVideoFrame
-                    renderTarget = Texture.New2D(graphicsDevice, width, height, PixelFormat.B8G8R8A8_UNorm, TextureFlags.RenderTarget | TextureFlags.ShaderResource);
+                    renderTargetSize = new Size2(width, height);
                 }
 
-                if (SharpDXInterop.GetNativeResource(renderTarget) is Texture2D nativeRenderTarget)
+                if (renderTargetSize != default)
                 {
+                    var videoFrame = texturePool.Rent(new Texture2DDescription()
+                    {
+                        Width = renderTargetSize.Width,
+                        Height = renderTargetSize.Height,
+                        ArraySize = 1,
+                        BindFlags = BindFlags.RenderTarget | BindFlags.ShaderResource,
+                        CpuAccessFlags = CpuAccessFlags.None,
+                        // _SRGB doesn't work :/ Getting invalid argument exception in TransferVideoFrame
+                        Format = SharpDX.DXGI.Format.B8G8R8A8_UNorm,
+                        MipLevels = 1,
+                        OptionFlags = ResourceOptionFlags.None,
+                        SampleDescription = new SharpDX.DXGI.SampleDescription(1, 0),
+                        Usage = ResourceUsage.Default
+                    });
+
                     engine.TransferVideoFrame(
-                        nativeRenderTarget, 
-                        ToVideoRect(SourceBounds), 
-                        new RawRectangle(0, 0, renderTarget.ViewWidth, renderTarget.ViewHeight), 
+                        videoFrame.NativeTexture,
+                        ToVideoRect(SourceBounds),
+                        new RawRectangle(0, 0, renderTargetSize.Width, renderTargetSize.Height),
                         ToRawColorBGRA(BorderColor));
 
-                    // Apply color space conversion if necessary
-                    currentVideoFrame = colorSpaceConverter.ToDeviceColorSpace(renderTarget);
+                    return output.Resource = videoFrame;
                 }
             }
+
+            return output.Resource;
         }
-        Texture renderTarget;
-        Texture currentVideoFrame;
 
         static VideoNormalizedRect? ToVideoRect(RectangleF? rect)
         {
@@ -332,11 +329,13 @@ namespace VL.MediaFoundation
 
         public void Dispose()
         {
+            output?.Dispose();
+
             engine.Shutdown();
             engine.PlaybackEvent -= Engine_PlaybackEvent;
             engine.Dispose();
-            colorSpaceConverter.Dispose();
-            renderTarget?.Dispose();
+
+            deviceProvider.Dispose();
         }
     }
 

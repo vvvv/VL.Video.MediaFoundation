@@ -1,5 +1,6 @@
 ﻿using SharpDX.MediaFoundation;
 using SharpDX.Multimedia;
+using Stride.Core.Extensions;
 using Stride.Core.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using VL.Core;
 
-namespace VL.MediaFoundation
+namespace VL.Video.MediaFoundation
 {
     public static class VideoCaptureHelpers
     {
@@ -23,9 +24,9 @@ namespace VL.MediaFoundation
             public MediaType mediaType;
         }
 
-        public static string GetSupportedFormats(int deviceIndex)
+        public static string GetSupportedFormats(VideoCaptureDeviceEnumEntry deviceEntry)
         {
-            return String.Join(Environment.NewLine, EnumerateSupportedFormats(deviceIndex)
+            return String.Join(Environment.NewLine, EnumerateSupportedFormats(deviceEntry)
                 .OrderByDescending(x => x.format)
                 .ThenByDescending(x => x.size.X)
                 .ThenByDescending(x => x.size.Y)
@@ -35,10 +36,18 @@ namespace VL.MediaFoundation
                 .ToArray());
         }
 
-        static IEnumerable<Format> EnumerateSupportedFormats(int deviceIndex)
+        static IEnumerable<Format> EnumerateSupportedFormats(VideoCaptureDeviceEnumEntry deviceEntry)
         {
             var devices = EnumerateVideoDevices();
-            var device = devices[deviceIndex];
+            if (devices.Length == 0)
+                yield break;
+
+            // Zero is the made up default entry - skip it
+            var index = deviceEntry.Definition.Entries.IndexOf(x => x == deviceEntry.Value) - 1;
+            if (index < 0)
+                yield break;
+
+            var device = devices[index];
             var name = device.Get(CaptureDeviceAttributeKeys.FriendlyName);
             var mediaSource = device.ActivateObject<MediaSource>();
             mediaSource.CreatePresentationDescriptor(out PresentationDescriptor descriptor);
