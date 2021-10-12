@@ -7,7 +7,7 @@
     <OutputPath></OutputPath>
 
     <Year>$([System.DateTime]::Now.ToString('yyyy'))</Year>
-    <VersionPrefix>1.0.2</VersionPrefix>
+    <VersionPrefix>1.0.3</VersionPrefix>
     <VersionSuffix></VersionSuffix>
 
     <!-- Passed to vvvv.exe when starting from within VS -->
@@ -44,7 +44,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="..\help\*.*">
+    <Content Include="..\**\*.vl">
+      <PackagePath>%(RecursiveDir)%(Filename)%(Extension)</PackagePath>
+    </Content>
+    <Content Include="..\**\*.mp4">
+      <PackagePath>%(RecursiveDir)%(Filename)%(Extension)</PackagePath>
+    </Content>
+    <Content Include="..\**\*.xml">
       <PackagePath>%(RecursiveDir)%(Filename)%(Extension)</PackagePath>
     </Content>
   </ItemGroup>
