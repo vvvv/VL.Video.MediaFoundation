@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Document xmlns:p="property" Id="JuY9PG38vGNOkS7ym7t7mh" LanguageVersion="2021.4.0.483" Version="0.128">
-  <NugetDependency Id="Gj2X4Tql09gOq0jy9yu36j" Location="VL.CoreLib" Version="2021.4.0-0480-g1f42b51cd3" />
+<Document xmlns:p="property" Id="JuY9PG38vGNOkS7ym7t7mh" LanguageVersion="2021.4.0.497" Version="0.128">
+  <NugetDependency Id="Gj2X4Tql09gOq0jy9yu36j" Location="VL.CoreLib" Version="2021.4.0-0497-g3edb2ef3ed" />
   <Patch Id="PNn7TZV6ad3P1MdWzEMnc6">
     <Canvas Id="AVxdp3P1HUsQFBWkhFkFnV" DefaultCategory="Main" BordersChecked="false" CanvasType="FullCategory" />
     <!--
@@ -18,7 +18,7 @@
           <Node Bounds="142,477,109,19" Id="DgVQXzT7aZTNVDVCaQjTze">
             <p:NodeReference LastCategoryFullName="Video.MediaFoundation" LastSymbolSource="VL.Video.MediaFoundation.vl">
               <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
-              <Choice Kind="ProcessAppFlag" Name="VideoPlayer (Url)" />
+              <Choice Kind="ProcessAppFlag" Name="VideoPlayer (Url Stride)" />
             </p:NodeReference>
             <p:HelpFocus p:Assembly="VL.Lang" p:Type="VL.Model.HelpPriority">High</p:HelpFocus>
             <Pin Id="JJiDu0NAGHoOhHGEwdHpuT" Name="Url" Kind="InputPin" />
@@ -157,5 +157,5 @@
     </Node>
   </Patch>
   <NugetDependency Id="IY12tTRFkcoMmTmyEe3oPy" Location="VL.Video.MediaFoundation" Version="0.0.0.0" />
-  <NugetDependency Id="JIqb251hSkaONI716fkH2Y" Location="VL.Stride" Version="2021.4.0-0483-g5376d8cf6e" />
+  <NugetDependency Id="JIqb251hSkaONI716fkH2Y" Location="VL.Stride" Version="2021.4.0-0497-g3edb2ef3ed" />
 </Document>

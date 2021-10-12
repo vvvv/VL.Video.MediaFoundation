@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Document xmlns:p="property" Id="GCeR2VbZxmMN6ZcU8vYNGe" LanguageVersion="2021.4.0.458" Version="0.128">
-  <NugetDependency Id="OddDUH5t00UQDOaM5VIUbR" Location="VL.CoreLib" Version="2021.4.0-0458-g12f67edc27" />
+<Document xmlns:p="property" Id="GCeR2VbZxmMN6ZcU8vYNGe" LanguageVersion="2021.4.0.497" Version="0.128">
+  <NugetDependency Id="OddDUH5t00UQDOaM5VIUbR" Location="VL.CoreLib" Version="2021.4.0-0497-g3edb2ef3ed" />
   <Patch Id="RGTfRCPLQo7PrXo7dPC5Ad">
     <Canvas Id="USHGZ5YZJZ5NCZiBRK95Vs" DefaultCategory="Video.MediaFoundation" CanvasType="FullCategory">
       <Canvas Id="E85TIfV85NyN7HiBWXsv1t" Name="Advanced" Position="730,270">
@@ -54,16 +54,16 @@
       </Canvas>
       <!--
 
-    ************************ VideoIn ************************
+    ************************ VideoIn (Stride) ************************
 
 -->
-      <Node Name="VideoIn" Bounds="260,235" Id="EXFOac2lMH0NOo34w6lLvB" Summary="Capture video from USB cameras" Remarks="Supports any camera that comes with a UVC 1.1 driver" Tags="capture,stream,webcam,camera">
+      <Node Name="VideoIn (Stride)" Bounds="260,235" Id="EXFOac2lMH0NOo34w6lLvB" Summary="Capture video from USB cameras" Remarks="Supports any camera that comes with a UVC 1.1 driver" Tags="capture,stream,webcam,camera">
         <p:NodeReference LastCategoryFullName="Primitive" LastSymbolSource="builtin">
           <Choice Kind="ContainerDefinition" Name="Process" />
         </p:NodeReference>
         <Patch Id="UsZjm0NpxKJOn7kwmKNweq">
           <Canvas Id="KuF4UnnhmRHMxY2aAbALPG" CanvasType="Group">
-            <Node Bounds="625,506,85,26" Id="ETHcLdPj5OOPzxcrGs6QOy">
+            <Node Bounds="420,278,90,26" Id="ETHcLdPj5OOPzxcrGs6QOy">
               <p:NodeReference LastCategoryFullName="VL.Video.MediaFoundation.StrideDeviceProvider" LastSymbolSource="VL.Video.MediaFoundation.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="OperationCallFlag" Name="Create" />
@@ -72,7 +72,7 @@
               <Pin Id="M3kGD3tIHPUPrRl0vAR5Al" Name="Node Context" Kind="InputPin" />
               <Pin Id="QMkQeOi2jOsOTF0g33uLZy" Name="Output" Kind="StateOutputPin" />
             </Node>
-            <Node Bounds="626,562,125,19" AutoConnect="true" Id="OpTCYVFxT9OOY8amsY66eH">
+            <Node Bounds="420,334,125,19" AutoConnect="true" Id="OpTCYVFxT9OOY8amsY66eH">
               <p:NodeReference LastCategoryFullName="Video.MediaFoundation" LastSymbolSource="VL.Video.MediaFoundation.vl">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="ProcessAppFlag" Name="VideoInCore" />
@@ -89,7 +89,7 @@
               <Pin Id="SaF3ShCOspVN1fvXyy2PKC" Name="Actual FPS" Kind="OutputPin" />
               <Pin Id="OjvD3t7FiCXP6BDhdU1Mhg" Name="Supported Formats" Kind="OutputPin" />
             </Node>
-            <Node Bounds="612,625" Id="QQXWlGx3xfkLYUuhO0Ie0X">
+            <Node Bounds="420,397,63,19" Id="QQXWlGx3xfkLYUuhO0Ie0X">
               <p:NodeReference LastCategoryFullName="Video.MediaFoundation" LastSymbolSource="VL.Video.MediaFoundation.vl">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="ProcessAppFlag" Name="AsTexture" />
@@ -97,7 +97,7 @@
               <Pin Id="BUjLSZbCc3INVd264I8xwB" Name="Input" Kind="InputPin" />
               <Pin Id="UBkVyMSEJr3NDZvKABHfTz" Name="Output" Kind="OutputPin" />
             </Node>
-            <ControlPoint Id="N2dXDDAWJYoQRRWc0lxhEu" Bounds="605,688" />
+            <ControlPoint Id="N2dXDDAWJYoQRRWc0lxhEu" Bounds="422,460" />
           </Canvas>
           <ProcessDefinition Id="HkyhR5csDd5PuBFBOWKyGc">
             <Fragment Id="SkWQCGwxN1KQI0zG5UPiWW" Patch="QvCu62Lhf7WPMOxTMQ3o7W" Enabled="true" />
@@ -124,10 +124,10 @@
       </Node>
       <!--
 
-    ************************ VideoPlayer (Url) ************************
+    ************************ VideoPlayer (Url Stride) ************************
 
 -->
-      <Node Name="VideoPlayer (Url)" Bounds="260,374" Id="STFu4QdmkZDLjuilki3t4F" Summary="Play videos from a given web url" Tags="web,avi,wmv,mp4,h264,mjpeg,mpeg,dv,mov">
+      <Node Name="VideoPlayer (Url Stride)" Bounds="260,374" Id="STFu4QdmkZDLjuilki3t4F" Summary="Play videos from a given web url" Tags="web,avi,wmv,mp4,h264,mjpeg,mpeg,dv,mov">
         <p:NodeReference LastCategoryFullName="Primitive" LastSymbolSource="builtin">
           <Choice Kind="ContainerDefinition" Name="Process" />
         </p:NodeReference>
@@ -325,19 +325,19 @@
       </Node>
       <!--
 
-    ************************ VideoPlayer ************************
+    ************************ VideoPlayer (Stride) ************************
 
 -->
-      <Node Name="VideoPlayer" Bounds="260,318" Id="Bktz625OKwbLY1eZgNFaA7" Summary="Play videos from disk" Tags="avi,wmv,mp4,h264,mjpeg,mpeg,dv,mov">
+      <Node Name="VideoPlayer (Stride)" Bounds="260,318" Id="Bktz625OKwbLY1eZgNFaA7" Summary="Play videos from disk" Tags="avi,wmv,mp4,h264,mjpeg,mpeg,dv,mov">
         <p:NodeReference LastCategoryFullName="Primitive" LastSymbolSource="builtin">
           <Choice Kind="ContainerDefinition" Name="Process" />
         </p:NodeReference>
         <Patch Id="QqPmN8G0YWZQYibLRemmG1">
           <Canvas Id="Tjhl1CDpaWhNf7k6DCbzmq" CanvasType="Group">
             <Node Bounds="274,340,225,19" AutoConnect="true" Id="A0dGfyDwiKlPxMUI3rdk6O">
-              <p:NodeReference LastCategoryFullName="Video.MediaFoundation" LastSymbolSource="VL.Video.MediaFoundation.vl">
+              <p:NodeReference>
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
-                <Choice Kind="ProcessAppFlag" Name="VideoPlayer (Url)" />
+                <Choice Kind="ProcessAppFlag" Name="VideoPlayer (Url Stride)" />
               </p:NodeReference>
               <Pin Id="EgMQ8nnmZWvPZBSmydjFu9" Name="Url" Kind="InputPin" />
               <Pin Id="TL2Twm0ZaTGMjKcjt0uDNR" Name="Play" Kind="InputPin" />
@@ -416,10 +416,10 @@
       </Node>
       <!--
 
-    ************************ VideoPlayer (Skia Url) ************************
+    ************************ VideoPlayer (Url Skia) ************************
 
 -->
-      <Node Name="VideoPlayer (Skia Url)" Bounds="487,375" Id="Tx2eBnCVsoLOuCGpt7Kmg7" Summary="Play videos from a given web url" Tags="web,avi,wmv,mp4,h264,mjpeg,mpeg,dv,mov">
+      <Node Name="VideoPlayer (Url Skia)" Bounds="487,375" Id="Tx2eBnCVsoLOuCGpt7Kmg7" Summary="Play videos from a given web url" Tags="web,avi,wmv,mp4,h264,mjpeg,mpeg,dv,mov">
         <p:NodeReference LastCategoryFullName="Primitive" LastSymbolSource="builtin">
           <Choice Kind="ContainerDefinition" Name="Process" />
         </p:NodeReference>
@@ -627,9 +627,9 @@
         <Patch Id="I32cMFWA9OtP9WJcFxjdSj">
           <Canvas Id="ODS6sTgCQOTNeH19Lr76yi" CanvasType="Group">
             <Node Bounds="274,340,225,19" AutoConnect="true" Id="HkqyKP45qujMMqQXlerRgo">
-              <p:NodeReference LastCategoryFullName="Video.MediaFoundation" LastSymbolSource="VL.Video.MediaFoundation.vl">
+              <p:NodeReference>
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
-                <Choice Kind="ProcessAppFlag" Name="VideoPlayer (Skia Url)" />
+                <Choice Kind="ProcessAppFlag" Name="VideoPlayer (Url Skia)" />
               </p:NodeReference>
               <Pin Id="MHAaXvuVYHhPUwoJDoOWIE" Name="Url" Kind="InputPin" />
               <Pin Id="ANH5oCYf7riMNwvPxQV4Bx" Name="Play" Kind="InputPin" />
@@ -1152,8 +1152,8 @@
       </Patch>
     </Node>
   </Patch>
-  <NugetDependency Id="LozAUHC3yMPOTrviaKMV0q" Location="VL.Stride.Windows" Version="2021.4.0-0458-g12f67edc27" />
+  <NugetDependency Id="LozAUHC3yMPOTrviaKMV0q" Location="VL.Stride.Windows" Version="2021.4.0-0497-g3edb2ef3ed" />
   <PlatformDependency Id="QoeqsqOSs36P831LYwJ2F5" Location="./src/bin/Debug/net472/VL.Video.MediaFoundation.dll" />
   <NodeFactoryDependency Id="IMKEckb6PLINiWhI9EoUMQ" Location="VL.Video.MediaFoundation.ControlNodes" IsForward="true" />
-  <NugetDependency Id="Fu7YLYsk4ADP61CvbY6U0p" Location="VL.Stride" Version="2021.4.0-0458-g12f67edc27" />
+  <NugetDependency Id="Fu7YLYsk4ADP61CvbY6U0p" Location="VL.Stride" Version="2021.4.0-0497-g3edb2ef3ed" />
 </Document>
