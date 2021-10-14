@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Document xmlns:p="property" Id="HCLhARd4Sv0PCVs8Igi22t" LanguageVersion="2021.4.0.483" Version="0.128">
-  <NugetDependency Id="Gj2X4Tql09gOq0jy9yu36j" Location="VL.CoreLib" Version="2021.4.0-0480-g1f42b51cd3" />
+<Document xmlns:p="property" Id="HCLhARd4Sv0PCVs8Igi22t" LanguageVersion="2021.4.0.505" Version="0.128">
+  <NugetDependency Id="Gj2X4Tql09gOq0jy9yu36j" Location="VL.CoreLib" Version="2021.4.0-0497-g3edb2ef3ed" />
   <Patch Id="PNn7TZV6ad3P1MdWzEMnc6">
     <Canvas Id="AVxdp3P1HUsQFBWkhFkFnV" DefaultCategory="Main" BordersChecked="false" CanvasType="FullCategory" />
     <!--
@@ -20,7 +20,7 @@
               <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
               <CategoryReference Kind="Category" Name="Video" />
               <CategoryReference Kind="Category" Name="MediaFoundation" />
-              <Choice Kind="ProcessAppFlag" Name="VideoIn" />
+              <Choice Kind="ProcessAppFlag" Name="VideoIn (Stride)" />
             </p:NodeReference>
             <p:HelpFocus p:Assembly="VL.Lang" p:Type="VL.Model.HelpPriority">High</p:HelpFocus>
             <Pin Id="UX9W5luArdYOF836LPShXT" Name="Device" Kind="InputPin" />
@@ -136,6 +136,6 @@
       </Patch>
     </Node>
   </Patch>
-  <NugetDependency Id="Nzz53D5gz6EN8zTPf6catI" Location="VL.Stride" Version="2021.4.0-0483-g5376d8cf6e" />
+  <NugetDependency Id="Nzz53D5gz6EN8zTPf6catI" Location="VL.Stride" Version="2021.4.0-0505-g1761ae3f59" />
   <NugetDependency Id="AiTw8YnfRjXLeEC1oU0Np9" Location="VL.Video.MediaFoundation" Version="0.0.0.0" />
 </Document>
