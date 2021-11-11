@@ -26,7 +26,9 @@ namespace VL.Video.MediaFoundation
 
         public static string GetSupportedFormats(VideoCaptureDeviceEnumEntry deviceEntry)
         {
-            return String.Join(Environment.NewLine, EnumerateSupportedFormats(deviceEntry)
+            try
+            {
+                return String.Join(Environment.NewLine, EnumerateSupportedFormats(deviceEntry)
                 .OrderByDescending(x => x.format)
                 .ThenByDescending(x => x.size.X)
                 .ThenByDescending(x => x.size.Y)
@@ -34,6 +36,11 @@ namespace VL.Video.MediaFoundation
                 .Select(x => $"{x.format} {x.size.X}x{x.size.Y} - {x.aspect:F2} @ {x.fr:F2}")
                 .Distinct()
                 .ToArray());
+            }
+            catch (Exception)
+            {
+                return "Error: Your device does not allow listing of supported formats.";
+            }
         }
 
         static IEnumerable<Format> EnumerateSupportedFormats(VideoCaptureDeviceEnumEntry deviceEntry)
