@@ -5,9 +5,11 @@ Try it with vvvv, the visual live-programming environment for .NET
 Download: http://visualprogramming.net
 
 ## Using the library
-In order to use this library with VL you have to install the nuget that is available via nuget.org. For information on how to use nugets with VL, see [Managing Nugets](https://thegraybook.vvvv.org/reference/libraries/dependencies.html#manage-nugets) in the VL documentation. As described there you go to the commandline and then type:
+Recent vvvv versions (>= 2021.4) have this package pre-installed. Simply open the node browser and select the `VL.Video.MediaFoundation` package.
 
-    nuget install VL.Video.MediaFoundation -pre
+For earlier versions of vvvv the package has to be [installed manually](https://thegraybook.vvvv.org/reference/libraries/dependencies.html#manage-nugets) by opening the command line and typing:
+
+    nuget install VL.Video.MediaFoundation -version 0.0.9-alpha
 
 Once the VL.Video.MediaFoundation nuget is installed and referenced in your VL document you'll see the category "MediaFoundation" under "Video" in the nodebrowser. 
 
