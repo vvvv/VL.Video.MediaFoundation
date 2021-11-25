@@ -251,7 +251,7 @@ namespace VL.Video.MediaFoundation
                     engine.Pause();
             }
 
-            if (ReadyState >= ReadyState.HaveCurrentData && engine.OnVideoStreamTick(out var presentationTimeTicks) && presentationTimeTicks != this.presentationTimeTicks)
+            if (ReadyState >= ReadyState.HaveCurrentData && engine.HasVideo() && engine.OnVideoStreamTick(out var presentationTimeTicks) && presentationTimeTicks != this.presentationTimeTicks)
             {
                 this.presentationTimeTicks = presentationTimeTicks;
 
