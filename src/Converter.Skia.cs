@@ -24,6 +24,8 @@ namespace VL.Video.MediaFoundation
 
         protected override SKImage Convert(VideoFrame frame)
         {
+            const int GL_TEXTURE_BINDING_2D = 0x8069;
+
             renderContext.MakeCurrent();
 
             var eglContext = renderContext.EglContext;
@@ -31,9 +33,12 @@ namespace VL.Video.MediaFoundation
 
             uint textureId = 0;
             NativeGles.glGenTextures(1, ref textureId);
+
+            // We need to restore the currently bound texture (https://github.com/devvvvs/vvvv/issues/5925)
+            NativeGles.glGetIntegerv(GL_TEXTURE_BINDING_2D, out var currentTextureId);
             NativeGles.glBindTexture(NativeGles.GL_TEXTURE_2D, textureId);
             NativeGles.glEGLImageTargetTexture2DOES(NativeGles.GL_TEXTURE_2D, eglImage);
-            NativeGles.glBindTexture(NativeGles.GL_TEXTURE_2D, 0);
+            NativeGles.glBindTexture(NativeGles.GL_TEXTURE_2D, (uint)currentTextureId);
 
             var description = frame.NativeTexture.Description;
             var colorType = GetColorType(description.Format);
