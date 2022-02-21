@@ -215,14 +215,15 @@ namespace VL.Video.MediaFoundation
                                 Width = width,
                                 Height = height,
                                 ArraySize = 1,
-                                BindFlags = BindFlags.ShaderResource,
+                                // Weired: RenderTarget is needed for ToRasterImage to work
+                                BindFlags = BindFlags.RenderTarget | BindFlags.ShaderResource,
                                 CpuAccessFlags = CpuAccessFlags.None,
-                                // _SRGB doesn't work :/ Getting invalid argument exception in TransferVideoFrame
                                 Format = deviceProvider.UsesLinearColorspace ? Format.B8G8R8A8_UNorm_SRgb : Format.B8G8R8A8_UNorm,
                                 MipLevels = 1,
                                 OptionFlags = ResourceOptionFlags.None,
                                 SampleDescription = new SampleDescription(1, 0),
-                                Usage = ResourceUsage.Immutable
+                                // Due to RenderTarget flag we can't use Immutable
+                                Usage = ResourceUsage.Default
                             }, new SharpDX.DataRectangle(ptr, width * 4));
 
                             using var frame = new VideoFrame(texture, texture);
