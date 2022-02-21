@@ -12,7 +12,7 @@
 
     <!-- Passed to vvvv.exe when starting from within VS -->
     <PackageRepositories>$(MSBuildThisFileDirectory)..\..</PackageRepositories>
-    <VLVersion>2021.4.0</VLVersion>
+    <VLVersion>2021.4.6</VLVersion>
     <ExecutablePath>C:\Program Files\vvvv\vvvv_gamma_$(VLVersion)\vvvv.exe</ExecutablePath>
 
     <!-- Package properties -->

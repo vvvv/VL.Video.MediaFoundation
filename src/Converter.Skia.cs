@@ -62,16 +62,26 @@ namespace VL.Video.MediaFoundation
                 colorspace: SKColorSpace.CreateSrgb(),
                 releaseProc: _ =>
                 {
-                    renderContext.MakeCurrent();
+                    try
+                    {
+                        renderContext.MakeCurrent();
 
-                    backendTexture.Dispose();
-                    NativeGles.glDeleteTextures(1, ref textureId);
-                    eglImage.Dispose();
-                    frame.Dispose();
+                        backendTexture.Dispose();
+                        NativeGles.glDeleteTextures(1, ref textureId);
+                        eglImage.Dispose();
+                        frame.Dispose();
+                    }
+                    finally
+                    {
+                        renderContext.Release();
+                    }
                 });
 
             if (image != null)
+            {
                 frame.AddRef();
+                renderContext.AddRef();
+            }
 
             return image;
         }

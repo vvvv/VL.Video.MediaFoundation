@@ -225,9 +225,9 @@ namespace VL.Video.MediaFoundation
                                 Usage = ResourceUsage.Immutable
                             }, new SharpDX.DataRectangle(ptr, width * 4));
 
-                            var frame = new VideoFrame(texture, texture);
-                            if (!videoFrames.TryAdd(frame))
-                                frame.Dispose();
+                            using var frame = new VideoFrame(texture, texture);
+                            if (videoFrames.TryAdd(frame))
+                                frame.AddRef();
                         }
                         finally
                         {
