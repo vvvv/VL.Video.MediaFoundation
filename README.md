@@ -7,7 +7,7 @@ Download: http://visualprogramming.net
 ## Using the library
 Recent vvvv versions (>= 2021.4) have this package pre-installed. Simply open the node browser and select the `VL.Video.MediaFoundation` package.
 
-For earlier versions of vvvv the package has to be [installed manually](https://thegraybook.vvvv.org/reference/libraries/dependencies.html#manage-nugets) by opening the command line and typing:
+For earlier versions of vvvv the package has to be [installed manually](https://thegraybook.vvvv.org/reference/hde/managing-nugets.html) by opening the command line and typing:
 
     nuget install VL.Video.MediaFoundation -version 0.0.9-alpha
 
