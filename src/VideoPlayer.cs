@@ -17,7 +17,6 @@ namespace VL.Video.MediaFoundation
         private readonly TexturePool texturePool;
         private readonly MediaEngine engine;
         private Size2 renderTargetSize;
-        private long presentationTimeTicks;
         private readonly Producing<VideoFrame> output = new Producing<VideoFrame>();
 
         public VideoPlayer(DeviceProvider deviceProvider)
@@ -251,10 +250,8 @@ namespace VL.Video.MediaFoundation
                     engine.Pause();
             }
 
-            if (ReadyState >= ReadyState.HaveCurrentData && engine.HasVideo() && engine.OnVideoStreamTick(out var presentationTimeTicks) && presentationTimeTicks != this.presentationTimeTicks)
+            if (ReadyState >= ReadyState.HaveCurrentData && engine.HasVideo() && engine.OnVideoStreamTick(out var presentationTimeTicks) && presentationTimeTicks > 0)
             {
-                this.presentationTimeTicks = presentationTimeTicks;
-
                 if (renderTargetSize == default)
                 {
                     texturePool.Recycle();
