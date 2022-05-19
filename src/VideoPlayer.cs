@@ -250,7 +250,7 @@ namespace VL.Video.MediaFoundation
                     engine.Pause();
             }
 
-            if (ReadyState >= ReadyState.HaveCurrentData && engine.HasVideo() && engine.OnVideoStreamTick(out var presentationTimeTicks) && presentationTimeTicks > 0)
+            if (ReadyState >= ReadyState.HaveCurrentData && engine.HasVideo() && engine.OnVideoStreamTick(out var presentationTimeTicks) && presentationTimeTicks >= 0)
             {
                 if (renderTargetSize == default)
                 {
