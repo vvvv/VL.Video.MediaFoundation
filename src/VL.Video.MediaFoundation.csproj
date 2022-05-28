@@ -7,12 +7,12 @@
     <OutputPath></OutputPath>
 
     <Year>$([System.DateTime]::Now.ToString('yyyy'))</Year>
-    <VersionPrefix>1.0.12</VersionPrefix>
+    <VersionPrefix>1.0.13-preview</VersionPrefix>
     <VersionSuffix></VersionSuffix>
 
     <!-- Passed to vvvv.exe when starting from within VS -->
     <PackageRepositories>$(MSBuildThisFileDirectory)..\..</PackageRepositories>
-    <VLVersion>2021.4.6</VLVersion>
+    <VLVersion>2021.4.9</VLVersion>
     <ExecutablePath>C:\Program Files\vvvv\vvvv_gamma_$(VLVersion)\vvvv.exe</ExecutablePath>
 
     <!-- Package properties -->
@@ -36,7 +36,7 @@
       <!-- Already shipped with vvvv itself -->
       <PrivateAssets>all</PrivateAssets>      
     </PackageReference>
-    <PackageReference Include="VL.Stride.Runtime" Version="$(VLVersion)">
+    <PackageReference Include="VL.Stride.Windows" Version="$(VLVersion)">
       <!-- Already shipped with vvvv itself -->
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Document xmlns:p="property" Id="GCeR2VbZxmMN6ZcU8vYNGe" LanguageVersion="2021.4.0.497" Version="0.128">
-  <NugetDependency Id="OddDUH5t00UQDOaM5VIUbR" Location="VL.CoreLib" Version="2021.4.0-0497-g3edb2ef3ed" />
+<Document xmlns:p="property" Id="GCeR2VbZxmMN6ZcU8vYNGe" LanguageVersion="2021.4.9.982" Version="0.128">
+  <NugetDependency Id="OddDUH5t00UQDOaM5VIUbR" Location="VL.CoreLib" Version="2021.4.9" />
   <Patch Id="RGTfRCPLQo7PrXo7dPC5Ad">
     <Canvas Id="USHGZ5YZJZ5NCZiBRK95Vs" DefaultCategory="Video.MediaFoundation" CanvasType="FullCategory">
       <Canvas Id="E85TIfV85NyN7HiBWXsv1t" Name="Advanced" Position="730,270">
@@ -69,7 +69,6 @@
                 <Choice Kind="OperationCallFlag" Name="Create" />
                 <CategoryReference Kind="AssemblyCategory" Name="StrideDeviceProvider" NeedsToBeDirectParent="true" />
               </p:NodeReference>
-              <Pin Id="M3kGD3tIHPUPrRl0vAR5Al" Name="Node Context" Kind="InputPin" />
               <Pin Id="QMkQeOi2jOsOTF0g33uLZy" Name="Output" Kind="StateOutputPin" />
             </Node>
             <Node Bounds="420,334,125,19" AutoConnect="true" Id="OpTCYVFxT9OOY8amsY66eH">
@@ -142,7 +141,6 @@
               <Pin Id="LIPHtOGRfYePpPzc1KKikk" Name="Device Provider" Kind="InputPin" />
               <Pin Id="SPhH7DVTQWjPFXdCeabm7u" Name="Output" Kind="StateOutputPin" />
             </Node>
-            <ControlPoint Id="D228dko9n3JPxEbcJ0ZKyG" Bounds="226,141" />
             <Pad Id="MQXFQyXUcHPN11S8cbfzvP" SlotId="DpoWupsOjxuQSxVY930XwZ" Bounds="225,279" />
             <Node Bounds="222,431,245,19" AutoConnect="true" Id="Du0vCopVusHOTVzSp23qxZ">
               <p:NodeReference LastCategoryFullName="VL.Video.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
@@ -246,7 +244,6 @@
                 <CategoryReference Kind="AssemblyCategory" Name="StrideDeviceProvider" />
                 <Choice Kind="OperationCallFlag" Name="Create" />
               </p:NodeReference>
-              <Pin Id="PqWzdJMWRJgNI7wSOQ77BZ" Name="Node Context" Kind="InputPin" />
               <Pin Id="Ka7dKmkxRlVNoNu7OhBoth" Name="Output" Kind="StateOutputPin" />
             </Node>
             <Node Bounds="272,541,63,19" Id="UjrPzcmexR1OW6WUJajDhy">
@@ -263,7 +260,6 @@
             <Fragment Id="LvRD2JBbrvhOlqfvW7mgFh" Patch="Rtyn4SZLslsOLIHLBtc6ED" Enabled="true" />
           </ProcessDefinition>
           <Slot Id="DpoWupsOjxuQSxVY930XwZ" Name="VideoPlayer" />
-          <Link Id="A5OyXRjDLOAQWmlfiMjDiF" Ids="NbzGQThG25aPRPuX8Zy4lb,D228dko9n3JPxEbcJ0ZKyG" IsHidden="true" />
           <Link Id="D6j7h2iDOY7MjafLWnas9P" Ids="SPhH7DVTQWjPFXdCeabm7u,MQXFQyXUcHPN11S8cbfzvP" />
           <Link Id="R7EhtQT0PkJPhnOFhqUDyw" Ids="MQXFQyXUcHPN11S8cbfzvP,D7btSTJKH7ELeDaaQSKDON" />
           <Link Id="OU4773cKLJkNQGE39pRqnV" Ids="HgSfEQ6rJJyObyWjbYy2RA,GLEkmZMOJOILDeFFvesjwb" />
@@ -293,9 +289,7 @@
           <Link Id="SO3x6Xz6eFbM19BjA0Xqbg" Ids="Vr3kbbqGYx6MsTqhkutUaz,FDdroFfxXXQLAWgDF6Ephq" IsHidden="true" />
           <Link Id="IQVyPZgWdDpPS3a4thDYhL" Ids="EzZYfU2PlvlLhpFVPdLHA0,C9Uhfi77vG6Nr0bnmG4Q6r" />
           <Link Id="LavQNuWmPJyNxSqXzvQfnY" Ids="EGFAgCuVPdSQW6YIWGfrLA,EzZYfU2PlvlLhpFVPdLHA0" IsHidden="true" />
-          <Patch Id="JTnW9BMNi24Lv6WaWsKT1Y" Name="Create" ParticipatingElements="DV39z8q4XZ2OsCCEnQDUDp">
-            <Pin Id="NbzGQThG25aPRPuX8Zy4lb" Name="Node Context" Kind="InputPin" Bounds="436,204" Visibility="Hidden" />
-          </Patch>
+          <Patch Id="JTnW9BMNi24Lv6WaWsKT1Y" Name="Create" ParticipatingElements="DV39z8q4XZ2OsCCEnQDUDp" />
           <Patch Id="Rtyn4SZLslsOLIHLBtc6ED" Name="Update">
             <Pin Id="HeavXA35mPeP4XH5ertM9C" Name="Url" Kind="InputPin" />
             <Pin Id="EakyK03ptWSPUn9io21eyf" Name="Play" Kind="InputPin" />
@@ -319,7 +313,6 @@
           </Patch>
           <Patch Id="EF45x3UgXT5OE2xhoWwCMy" Name="Dispose" ParticipatingElements="C4f4PKVSYfkNTtxJIGxnAt" />
           <Link Id="N8IKrF7lxYIPFre9QLyVEg" Ids="Ka7dKmkxRlVNoNu7OhBoth,LIPHtOGRfYePpPzc1KKikk" />
-          <Link Id="TC7yAzsX2cGOe4m3YjmGPa" Ids="D228dko9n3JPxEbcJ0ZKyG,PqWzdJMWRJgNI7wSOQ77BZ" />
           <Link Id="LrpLRrVHCkSNcNpOlKmddl" Ids="E3DT4gGuo6uNHliNzBILYE,M8AcYykKmMUNidrOK41kaz" />
         </Patch>
       </Node>
@@ -434,7 +427,6 @@
               <Pin Id="NEQ42bZfW2jPTrJGRouOiV" Name="Device Provider" Kind="InputPin" />
               <Pin Id="IFEOhPZ46VgQXnYljKQbfi" Name="Output" Kind="StateOutputPin" />
             </Node>
-            <ControlPoint Id="KuxKmWXZ3YsNG076m0a4k1" Bounds="226,141" />
             <Pad Id="Q5GlOhudgMFPHZ1cEsuaks" SlotId="IZHFHiQgxnXODHaUfVgqgw" Bounds="225,279" />
             <Node Bounds="222,431,245,19" AutoConnect="true" Id="VDhlwk7XQEUNc50QPLnmd9">
               <p:NodeReference LastCategoryFullName="VL.Video.MediaFoundation.VideoPlayer" LastSymbolSource="VL.Video.MediaFoundation.dll">
@@ -538,7 +530,7 @@
                 <CategoryReference Kind="AssemblyCategory" Name="SkiaDeviceProvider" />
                 <Choice Kind="OperationCallFlag" Name="Create" />
               </p:NodeReference>
-              <Pin Id="AdSB1F95hruP7mtp5LOBin" Name="Node Context" Kind="InputPin" />
+              <Pin Id="LpeRHL58ZFeQdPP5apkTGx" Name="Use Stride Device" Kind="InputPin" />
               <Pin Id="HcLyZGnjmswLEGfKsZGnhK" Name="Output" Kind="StateOutputPin" />
             </Node>
             <Node Bounds="271,540,66,19" Id="JqcTGHCTzX8NSWZ2icgUfm">
@@ -546,16 +538,17 @@
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="ProcessAppFlag" Name="AsSKImage" />
               </p:NodeReference>
+              <Pin Id="ROvQIG1hgufP1FoXRiKEEY" Name="Use Stride Device" Kind="InputPin" />
               <Pin Id="Lu9ht7NI0fJLSA94b5amEC" Name="Input" Kind="InputPin" />
               <Pin Id="ButEYhZbEGyOu0atdhV2ka" Name="Output" Kind="OutputPin" />
             </Node>
+            <ControlPoint Id="V4Lq11Y9S9APAOWMQTMuyj" Bounds="329,125" />
           </Canvas>
           <ProcessDefinition Id="PKXjpVO2XO6PsNqnuWyZpN">
             <Fragment Id="G8RElS96Zs8PCF5i5NGSRi" Patch="TQc0bfDaHcnOzoxI15ZvAc" Enabled="true" />
             <Fragment Id="Kthxevkk5yIN5I0LJVD0NZ" Patch="L1dpNboKECsPX80Pk1zApt" Enabled="true" />
           </ProcessDefinition>
           <Slot Id="IZHFHiQgxnXODHaUfVgqgw" Name="VideoPlayer" />
-          <Link Id="AdVCYX2m5dOO8ZDdsdhnev" Ids="D1kVmp3cRKmPT81O4fTI7G,KuxKmWXZ3YsNG076m0a4k1" IsHidden="true" />
           <Link Id="UALbaz81VRiNi5aqcWj0Q4" Ids="IFEOhPZ46VgQXnYljKQbfi,Q5GlOhudgMFPHZ1cEsuaks" />
           <Link Id="F6hSDH3n2u5NyuQi9zeTp3" Ids="Q5GlOhudgMFPHZ1cEsuaks,R2nqxzVlta8L9LE6UptWi5" />
           <Link Id="FVoBqN7cNQDPNN26x1GT2h" Ids="Sq1ch83AuvALztUlK1sHGT,RPIOmNICBpMN1y8GCvkKbe" />
@@ -586,7 +579,7 @@
           <Link Id="FsPcAlAPac3MFuWE0lSWCq" Ids="QMwCCliwohwNLrW5yS5fpD,QR4yrjFofmrLlXN0NZlSJJ" />
           <Link Id="EPfMRuXuT7wLC94hUXwZze" Ids="RjDzMIlCnH8MW1ks3m3nsI,QMwCCliwohwNLrW5yS5fpD" IsHidden="true" />
           <Patch Id="TQc0bfDaHcnOzoxI15ZvAc" Name="Create" ParticipatingElements="GIG54MqancOPc7Z1dlZrNW">
-            <Pin Id="D1kVmp3cRKmPT81O4fTI7G" Name="Node Context" Kind="InputPin" Bounds="436,204" Visibility="Hidden" />
+            <Pin Id="MmsWeLuW9hMP4LiGRbV3US" Name="Use Stride Device" Kind="InputPin" Bounds="331,124" />
           </Patch>
           <Patch Id="L1dpNboKECsPX80Pk1zApt" Name="Update">
             <Pin Id="HJKXp3Dcp7sMImJj6xlQkw" Name="Url" Kind="InputPin" />
@@ -610,9 +603,11 @@
             <Pin Id="APcVyagOpeOLc2fNiJXc8M" Name="Error Code" Kind="OutputPin" Bounds="1613,524" />
           </Patch>
           <Patch Id="RMSFBSQXkURPpQkEkDBXXp" Name="Dispose" ParticipatingElements="SQ0swebJQJ4LBaK9HT5JZ0" />
-          <Link Id="Otgs4MZmPAyPorrK6FOAfX" Ids="KuxKmWXZ3YsNG076m0a4k1,AdSB1F95hruP7mtp5LOBin" />
           <Link Id="ETPgvx2pIWeMKpQPAaCJrn" Ids="HcLyZGnjmswLEGfKsZGnhK,NEQ42bZfW2jPTrJGRouOiV" />
           <Link Id="RYbEqlPyqmtM8xqTNSuvhP" Ids="ButEYhZbEGyOu0atdhV2ka,QiEVdpaxalqNBXlEExQCOe" />
+          <Link Id="VOdjt7HJWWOMXYJdsNK3uh" Ids="V4Lq11Y9S9APAOWMQTMuyj,LpeRHL58ZFeQdPP5apkTGx" />
+          <Link Id="Fizr8bdnkACOQ5YFtFioYE" Ids="MmsWeLuW9hMP4LiGRbV3US,V4Lq11Y9S9APAOWMQTMuyj" IsHidden="true" />
+          <Link Id="HTRrAeSUo3bMALtPmUdGyI" Ids="V4Lq11Y9S9APAOWMQTMuyj,ROvQIG1hgufP1FoXRiKEEY" />
         </Patch>
       </Node>
       <!--
@@ -631,6 +626,7 @@
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="ProcessAppFlag" Name="VideoPlayer (Url Skia)" />
               </p:NodeReference>
+              <Pin Id="NW9fiHqo1QUL3p2ObgkYpv" Name="Use Stride Device" Kind="InputPin" />
               <Pin Id="MHAaXvuVYHhPUwoJDoOWIE" Name="Url" Kind="InputPin" />
               <Pin Id="ANH5oCYf7riMNwvPxQV4Bx" Name="Play" Kind="InputPin" />
               <Pin Id="LauJlf0AOciNHjB5sKlEyR" Name="Rate" Kind="InputPin" />
@@ -664,6 +660,7 @@
             <ControlPoint Id="GzyuRzo8sMyQY16DQc0MH7" Bounds="486,254" />
             <ControlPoint Id="UsHhnId4iGBLwAzMr9jWrl" Bounds="499,277" />
             <ControlPoint Id="BMEMSVcVJVQPPDLkFSamJk" Bounds="507,305" />
+            <ControlPoint Id="EiLrfGB4gg9QWAYckGyAS4" Bounds="143,255" />
           </Canvas>
           <ProcessDefinition Id="E932tPO7m65L8QfWGqWTza">
             <Fragment Id="AzaOnJMYD0HLJOPmzFi7MI" Patch="APcNIMg8kOzNtJA8GsjkQj" Enabled="true" />
@@ -679,7 +676,11 @@
           <Link Id="UP3ertL8PlkLNqV4cQo1UV" Ids="EIStkEomBUaOXB07bFmMJO,UsHhnId4iGBLwAzMr9jWrl" IsHidden="true" />
           <Link Id="EvPU63pnZIAMjFdmheMP2Z" Ids="BMEMSVcVJVQPPDLkFSamJk,DWwfqU9WA8fNbBCqOXEXtx" />
           <Link Id="AQ7gw3xvs1ILp2k4fP8q36" Ids="UEYQrjmufjDP2WOLPgUjz6,BMEMSVcVJVQPPDLkFSamJk" IsHidden="true" />
-          <Patch Id="APcNIMg8kOzNtJA8GsjkQj" Name="Create" />
+          <Link Id="QERRIjaHFXbNVwx2RxwWpy" Ids="EiLrfGB4gg9QWAYckGyAS4,NW9fiHqo1QUL3p2ObgkYpv" />
+          <Link Id="G9cS5NkAJeCNYX9MGg9NJl" Ids="LnGpri1Ze2sNdZLyBUsDix,EiLrfGB4gg9QWAYckGyAS4" IsHidden="true" />
+          <Patch Id="APcNIMg8kOzNtJA8GsjkQj" Name="Create">
+            <Pin Id="LnGpri1Ze2sNdZLyBUsDix" Name="Use Stride Device" Kind="InputPin" Visibility="Optional" />
+          </Patch>
           <Patch Id="HE4GKTUvPhfPDhZmr8lQwh" Name="Update" ManuallySortedPins="true">
             <Pin Id="KhWDEDxk5qvLhv4QeF9FZr" Name="Filename" Kind="InputPin" Bounds="377,284" DefaultValue="">
               <p:TypeAnnotation>
@@ -949,7 +950,6 @@
                 <CategoryReference Kind="AssemblyCategory" Name="StrideConverter" />
                 <Choice Kind="OperationCallFlag" Name="Create" />
               </p:NodeReference>
-              <Pin Id="ClIUgsLSViePiCkqVYaXuh" Name="Node Context" Kind="InputPin" />
               <Pin Id="HeywXBWpYJBLX818k5nYnL" Name="Output" Kind="StateOutputPin" />
             </Node>
             <Pad Id="NbrAstxJmnbNUl8OBvJ0HR" SlotId="BPSLiOjcFPFLeraEAqLwUp" Bounds="486,446" />
@@ -1013,7 +1013,7 @@
                 <Choice Kind="OperationCallFlag" Name="Create" />
                 <CategoryReference Kind="AssemblyCategory" Name="SkiaConverter" NeedsToBeDirectParent="true" />
               </p:NodeReference>
-              <Pin Id="O5X8CcxxRvZOSmCrZTaOcg" Name="Node Context" Kind="InputPin" />
+              <Pin Id="UxYhy1S1tPUM9DfFQflVSh" Name="Use Stride Device" Kind="InputPin" />
               <Pin Id="R9cEPkmGEwgNy4K7cnrEjN" Name="Output" Kind="StateOutputPin" />
             </Node>
             <Pad Id="EAGJ6EUNWv2NI5mPpc3Wsn" SlotId="IuwsPHEZxyMPf7oP2xFBqZ" Bounds="486,446" />
@@ -1039,8 +1039,11 @@
               <Pin Id="Mq8FtGk3qMzNeGxZq10gPy" Name="Input" Kind="StateInputPin" />
               <Pin Id="Di5vqR2XAPZNQd0gKKSeVu" Name="Output" Kind="StateOutputPin" />
             </Node>
+            <ControlPoint Id="NymU7eIlvAwP7cPP923FNM" Bounds="485,293" />
           </Canvas>
-          <Patch Id="M9QMeenche0OfjcLRDRNsV" Name="Create" ParticipatingElements="QIYgs5SmeADMK2h9wsloNz" />
+          <Patch Id="M9QMeenche0OfjcLRDRNsV" Name="Create" ParticipatingElements="QIYgs5SmeADMK2h9wsloNz">
+            <Pin Id="Djm7thgse39LUqqBMpKi4c" Name="Use Stride Device" Kind="InputPin" Bounds="485,293" />
+          </Patch>
           <Patch Id="P7VvIEVSmk2NrV2eXqtOt5" Name="Update">
             <Pin Id="ES45JEVpQPXL16jEcp2djf" Name="Input" Kind="InputPin" Bounds="607,418" />
             <Pin Id="VIFChr8XIRiLXIJf8uInZG" Name="Output" Kind="OutputPin" Bounds="578,557" />
@@ -1058,6 +1061,8 @@
           <Link Id="Bu7xRNueySXOPqRymrr7Hb" Ids="EAGJ6EUNWv2NI5mPpc3Wsn,Mq8FtGk3qMzNeGxZq10gPy" />
           <Patch Id="K0vti1pAOyCMqePbt3g3H8" Name="Dispose" ParticipatingElements="BHw4QBZMpKlQCNX82YFUNM" />
           <Link Id="SNL9U7PBMpfOen5X5NlaHv" Ids="L6PAki0zevIMzjbRMf5UXr,I8gtv4c2oeUMGPOWthFxM7" />
+          <Link Id="LfFzGGCiKkbOnjABAiBX0i" Ids="NymU7eIlvAwP7cPP923FNM,UxYhy1S1tPUM9DfFQflVSh" />
+          <Link Id="EIqeYWPVVzZLWJfpahPfqX" Ids="Djm7thgse39LUqqBMpKi4c,NymU7eIlvAwP7cPP923FNM" IsHidden="true" />
         </Patch>
       </Node>
       <!--
@@ -1077,7 +1082,7 @@
                 <Choice Kind="OperationCallFlag" Name="Create" />
                 <CategoryReference Kind="AssemblyCategory" Name="SkiaDeviceProvider" NeedsToBeDirectParent="true" />
               </p:NodeReference>
-              <Pin Id="Jmgrjn3bvrxQXrImKoGDHG" Name="Node Context" Kind="InputPin" />
+              <Pin Id="CHLoSOGlJuGMTf7VJjdS1a" Name="Use Stride Device" Kind="InputPin" />
               <Pin Id="OxmXwB7S9P0QDosmtWKWrl" Name="Output" Kind="StateOutputPin" />
             </Node>
             <Node Bounds="626,562,125,19" AutoConnect="true" Id="MDPjBjxIVsXOt4w1w4mFnu">
@@ -1102,6 +1107,7 @@
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <Choice Kind="ProcessAppFlag" Name="AsSKImage" />
               </p:NodeReference>
+              <Pin Id="Sni4KPmftfKNaUFMkyeQSS" Name="Use Stride Device" Kind="InputPin" />
               <Pin Id="VTZQxCM9dIKQRckw6uD2aA" Name="Input" Kind="InputPin" />
               <Pin Id="U09aBfnhddANsyUbs8cc4v" Name="Output" Kind="OutputPin" />
             </Node>
@@ -1152,8 +1158,8 @@
       </Patch>
     </Node>
   </Patch>
-  <NugetDependency Id="LozAUHC3yMPOTrviaKMV0q" Location="VL.Stride.Windows" Version="2021.4.0-0497-g3edb2ef3ed" />
+  <NugetDependency Id="LozAUHC3yMPOTrviaKMV0q" Location="VL.Stride.Windows" Version="2021.4.9" />
   <PlatformDependency Id="QoeqsqOSs36P831LYwJ2F5" Location="./src/bin/Debug/net472/VL.Video.MediaFoundation.dll" />
   <NodeFactoryDependency Id="IMKEckb6PLINiWhI9EoUMQ" Location="VL.Video.MediaFoundation.ControlNodes" IsForward="true" />
-  <NugetDependency Id="Fu7YLYsk4ADP61CvbY6U0p" Location="VL.Stride" Version="2021.4.0-0497-g3edb2ef3ed" />
+  <NugetDependency Id="Fu7YLYsk4ADP61CvbY6U0p" Location="VL.Stride" Version="2021.4.9" />
 </Document>

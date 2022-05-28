@@ -10,16 +10,25 @@ namespace VL.Video.MediaFoundation
     public sealed class SkiaConverter : Converter<SKImage>
     {
         private readonly RenderContext renderContext;
+        private readonly IDisposable graphicsDeviceHandle;
 
-        public SkiaConverter(NodeContext nodeContext)
+        public SkiaConverter(bool useStrideDevice)
         {
-            renderContext = RenderContext.ForCurrentThread();
+            if (useStrideDevice)
+            {
+                (renderContext, graphicsDeviceHandle) = RenderContextProvider.GetStrideRenderContext();
+            }
+            else
+            {
+                renderContext = RenderContextProvider.GetSkiaRenderContext();
+            }
         }
 
         public override void Dispose()
         {
             base.Dispose();
             renderContext.Dispose();
+            graphicsDeviceHandle?.Dispose();
         }
 
         protected override SKImage Convert(VideoFrame frame)

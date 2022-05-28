@@ -7,6 +7,7 @@ using System;
 using VL.Core;
 using VL.Lib.Basics.Resources;
 using VL.Stride;
+using ServiceRegistry = VL.Core.ServiceRegistry;
 
 namespace VL.Video.MediaFoundation
 {
@@ -15,9 +16,9 @@ namespace VL.Video.MediaFoundation
         private readonly IResourceHandle<RenderDrawContext> renderDrawContextHandle;
         private readonly GraphicsDevice graphicsDevice;
 
-        public StrideDeviceProvider(NodeContext nodeContext)
+        public StrideDeviceProvider()
         {
-            renderDrawContextHandle = nodeContext.GetGameProvider()
+            renderDrawContextHandle = ServiceRegistry.Current.GetGameProvider()
                 .Bind(g => RenderContext.GetShared(g.Services).GetThreadContext())
                 .GetHandle() ?? throw new ServiceNotFoundException(typeof(IResourceProvider<Game>));
 
