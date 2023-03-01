@@ -1,3 +1,6 @@
+# Archived!
+This repo moved into [VL.StandardLibs](https://github.com/vvvv/VL.StandardLibs).
+
 # VL.Video.MediaFoundation
 Set of nodes for video capture and playback using the [Windows MediaFoundation SDK](https://docs.microsoft.com/en-us/windows/win32/medfound/microsoft-media-foundation-sdk)
 
